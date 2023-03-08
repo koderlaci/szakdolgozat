@@ -1,0 +1,109 @@
+.section {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0px auto;
+
+    &.introduction {
+        display: flex;
+        justify-content: space-between;
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 40%;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .image {
+            width: 60%;
+            height: 800px;
+            margin: 0px 25px;
+            background-color: #184375;
+        }
+    }
+
+    &.tutorial {
+        display: flex;
+        flex-direction: column;
+        margin-top: 150px;
+        
+        .text {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            width: 100%;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .title-and-disclaimer {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 350px;
+            text-align: center;
+        
+            .title {
+                height: 80px;
+                text-align: center;
+            }
+        }
+
+        .button {
+            margin: auto;
+        }
+        
+        .disclaimer {
+            margin: 100px auto;
+            text-align: center;
+            width: 300px;
+        }
+    }
+
+    &.sending {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 40%;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .image {
+            width: 60%;
+            height: 800px;
+            margin: 0px 25px;
+            background-color: #184375;
+        }
+    }
+}
+
+.section-title {
+    font-size: 50px;
+    font-weight: 400;
+}
+
+.title {
+    font-size: 34px;
+    font-weight: 400;
+}
+
+.subtitle {
+    font-size: 20px;
+}
