@@ -12,13 +12,13 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 const routes: Routes = [
   { path: "", redirectTo: "/landing", pathMatch: "full"},
   { path: "landing", component: LandingComponent},
-  { path: "products", component: ProductsComponent},
+  { path: "products/:type", component: ProductsComponent},
   { path: "login", component: LoginComponent},
   { path: "registration", component: RegistrationComponent},
   { path: "delivery", component: DeliveryComponent},
   { path: "cart", component: CartComponent},
-  { path: "admin", component: AdminComponent},
-  { path: "profile", component: ProfileComponent},
+  { path: "admin", component: AdminComponent}, // todo: implement guard
+  { path: "profile", component: ProfileComponent}, // todo: implement guard
 ];
 
 @NgModule({
