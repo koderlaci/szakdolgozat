@@ -2,8 +2,31 @@
 
 * {
     box-sizing: border-box;
+    font-family: 'Inter';
 }
 
 body {
     margin: 0;
+    color: white;
+    background-color: #001174;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.button {
+    width: 250px;
+    height: 50px;
+    border-radius: 6px;
+    border: none;
+    background-color: #184375;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &:hover {
+        background-color: rgb(102, 102, 102);
+    }
 }
