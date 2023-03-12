@@ -24,13 +24,34 @@ a {
     width: 250px;
     height: 50px;
     border-radius: 6px;
-    border: none;
-    background-color: #184375;
+    border: 2px solid transparent;
     color: inherit;
     cursor: pointer;
     transition: all 0.5s;
 
-    &:hover {
-        background-color: rgb(102, 102, 102);
+    &.main {
+        background-color: #0161D2;
+        
+        &:hover {
+            background-color: #0039CD;
+        }
+    }
+
+    &.secondary {
+        background-color: transparent;
+        border: 2px solid #0161D2;
+
+        &:hover {
+            border-color: #0039CD;
+        }
+    }
+
+    &.hollow {
+        background-color: transparent;
+        color: #0039CD;
+
+        &:hover {
+            color: white;
+        }
     }
 }
