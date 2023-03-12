@@ -1,1 +1,13 @@
-<p>login works!</p>
+<section class="login" [formGroup]="loginForm">
+    <form class="form-container">
+        <img src="assets/icons/logo.svg" alt="logo" class="logo">
+        <div class="subtitle">Az Eszterházy Károly Katolikus Egyetem saját kriptotokenje</div>
+        <input type="text" class="input" placeholder="Email" name="email" formControlName="email">
+        <input type="password" class="input" placeholder="Jelszó" name="password" formControlName="password">
+        <div class="buttons-container">
+            <button class="button main" (click)="login()">Bejelentkezés</button>
+            <button class="button secondary">Regisztrálok</button>
+        </div>
+    </form>
+    <img src="assets/images/tokens_login.svg" alt="tokens" class="tokens">
+</section>
