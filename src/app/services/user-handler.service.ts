@@ -11,10 +11,12 @@ type LoginForm = {
 })
 export class UserHandlerService {
 
+  localUrl = "http://localhost:4201";
+
   constructor(private http: HttpClient) { }
 
   login(formData: LoginForm) {
-    return this.http.post('/api/login', formData);
+    return this.http.post(this.localUrl + '/login', formData);
   }
 
   getAllUsers() {
