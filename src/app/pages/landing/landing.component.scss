@@ -1,71 +1,124 @@
+$main-title-max-width: 1920px;
+
 .section {
-    position: relative;
     width: 100%;
+    min-height: 100vh;
     max-width: 1920px;
     margin: 0px auto;
 
     &.introduction {
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        min-height: calc(100vh - 100px);
 
-        .text {
+        .title-container {
+            position: relative;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            width: 40%;
-            max-width: 400px;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 100px);
+            max-width: $main-title-max-width;
+            width: fit-content;
             margin: auto;
+            z-index: 2;
+
+            .title {
+                font-size: 12vw;
+                font-family: Bebas Neue;
+            }
+
+            .subtitle {
+                font-size: 1vw;
+                margin-bottom: 100px;
+            }
+
+            .tokens {
+                position: absolute;
+                top: 50%;
+                height: 30vw;
+                max-width: $main-title-max-width;
+                z-index: 3;
+    
+                &.left {
+                    left: 0;
+                    transform: translateY(-60%) translateX(-50%);
+                }
+    
+                &.right {
+                    right: 0;
+                    transform: translateY(-60%) translateX(50%);
+                }
+            }
         }
 
-        .image {
-            width: 60%;
-            height: 800px;
-            margin: 0px 25px;
-            background-color: #184375;
+        .flare {
+            position: absolute;
+            z-index: -1;
+
+            &.left {
+                left: 0;
+            }
+
+            &.right {
+                right: 0;
+            }
         }
     }
 
     &.tutorial {
         display: flex;
         flex-direction: column;
-        margin-top: 150px;
         
         .text {
             display: flex;
             flex-direction: column;
             gap: 80px;
             width: 100%;
-            margin: auto;
-        }
 
-        .section-title {
-            text-align: center;
-        }
-
-        .steps {
-            display: flex;
-            justify-content: space-evenly;
-        }
-
-        .title-and-disclaimer {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 350px;
-            text-align: center;
-        
-            .title {
-                height: 80px;
+            .section-title {
                 text-align: center;
+                margin-bottom: 10vw;
+            }
+    
+            .steps {
+                display: flex;
+                justify-content: space-between;
+                padding: 0px 100px;
+    
+                .icon-title-disclaimer {
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    width: 30%;
+                    padding: 70px 20px 30px 20px;
+                    text-align: center;
+                    background: rgba(255, 255, 255, 0.05);
+                    border-radius: 12px;
+
+                    .icon {
+                        position: absolute;
+                        width: 150px;
+                        top: -50%;
+                        left: 50%;
+                        transform: translateX(-50%);
+                    }
+                
+                    .title {
+                        min-height: 5vw;
+                        text-align: center;
+                    }
+                }
             }
         }
 
         .button {
-            margin: auto;
+            margin: 0 auto;
         }
         
         .disclaimer {
-            margin: 100px auto;
+            margin: 0 auto;
             text-align: center;
             width: 300px;
         }
@@ -73,35 +126,42 @@
 
     &.sending {
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        margin-top: 50px;
+        gap: 50px;
+        padding: 0px 100px;
 
         .text {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 20px;
             width: 40%;
             max-width: 400px;
             margin: auto;
+
+            .title {
+                font-size: 2vw;
+            }
         }
 
         .image {
             width: 60%;
-            height: 800px;
-            margin: 0px 25px;
+            height: 70vh;
             background-color: #184375;
+            border-radius: 12px;
         }
     }
 }
 
 .section-title {
-    font-size: 50px;
+    font-size: 5vw;
     font-weight: 400;
+    font-family: Bebas Neue;
 }
 
 .title {
-    font-size: 34px;
-    font-weight: 400;
+    font-size: 1.5vw;
+    font-weight: 600;
 }
 
 .subtitle {

@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Red+Rose:wght@300&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Red+Rose:wght@300&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 * {
     box-sizing: border-box;
@@ -9,6 +12,7 @@ body {
     margin: 0;
     color: white;
     background-color: #001174;
+    overflow-x: hidden;
 }
 
 a {
