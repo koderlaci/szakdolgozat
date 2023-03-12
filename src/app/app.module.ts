@@ -1,9 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+
+//components
 import { HeaderComponent } from './components/header/header.component';
+
+// pages
 import { LandingComponent } from './pages/landing/landing.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -28,7 +33,9 @@ import { CartComponent } from './pages/cart/cart.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
