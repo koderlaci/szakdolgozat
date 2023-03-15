@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 
+type LoginResponse = {
+  authenticated: boolean,
+  errorMessage: string
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,6 +19,10 @@ export class LoginComponent implements OnInit {
     password: new FormControl('')
   })
 
+  loginResponse = {
+      authenticated: false,
+      errorMessage: ''
+    };
 
   constructor(private userHandlerService: UserHandlerService) { }
 
@@ -25,6 +34,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.userHandlerService.login(this.loginForm.getRawValue()).subscribe(res => {
       console.log(res);
+      this.loginResponse = res as LoginResponse;
     })
   }
 

@@ -4,6 +4,7 @@
         <div class="subtitle">Az Eszterházy Károly Katolikus Egyetem saját kriptotokenje</div>
         <input type="text" class="input" placeholder="Email" name="email" formControlName="email">
         <input type="password" class="input" placeholder="Jelszó" name="password" formControlName="password">
+        <div class="error-message" *ngIf="loginResponse.errorMessage">{{ loginResponse.errorMessage }}</div>
         <div class="buttons-container">
             <button class="button main" (click)="login()">Bejelentkezés</button>
             <button class="button secondary">Regisztrálok</button>
