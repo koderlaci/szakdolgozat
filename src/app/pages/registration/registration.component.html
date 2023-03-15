@@ -1,1 +1,16 @@
-<p>registration works!</p>
+<section class="registration" [formGroup]="registrationForm">
+    <form class="form-container">
+        <img src="assets/icons/logo.svg" alt="logo" class="logo">
+        <div class="subtitle">Az Eszterházy Károly Katolikus Egyetem saját kriptotokenje</div>
+        <input type="text" class="input" placeholder="Név" name="name" formControlName="name">
+        <input type="text" class="input" placeholder="Neptun kód" name="neptun" formControlName="neptun">
+        <input type="text" class="input" placeholder="Email" name="email" formControlName="email">
+        <input type="password" class="input" placeholder="Jelszó" name="password" formControlName="password">
+        <!-- <div class="error-message" *ngIf="loginResponse.errorMessage">{{ loginResponse.errorMessage }}</div> -->
+        <div class="buttons-container">
+            <button class="button main" (click)="registrate()">Regisztrálok</button>
+            <button class="button secondary" routerLink="/login">Bejelentkezés</button>
+        </div>
+    </form>
+    <img src="assets/images/tokens_login.svg" alt="tokens" class="tokens">
+</section>

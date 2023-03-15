@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { UserHandlerService } from 'src/app/services/user-handler.service';
 
 @Component({
   selector: 'app-registration',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  registrationForm = new FormGroup({
+    name: new FormControl(''),
+    neptun: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl('')
+  })
+
+  constructor(private userHandlerService: UserHandlerService) { }
 
   ngOnInit(): void {
+    this.registrationForm.valueChanges.subscribe(form => console.log(form));
+  }
+
+  registrate() {
+    this.userHandlerService.registrate(this.registrationForm.getRawValue()).subscribe(res => {
+      console.log(res);
+    })
   }
 
 }

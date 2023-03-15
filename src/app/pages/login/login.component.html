@@ -7,7 +7,7 @@
         <div class="error-message" *ngIf="loginResponse.errorMessage">{{ loginResponse.errorMessage }}</div>
         <div class="buttons-container">
             <button class="button main" (click)="login()">Bejelentkezés</button>
-            <button class="button secondary">Regisztrálok</button>
+            <button class="button secondary" routerLink="/registration">Regisztrálok</button>
         </div>
     </form>
     <img src="assets/images/tokens_login.svg" alt="tokens" class="tokens">
