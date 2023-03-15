@@ -2,6 +2,7 @@ import express from "express";
 import mysql from "mysql";
 import cors from "cors";
 import bodyParser from 'body-parser';
+import sha1 from 'sha1';
 
 const corsOptions = {
   origin: '*',
@@ -33,72 +34,101 @@ app.listen(port, () => {
 })
 
 // get all users
-app.get('/allusers', (req, res) => {
+app.get('/allusers', (request, response) => {
 
   let query = "SELECT * FROM `user`";
 
   con.query(query, (err, result) => {
     if (err) throw err;
-    res.send(result)
+    response.send(result)
   });
 })
 
 // add user
-app.post('/adduser', (req, res) => {
+app.post('/adduser', jsonParser, (request, response) => {
 
   let query = `INSERT INTO user SET ?`;
 
   let formData = {
-    username: req.body.username,
-    neptun: req.body.neptun,
-    email: req.body.email,
-    password: req.body.password,
+    name: request.body.name,
+    neptun: request.body.neptun,
+    email: request.body.email,
+    password: sha1(request.body.password),
     permission: 0
   }
 
-  con.query(query, formData, (err, res) => {
-    if (err) throw err;
-    // res.redirect('/user');
-  });
+  if (!formData.name || !formData.neptun || !formData.email || !request.body.password) {
+    response.send(false);
+  }
+  else {
+    con.query(query, formData, (err, result) => {
+      if (err) throw err;
+      response.send(true);
+    });
+  }
 })
 
 // edit user
-app.post('/edituser/:id', (req, res) => {
+app.post('/edituser/:id', (request, response) => {
 
   let formData = {
-    username: req.body.username,
-    neptun: req.body.neptun,
-    email: req.body.email,
-    password: req.body.password,
+    name: request.body.name,
+    neptun: request.body.neptun,
+    email: request.body.email,
+    password: request.body.password,
     permission: 0
   }
 
-  con.query('UPDATE user SET ? WHERE id = ' + req.params.id, formData, (err, res) => {
+  con.query('UPDATE user SET ? WHERE id = ' + request.params.id, formData, (err, result) => {
     if (err) throw err
-    // res.redirect('/user');
+    // response.redirect('/user');
   })
 })
 
 // delete user
-app.get('/deleteuser/(:id)', (req, res) => {
+app.get('/deleteuser/(:id)', (request, response) => {
 
-  con.query('DELETE FROM user WHERE id = ' + req.params.id, (err, res) => {
+  con.query('DELETE FROM user WHERE id = ' + request.params.id, (err, result) => {
     if (err) throw err
     console.log("deleted user");
-    // res.redirect('/user')
+    // response.redirect('/user')
   })
 })
 
 // login
-app.post('/login', jsonParser, (req, resp) => {
+app.post('/login', jsonParser, (request, response) => {
 
-  con.query(`SELECT password FROM user WHERE email = '${req.body.email}'`, (err, res)=> {
+  con.query(`SELECT password FROM user WHERE email = '${request.body.email}'`, (err, result) => {
     if (err) throw err;
-    if (res[0].password === req.body.password) {
-      resp.send(true)
+    if (result.length > 0) {
+      if (result[0].password === sha1(request.body.password)) {
+        response.send(
+          {
+            authenticated: true,
+            errorMessage: null
+          }
+        );
+      }
+      else {
+        response.send(
+          {
+            authenticated: false,
+            errorMessage: 'Helytelen email vagy jelszó!'
+          }
+        );
+      }
     }
     else {
-      resp.send(false)
+      response.send(
+        {
+          authenticated: false,
+          errorMessage: 'Helytelen email vagy jelszó!'
+        }
+      );
     }
   })
+})
+
+app.get('/shatest', jsonParser, (request, response) => {
+  response.send(sha1("banana"));
 })

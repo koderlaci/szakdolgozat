@@ -16,7 +16,9 @@
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "sha1": "^1.1.1",
+    "sha2": "^1.0.2"
   },
   "devDependencies": {
     "@types/estree": "^1.0.0",
