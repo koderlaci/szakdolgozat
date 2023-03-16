@@ -73,7 +73,7 @@ export class RegistrationComponent implements OnInit {
         case 'required':
           return 'Kötelező mező!'
         case 'minlength':
-          return 'A neptun kód hossza minimum 6 karakter!'
+          return 'Az email hossza minimum 3 karakter!'
         case 'pattern':
           return 'Helytelen formátum!'
       }

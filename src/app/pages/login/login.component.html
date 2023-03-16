@@ -3,7 +3,9 @@
         <img src="assets/icons/logo.svg" alt="logo" class="logo">
         <div class="subtitle">Az Eszterházy Károly Katolikus Egyetem saját kriptotokenje</div>
         <input type="text" class="input" placeholder="Email" name="email" formControlName="email">
+        <div class="error-message" *ngIf="!controlValid('email')">{{ getErrorMessage('email') }}</div>
         <input type="password" class="input" placeholder="Jelszó" name="password" formControlName="password">
+        <div class="error-message" *ngIf="!controlValid('password')">{{ getErrorMessage('password') }}</div>
         <div class="error-message" *ngIf="loginResponse.errorMessage">{{ loginResponse.errorMessage }}</div>
         <div class="buttons-container">
             <button class="button main" (click)="login()">Bejelentkezés</button>

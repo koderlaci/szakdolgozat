@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 
 type LoginResponse = {
@@ -15,34 +15,64 @@ type LoginResponse = {
 export class LoginComponent implements OnInit {
 
   loginForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
+    email: new FormControl('', [Validators.required, Validators.pattern(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
+    password: new FormControl('', [Validators.required])
   })
 
   loginResponse = {
-      authenticated: false,
-      errorMessage: ''
-    };
+    authenticated: false,
+    errorMessage: ''
+  };
 
   constructor(private userHandlerService: UserHandlerService) { }
 
   ngOnInit(): void {
     this.loginForm.valueChanges.subscribe(form => console.log(form));
-    // this.getAllUsers();
   }
 
   login() {
-    this.userHandlerService.login(this.loginForm.getRawValue()).subscribe(res => {
-      console.log(res);
-      this.loginResponse = res as LoginResponse;
-    })
+    if (this.loginForm.valid) {
+      this.userHandlerService.login(this.loginForm.getRawValue()).subscribe(res => {
+        console.log(res);
+        this.loginResponse = res as LoginResponse;
+      })
+    }
+    else {
+      Object.values(this.loginForm.controls).forEach(element => {
+        element.markAsTouched();
+      });
+    }
   }
 
-  /*getAllUsers() {
-    this.userHandlerService.getAllUsers().subscribe(res => {
-      console.log("Response: ");
-      console.log(res);
-    });
-  }*/
+  controlValid(control: string) {
+    if (!this.loginForm.get(control)?.touched) {
+      return true;
+    }
 
+    return this.loginForm.get(control)?.valid;
+  }
+
+  getErrorMessage(control: string) {
+    if (!this.loginForm.get(control)?.errors) {
+      return '';
+    }
+
+    if (control === 'email') {
+      switch (Object.keys(this.loginForm.get(control)?.errors as object)[0]) {
+        case 'required':
+          return 'Kötelező mező!'
+        case 'pattern':
+          return 'Helytelen formátum!'
+      }
+    }
+
+    if (control === 'password') {
+      switch (Object.keys(this.loginForm.get(control)?.errors as object)[0]) {
+        case 'required':
+          return 'Kötelező mező!'
+      }
+    }
+
+    return '';
+  }
 }
