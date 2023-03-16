@@ -1,3 +1,10 @@
-<p *ngIf="productsType === 'men'">Men products works!</p>
-<p *ngIf="productsType === 'women'">Women products works!</p>
-<p *ngIf="productsType === 'accessary'">Accessary products works!</p>
+<section class="main-container">
+    <div class="product" *ngFor="let product of products">
+        <img src="assets/images/tokens_login.svg" alt="" class="image">
+        <div class="name">{{ product.name }}</div>
+        <div class="price">{{ product.price }} UniToken</div>
+        <div class="colors">
+            <div class="color {{color}}" *ngFor="let color of product.colors"></div>
+        </div>
+    </div>
+</section>
