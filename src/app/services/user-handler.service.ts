@@ -20,6 +20,8 @@ export class UserHandlerService {
 
   localUrl = "http://localhost:4201";
 
+  userLoggedIn = sessionStorage.getItem('userLoggedIn') as unknown as boolean;
+
   constructor(private http: HttpClient) { }
 
   login(formData: LoginForm) {
@@ -32,5 +34,14 @@ export class UserHandlerService {
 
   getAllUsers() {
     return this.http.get('/api/allusers');
+  }
+
+  setUserLoggedIn(value: boolean) {
+    this.userLoggedIn = value;
+    sessionStorage.setItem('userLoggedIn', value.toString());
+  }
+
+  isUserLoggedIn() {
+    return this.userLoggedIn;
   }
 }
