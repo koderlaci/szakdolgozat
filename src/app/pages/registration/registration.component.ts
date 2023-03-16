@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class RegistrationComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(`(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}`)])
   })
 
-  constructor(private userHandlerService: UserHandlerService) { }
+  constructor(private userHandlerService: UserHandlerService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +26,9 @@ export class RegistrationComponent implements OnInit {
     if (this.registrationForm.valid) {
       this.userHandlerService.registrate(this.registrationForm.getRawValue()).subscribe(res => {
         this.userHandlerService.setUserLoggedIn(res as boolean);
+        if (res) {
+          this.router.navigate(['/landing']);
+        }
       })
     }
     else {

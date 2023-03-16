@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+// components
 import { AdminComponent } from './pages/admin/admin.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { DeliveryComponent } from './pages/delivery/delivery.component';
@@ -9,16 +11,20 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 
+// guards
+import { IsUserLoggedInGuard } from './guards/isUserLoggedIn/is-user-logged-in.guard';
+import { IsUserLoggedOutGuard } from './guards/isUserLoggedOut/is-user-logged-out.guard';
+
 const routes: Routes = [
   { path: "", redirectTo: "/landing", pathMatch: "full"},
   { path: "landing", component: LandingComponent},
   { path: "products/:type", component: ProductsComponent},
-  { path: "login", component: LoginComponent},
-  { path: "registration", component: RegistrationComponent},
-  { path: "delivery", component: DeliveryComponent},
+  { path: "login", component: LoginComponent, canActivate: [IsUserLoggedOutGuard]},
+  { path: "registration", component: RegistrationComponent, canActivate: [IsUserLoggedOutGuard]},
+  { path: "delivery", component: DeliveryComponent, canActivate: [IsUserLoggedInGuard]},
   { path: "cart", component: CartComponent},
   { path: "admin", component: AdminComponent}, // todo: implement guard
-  { path: "profile", component: ProfileComponent}, // todo: implement guard
+  { path: "profile", component: ProfileComponent, canActivate: [IsUserLoggedInGuard]},
 ];
 
 @NgModule({

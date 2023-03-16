@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 
 type LoginResponse = {
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
     errorMessage: ''
   };
 
-  constructor(private userHandlerService: UserHandlerService) { }
+  constructor(private userHandlerService: UserHandlerService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -34,6 +35,9 @@ export class LoginComponent implements OnInit {
       this.userHandlerService.login(this.loginForm.getRawValue()).subscribe(res => {
         this.loginResponse = res as LoginResponse;
         this.userHandlerService.setUserLoggedIn(this.loginResponse.authenticated);
+        if (this.loginResponse.authenticated) {
+          this.router.navigate(['/landing']);
+        }
       })
     }
     else {
