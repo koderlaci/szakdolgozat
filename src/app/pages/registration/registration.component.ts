@@ -19,13 +19,12 @@ export class RegistrationComponent implements OnInit {
   constructor(private userHandlerService: UserHandlerService) { }
 
   ngOnInit(): void {
-    this.registrationForm.valueChanges.subscribe(form => console.log(form));
   }
 
   registrate() {
     if (this.registrationForm.valid) {
       this.userHandlerService.registrate(this.registrationForm.getRawValue()).subscribe(res => {
-        console.log(res);
+        this.userHandlerService.setUserLoggedIn(res as boolean);
       })
     }
     else {
