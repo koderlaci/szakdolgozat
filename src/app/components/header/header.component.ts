@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserHandlerService } from 'src/app/services/user-handler.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public userHandlerService: UserHandlerService) { }
 
   ngOnInit(): void {
   }
-
 }

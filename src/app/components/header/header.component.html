@@ -10,13 +10,17 @@
         <a routerLink="/products/accessary" class="item">Kiegészítők</a>
     </div>
     <div class="item-group">
-        <a routerLink="/login" class="icon-item">
+        <a routerLink="/login" class="icon-item" *ngIf="!userHandlerService.isUserLoggedIn()">
             <img src="assets/icons/profile.svg" alt="Profil">
             <span>Bejelentkezés</span>
         </a>
         <a routerLink="/cart" class="icon-item">
             <img src="assets/icons/bag.svg" alt="Táska">
             <span>Kosár</span>
+        </a>
+        <a routerLink="/profile" class="icon-item" *ngIf="userHandlerService.isUserLoggedIn()">
+            <img src="assets/icons/profile.svg" alt="Profil">
+            <span>Profil</span>
         </a>
     </div>
 </div>
