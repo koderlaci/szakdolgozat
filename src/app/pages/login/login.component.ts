@@ -27,14 +27,13 @@ export class LoginComponent implements OnInit {
   constructor(private userHandlerService: UserHandlerService) { }
 
   ngOnInit(): void {
-    this.loginForm.valueChanges.subscribe(form => console.log(form));
   }
 
   login() {
     if (this.loginForm.valid) {
       this.userHandlerService.login(this.loginForm.getRawValue()).subscribe(res => {
-        console.log(res);
         this.loginResponse = res as LoginResponse;
+        this.userHandlerService.setUserLoggedIn(this.loginResponse.authenticated);
       })
     }
     else {
