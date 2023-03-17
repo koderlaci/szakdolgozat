@@ -9,9 +9,8 @@ export enum ProductType {
 }
 
 type Product = {
+  variantId: number;
   name: string;
-  type: ProductType;
-  style: string;
   colors: string[];
   price: number;
 }
@@ -25,42 +24,7 @@ export class ProductsComponent implements OnInit {
 
   productType: ProductType = ProductType.MEN;
 
-  products: Product[] = [
-    {
-      name: 'Kapucnis Pulóver',
-      type: ProductType.MEN,
-      style: 'Pulóver',
-      colors: ['blue', 'black'],
-      price: 10,
-    },
-    {
-      name: 'Kapucnis Pulóver',
-      type: ProductType.MEN,
-      style: 'Pulóver',
-      colors: ['blue', 'black'],
-      price: 10,
-    },
-    {
-      name: 'Kapucnis Pulóver',
-      type: ProductType.MEN,
-      style: 'Pulóver',
-      colors: ['blue', 'black'],
-      price: 10,
-    },
-    {
-      name: 'Kapucnis Pulóver',
-      type: ProductType.MEN,
-      style: 'Pulóver',
-      colors: ['blue', 'black'],
-      price: 10,
-    },
-    {
-      name: 'Kapucnis Pulóver',
-      type: ProductType.MEN,
-      style: 'Pulóver',
-      colors: ['blue', 'black'],
-      price: 10,
-    }];
+  products: Product[] = [];
 
   constructor(private route: ActivatedRoute, private productsService: ProductsService) {
   }
@@ -81,7 +45,7 @@ export class ProductsComponent implements OnInit {
           break;
       }
       this.productsService.getProducts(this.productType).subscribe(result => {
-        // this.products = result;
+        this.products = result as Product[];
       })
     })
   }
