@@ -1,6 +1,6 @@
 <section class="main-container">
     <div class="product" *ngFor="let product of products">
-        <img src="assets/images/tokens_login.svg" alt="" class="image">
+        <div class="image" [ngStyle]="{'background-image': 'url(assets/products/' + product.variantId + '.jpg)'}"></div>
         <div class="name">{{ product.name }}</div>
         <div class="price">{{ product.price }} UniToken</div>
         <div class="colors">

@@ -20,7 +20,10 @@
 
     .image {
         width: 100%;
-        background-color: greenyellow;
+        height: 20vw;
+        max-height: 510px;
+        background-size: cover;
+        background-position: center;
     }
 
     .name {
