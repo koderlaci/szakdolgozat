@@ -132,3 +132,112 @@ app.post('/login', jsonParser, (request, response) => {
 app.get('/shatest', jsonParser, (request, response) => {
   response.send(sha1("banana"));
 })
+
+
+// products
+
+function getColors(products, variantId) {
+  let colors = [];
+  products.forEach(product => {
+    if (product.variant_id === variantId) {
+      colors.push(product.color)
+    }
+  });
+
+  return colors;
+}
+
+function getSizes(products, variantId) {
+  let sizes = [];
+  products.forEach(product => {
+    if (product.variantId === variantId) {
+      sizes.push(product.size)
+    }
+  });
+
+  return sizes;
+}
+
+// get men products for products screen
+app.get('/menProducts', (request, response) => {
+
+  let query = "SELECT * FROM product WHERE type = 'men'";
+
+  con.query(query, (err, result) => {
+    if (err) throw err;
+
+    let products = [];
+
+    let productVariants = [];
+
+    result.forEach(product => {
+      if (!productVariants.includes(product.variant_id)) {
+        products.push({
+          variantId: product.variant_id,
+          name: product.name,
+          price: product.price,
+          colors: getColors(result, product.variant_id),
+        })
+        productVariants.push(product.variant_id);
+      }
+    });
+
+    response.send(products)
+  });
+})
+
+// get women products for products screen
+app.get('/womenProducts', (request, response) => {
+
+  let query = "SELECT * FROM product WHERE type = 'women'";
+
+  con.query(query, (err, result) => {
+    if (err) throw err;
+
+    let products = [];
+
+    let productVariants = [];
+
+    result.forEach(product => {
+      if (!productVariants.includes(product.variant_id)) {
+        products.push({
+          variantId: product.variant_id,
+          name: product.name,
+          price: product.price,
+          colors: getColors(result, product.variant_id),
+        })
+        productVariants.push(product.variant_id);
+      }
+    });
+
+    response.send(products)
+  });
+})
+
+// get accessary products for products screen
+app.get('/accessaryProducts', (request, response) => {
+
+  let query = "SELECT * FROM product WHERE type = 'accessary'";
+
+  con.query(query, (err, result) => {
+    if (err) throw err;
+
+    let products = [];
+
+    let productVariants = [];
+
+    result.forEach(product => {
+      if (!productVariants.includes(product.variant_id)) {
+        products.push({
+          variantId: product.variant_id,
+          name: product.name,
+          price: product.price,
+          colors: getColors(result, product.variant_id),
+        })
+        productVariants.push(product.variant_id);
+      }
+    });
+
+    response.send(products)
+  });
+})
