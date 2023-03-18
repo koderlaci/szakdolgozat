@@ -5,7 +5,7 @@ export enum ProductType {
 }
 
 export type Product = {
-    variantId: number;
+    variantId: string;
     name: string;
     colors: string[];
     price: number;
