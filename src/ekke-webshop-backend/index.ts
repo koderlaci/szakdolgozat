@@ -150,7 +150,7 @@ function getColors(products, variantId) {
 function getSizes(products, variantId) {
   let sizes = [];
   products.forEach(product => {
-    if (product.variantId === variantId) {
+    if (product.variant_id === variantId) {
       sizes.push(product.size)
     }
   });
@@ -267,5 +267,33 @@ app.get('/productSlider', (request, response) => {
     });
 
     response.send(products)
+  });
+})
+
+// get product for product page
+app.get('/product', jsonParser, (request, response) => {
+
+  let query = `SELECT * FROM product WHERE variant_id = '${request.query.variantId}'`;
+
+  con.query(query, (err, result) => {
+    if (err) throw err;
+
+    let mappedProduct = {};
+
+    let productVariants = [];
+
+    result.forEach(product => {
+      if (!productVariants.includes(product.variant_id)) {
+        mappedProduct = {
+          name: product.name,
+          price: product.price,
+          colors: getColors(result, product.variant_id),
+          sizes: getSizes(result, product.variant_id),
+        }
+        productVariants.push(product.variant_id);
+      }
+    });
+
+    response.send(mappedProduct)
   });
 })
