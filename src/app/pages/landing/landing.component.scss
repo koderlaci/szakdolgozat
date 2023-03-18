@@ -151,6 +151,18 @@ $main-title-max-width: 1920px;
             border-radius: 12px;
         }
     }
+
+    &.products {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding: 0px 100px;
+
+        .section-title {
+            text-align: center;
+            margin: 0 auto;
+        }
+    }
 }
 
 .section-title {

@@ -1,11 +1,15 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
-//components
+// web components
+import { register } from 'swiper/element/bundle';
+register();
+
+// components
 import { HeaderComponent } from './components/header/header.component';
 
 // pages
@@ -17,6 +21,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DeliveryComponent } from './pages/delivery/delivery.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ProductSliderComponent } from './components/product-slider/product-slider/product-slider.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +34,8 @@ import { CartComponent } from './pages/cart/cart.component';
     AdminComponent,
     ProfileComponent,
     DeliveryComponent,
-    CartComponent
+    CartComponent,
+    ProductSliderComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +44,7 @@ import { CartComponent } from './pages/cart/cart.component';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

@@ -1,19 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
+import { Product, ProductType } from 'src/app/types/types';
 
-export enum ProductType {
-  MEN,
-  WOMEN,
-  ACCESSARY
-}
 
-type Product = {
-  variantId: number;
-  name: string;
-  colors: string[];
-  price: number;
-}
 
 @Component({
   selector: 'app-products',

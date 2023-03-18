@@ -1,0 +1,63 @@
+.main-container {
+    display: flex;
+    gap: 30px;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: calc(25% - 30px);
+    max-width: 350px;
+    min-width: 200px;
+    height: fit-content;
+    max-height: 610px;
+
+    .image {
+        width: 100%;
+        height: 20vw;
+        max-height: 510px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .name {
+        font-size: 20px;
+    }
+
+    .price {
+        font-size: 16px;
+    }
+
+    .colors {
+        display: flex;
+        gap: 10px;
+
+        .color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+
+            &.black {
+                background-color: black;
+            }
+
+            &.white {
+                background-color: white;
+            }
+
+            &.blue {
+                background-color: #000E8F;
+            }
+
+            &.pink {
+                background-color: #F072CD;
+            }
+        }
+    }
+}
+
+swiper-container {
+    width: 100%;
+    height: 100%;
+}

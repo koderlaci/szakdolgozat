@@ -1,0 +1,14 @@
+<div class="main-container">
+    <swiper-container class="mySwiper" pagination="false" slides-per-view="4"
+        space-between="30">
+        <swiper-slide class="product" *ngFor="let product of products">
+            <div class="image" [ngStyle]="{'background-image': 'url(assets/products/' + product.variantId + '.jpg)'}">
+            </div>
+            <div class="name">{{ product.name }}</div>
+            <div class="price">{{ product.price }} UniToken</div>
+            <div class="colors">
+                <div class="color {{color}}" *ngFor="let color of product.colors"></div>
+            </div>
+        </swiper-slide>
+    </swiper-container>
+</div>

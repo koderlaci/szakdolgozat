@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ProductType } from '../pages/products/products.component';
+import { ProductType } from '../types/types';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +21,9 @@ export class ProductsService {
         return this.http.get('/api/accessaryProducts');
     }
   }
-  
+
+  getAllProductsForProductSlider() {
+    return this.http.get('/api/productSlider');
+  }
 }
+
