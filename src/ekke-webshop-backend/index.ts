@@ -285,6 +285,7 @@ app.get('/product', jsonParser, (request, response) => {
     result.forEach(product => {
       if (!productVariants.includes(product.variant_id)) {
         mappedProduct = {
+          variantId: product.variant_id,
           name: product.name,
           price: product.price,
           colors: getColors(result, product.variant_id),
