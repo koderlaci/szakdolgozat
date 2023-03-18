@@ -1,6 +1,11 @@
 .main-container {
     display: flex;
     gap: 30px;
+    cursor: pointer;
+
+    &:active {
+        cursor: grabbing;
+    }
 }
 
 .product {
