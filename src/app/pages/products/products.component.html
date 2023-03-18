@@ -1,5 +1,5 @@
 <section class="main-container">
-    <div class="product" *ngFor="let product of products">
+    <div class="product" *ngFor="let product of products" routerLink="{{ '/product/' + product.variantId }}">
         <div class="image" [ngStyle]="{'background-image': 'url(assets/products/' + product.variantId + '.jpg)'}"></div>
         <div class="name">{{ product.name }}</div>
         <div class="price">{{ product.price }} UniToken</div>

@@ -14,6 +14,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 // guards
 import { IsUserLoggedInGuard } from './guards/isUserLoggedIn/is-user-logged-in.guard';
 import { IsUserLoggedOutGuard } from './guards/isUserLoggedOut/is-user-logged-out.guard';
+import { ProductComponent } from './pages/product/product/product.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/landing", pathMatch: "full"},
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: "cart", component: CartComponent},
   { path: "admin", component: AdminComponent}, // todo: implement guard
   { path: "profile", component: ProfileComponent, canActivate: [IsUserLoggedInGuard]},
+  { path: "product/:variant", component: ProductComponent},
 ];
 
 @NgModule({

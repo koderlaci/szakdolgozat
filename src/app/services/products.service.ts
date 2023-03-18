@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProductType } from '../types/types';
 
@@ -24,6 +24,13 @@ export class ProductsService {
 
   getAllProductsForProductSlider() {
     return this.http.get('/api/productSlider');
+  }
+
+  getProductForProductPageByVariantId(variantId: string) {
+    let queryParam = new HttpParams();
+    queryParam = queryParam.append("variantId", variantId);
+
+    return this.http.get('/api/product', {params: queryParam});
   }
 }
 

@@ -22,6 +22,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { DeliveryComponent } from './pages/delivery/delivery.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductSliderComponent } from './components/product-slider/product-slider/product-slider.component';
+import { ProductComponent } from './pages/product/product/product.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ProductSliderComponent } from './components/product-slider/product-slid
     DeliveryComponent,
     CartComponent,
     ProductSliderComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,

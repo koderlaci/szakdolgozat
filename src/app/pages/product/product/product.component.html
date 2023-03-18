@@ -1,0 +1,20 @@
+<div class="main-container">
+    <div class="product-container">
+        <div class="image" [ngStyle]="{'background-image': 'url(assets/products/' + product.variantId + '.jpg)'}"></div>
+        <div class="details">
+            <div class="product-name">{{ product.name }}</div>
+            <div class="product-price">{{ product.price }} UniToken</div>
+            <select name="color" placeholder="Válassz színt" class="select">
+                <option *ngFor="let color of product.colors" value="{{ color }}">{{ color }}</option>
+            </select>
+            <select name="size" placeholder="Válassz méretet" class="select">
+                <option *ngFor="let size of product.sizes" value="{{ size }}">{{ size }}</option>
+            </select>
+            <button class="button main">Kosárba teszem</button>
+        </div>
+    </div>
+    <div class="product-slider-container">
+        <div class="title">Neked ajánljuk</div>
+        <app-product-slider></app-product-slider>
+    </div>
+</div>
