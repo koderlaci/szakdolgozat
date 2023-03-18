@@ -241,3 +241,31 @@ app.get('/accessaryProducts', (request, response) => {
     response.send(products)
   });
 })
+
+// get all products for product-slider
+app.get('/productSlider', (request, response) => {
+
+  let query = "SELECT * FROM product";
+
+  con.query(query, (err, result) => {
+    if (err) throw err;
+
+    let products = [];
+
+    let productVariants = [];
+
+    result.forEach(product => {
+      if (!productVariants.includes(product.variant_id)) {
+        products.push({
+          variantId: product.variant_id,
+          name: product.name,
+          price: product.price,
+          colors: getColors(result, product.variant_id),
+        })
+        productVariants.push(product.variant_id);
+      }
+    });
+
+    response.send(products)
+  });
+})
