@@ -23,6 +23,7 @@ import { DeliveryComponent } from './pages/delivery/delivery.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductSliderComponent } from './components/product-slider/product-slider/product-slider.component';
 import { ProductComponent } from './pages/product/product/product.component';
+import { SandboxComponent } from './pages/sandbox/sandbox.component';
 
 @NgModule({
   declarations: [
@@ -38,15 +39,16 @@ import { ProductComponent } from './pages/product/product/product.component';
     CartComponent,
     ProductSliderComponent,
     ProductComponent,
+    SandboxComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}
