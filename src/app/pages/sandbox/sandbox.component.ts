@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import Web3 from 'web3';
-// import { encodeFunctionCall } from 'web3-eth-abi';
 
 @Component({
   selector: 'app-sandbox',
@@ -12,7 +11,7 @@ export class SandboxComponent {
   ethereum;
   tokenContractAddress: string = '0x94463fe3011de32F140cc684fBD0cAA8BB5a4C1a';
   paymentAddress: string = '0x47987278BEf8B52E0cf536B6FeFACaCF2162ebF4';
-  price: string = '1';
+  price: string = '10';
 
   constructor() {
     const { ethereum } = <any>window;
@@ -54,7 +53,7 @@ export class SandboxComponent {
   }
 
   getDataFieldValue(tokenRecipientAddress: string, tokenAmount: string) {
-    // const web3 = new Web3();
+    const web3 = new Web3();
 
     const TRANSFER_FUNCTION_ABI = {
       constant: false,
@@ -69,14 +68,9 @@ export class SandboxComponent {
       type: 'function',
     };
 
-    // return web3.eth.abi.encodeFunctionCall(TRANSFER_FUNCTION_ABI, [
-    //   tokenRecipientAddress,
-    //   tokenAmount,
-    // ]);
-
-    // return web3.eth.abi.encodeFunctionCall(TRANSFER_FUNCTION_ABI, [
-    //   tokenRecipientAddress,
-    //   tokenAmount,
-    // ]);
+    return web3.eth.abi.encodeFunctionCall(TRANSFER_FUNCTION_ABI, [
+      tokenRecipientAddress,
+      tokenAmount,
+    ]);
   }
 }
