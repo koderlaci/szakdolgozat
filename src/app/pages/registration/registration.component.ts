@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 
@@ -10,11 +10,11 @@ import { UserHandlerService } from 'src/app/services/user-handler.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  registrationForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    neptun: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
-    email: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(`(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}`)])
+  registrationForm = new UntypedFormGroup({
+    name: new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+    neptun: new UntypedFormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
+    email: new UntypedFormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
+    password: new UntypedFormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(`(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}`)])
   })
 
   constructor(private userHandlerService: UserHandlerService, private router: Router) { }
