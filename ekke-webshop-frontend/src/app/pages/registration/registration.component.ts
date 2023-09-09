@@ -1,38 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
+  private userHandlerService = inject(UserHandlerService);
+  private router = inject(Router);
 
   registrationForm = new UntypedFormGroup({
-    name: new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
-    neptun: new UntypedFormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
-    email: new UntypedFormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
-    password: new UntypedFormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(`(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}`)])
-  })
+    name: new UntypedFormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    neptun: new UntypedFormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(6),
+    ]),
+    email: new UntypedFormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      ),
+    ]),
+    password: new UntypedFormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.pattern(`(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}`),
+    ]),
+  });
 
-  constructor(private userHandlerService: UserHandlerService, private router: Router) { }
-
-  ngOnInit(): void {
-  }
-
-  registrate() {
+  register() {
     if (this.registrationForm.valid) {
-      this.userHandlerService.registrate(this.registrationForm.getRawValue()).subscribe(res => {
-        this.userHandlerService.setUserLoggedIn(res as boolean);
-        if (res) {
-          this.router.navigate(['/landing']);
-        }
-      })
-    }
-    else {
-      Object.values(this.registrationForm.controls).forEach(element => {
+      this.userHandlerService
+        .register(this.registrationForm.getRawValue())
+        .subscribe((res) => {
+          this.userHandlerService.setUserLoggedIn(res as boolean);
+          if (res) {
+            this.router.navigate(['/landing']);
+          }
+        });
+    } else {
+      Object.values(this.registrationForm.controls).forEach((element) => {
         element.markAsTouched();
       });
     }
@@ -52,44 +71,52 @@ export class RegistrationComponent implements OnInit {
     }
 
     if (control === 'name') {
-      switch (Object.keys(this.registrationForm.get(control)?.errors as object)[0]) {
+      switch (
+        Object.keys(this.registrationForm.get(control)?.errors as object)[0]
+      ) {
         case 'required':
-          return 'Kötelező mező!'
+          return 'Kötelező mező!';
         case 'minlength':
-          return 'A név hossza minimum 3 karakter!'
+          return 'A név hossza minimum 3 karakter!';
       }
     }
 
     if (control === 'neptun') {
-      switch (Object.keys(this.registrationForm.get(control)?.errors as object)[0]) {
+      switch (
+        Object.keys(this.registrationForm.get(control)?.errors as object)[0]
+      ) {
         case 'required':
-          return 'Kötelező mező!'
+          return 'Kötelező mező!';
         case 'minlength':
-          return 'A neptun kód hossza minimum 6 karakter!'
+          return 'A neptun kód hossza minimum 6 karakter!';
         case 'maxlength':
-          return 'A neptun kód hossza maximum 6 karakter!'
+          return 'A neptun kód hossza maximum 6 karakter!';
       }
     }
 
     if (control === 'email') {
-      switch (Object.keys(this.registrationForm.get(control)?.errors as object)[0]) {
+      switch (
+        Object.keys(this.registrationForm.get(control)?.errors as object)[0]
+      ) {
         case 'required':
-          return 'Kötelező mező!'
+          return 'Kötelező mező!';
         case 'minlength':
-          return 'Az email hossza minimum 3 karakter!'
+          return 'Az email hossza minimum 3 karakter!';
         case 'pattern':
-          return 'Helytelen formátum!'
+          return 'Helytelen formátum!';
       }
     }
 
     if (control === 'password') {
-      switch (Object.keys(this.registrationForm.get(control)?.errors as object)[0]) {
+      switch (
+        Object.keys(this.registrationForm.get(control)?.errors as object)[0]
+      ) {
         case 'required':
-          return 'Kötelező mező!'
+          return 'Kötelező mező!';
         case 'minlength':
-          return 'A jelszó hossza minimum 8 karakter!'
+          return 'A jelszó hossza minimum 8 karakter!';
         case 'pattern':
-          return 'A jelszónak tartalmaznia kell legalább 1 kis betűt, 1 nagy betűt és 1 számot!'
+          return 'A jelszónak tartalmaznia kell legalább 1 kis betűt, 1 nagy betűt és 1 számot!';
       }
     }
 

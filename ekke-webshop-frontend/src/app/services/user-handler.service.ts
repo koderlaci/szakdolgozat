@@ -1,47 +1,30 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-
-type LoginForm = {
-  email: string,
-  password: string
-}
-
-type RegistrationForm = {
-  name: string,
-  neptun: string,
-  email: string,
-  password: string
-}
+import { Injectable, inject, signal } from '@angular/core';
+import { AddUserRequest, LoginRequest, UserService } from 'api-generated';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserHandlerService {
+  private userService = inject(UserService);
 
-  localUrl = "http://localhost:4201";
+  userLoggedIn = signal<boolean>(
+    sessionStorage.getItem('userLoggedIn') as unknown as boolean
+  );
 
-  userLoggedIn = sessionStorage.getItem('userLoggedIn') as unknown as boolean;
-
-  constructor(private http: HttpClient) { }
-
-  login(formData: LoginForm) {
-    return this.http.post(this.localUrl + '/login', formData);
+  login(formData: LoginRequest) {
+    return this.userService.login(formData);
   }
 
-  registrate(formData: RegistrationForm) {
-    return this.http.post(this.localUrl + '/adduser', formData);
+  register(formData: AddUserRequest) {
+    return this.userService.addUser(formData);
   }
 
   getAllUsers() {
-    return this.http.get('/api/allusers');
+    return this.userService.getAllUsers();
   }
 
   setUserLoggedIn(value: boolean) {
-    this.userLoggedIn = value;
+    this.userLoggedIn.set(value);
     sessionStorage.setItem('userLoggedIn', value.toString());
-  }
-
-  isUserLoggedIn() {
-    return this.userLoggedIn;
   }
 }

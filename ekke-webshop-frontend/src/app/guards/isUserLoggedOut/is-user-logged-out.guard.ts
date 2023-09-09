@@ -1,27 +1,33 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Injectable, inject } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class IsUserLoggedOutGuard  {
-  constructor(private userHandlerService: UserHandlerService, private router: Router) {
-  }
+export class IsUserLoggedOutGuard {
+  private userHandlerService = inject(UserHandlerService);
+  private router = inject(Router);
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    if (this.userHandlerService.isUserLoggedIn()) {
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    if (this.userHandlerService.userLoggedIn()) {
       this.router.navigate(['/landing']);
       return false;
-    }
-    else {
+    } else {
       return true;
     }
   }
-  
 }

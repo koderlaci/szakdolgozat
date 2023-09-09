@@ -1,1 +1,0 @@
-INSERT INTO `user` (`id`, `username`, `neptun`, `email`, `password`, `permission`) VALUES (NULL, 'admin', 'admin1', 'admin@admin.com', 'admin', '1');

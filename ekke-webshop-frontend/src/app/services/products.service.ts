@@ -1,36 +1,31 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ProductType } from '../types/types';
+import { ProductService } from 'api-generated';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductsService {
-
-  constructor(private http: HttpClient) { }
+  private productService = inject(ProductService);
 
   getProducts(type: ProductType) {
     switch (type) {
       case ProductType.MEN:
-        return this.http.get('/api/menProducts');
+        return this.productService.getMenProducts();
 
       case ProductType.WOMEN:
-        return this.http.get('/api/womenProducts');
+        return this.productService.getWomenProducts();
 
       case ProductType.ACCESSARY:
-        return this.http.get('/api/accessaryProducts');
+        return this.productService.getAccessaryProducts();
     }
   }
 
   getAllProductsForProductSlider() {
-    return this.http.get('/api/productSlider');
+    return this.productService.getSliderProducts();
   }
 
   getProductForProductPageByVariantId(variantId: string) {
-    let queryParam = new HttpParams();
-    queryParam = queryParam.append("variantId", variantId);
-
-    return this.http.get('/api/product', {params: queryParam});
+    return this.productService.getProduct(variantId);
   }
 }
-

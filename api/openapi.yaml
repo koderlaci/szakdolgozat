@@ -11,7 +11,7 @@ paths:
       summary: Returns a list of all users.
       tags:
         - user
-      operationId: getUserById
+      operationId: getAllUsers
 
   /adduser:
     post:
@@ -20,6 +20,7 @@ paths:
         - user
       operationId: addUser
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -56,6 +57,7 @@ paths:
             type: integer
             format: int64
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -93,6 +95,7 @@ paths:
         - user
       operationId: login
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -148,7 +151,7 @@ paths:
         - product
       operationId: getProduct
       parameters:
-        - name: fields
+        - name: variantId
           in: query
           required: true
           schema:

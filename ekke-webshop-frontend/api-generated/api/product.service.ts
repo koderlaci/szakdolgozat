@@ -197,22 +197,22 @@ export class ProductService {
 
     /**
      * Returns a product for the product page.
-     * @param fields 
+     * @param variantId 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getProduct(fields: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public getProduct(fields: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getProduct(fields: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getProduct(fields: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
-        if (fields === null || fields === undefined) {
-            throw new Error('Required parameter fields was null or undefined when calling getProduct.');
+    public getProduct(variantId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public getProduct(variantId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getProduct(variantId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getProduct(variantId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        if (variantId === null || variantId === undefined) {
+            throw new Error('Required parameter variantId was null or undefined when calling getProduct.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (fields !== undefined && fields !== null) {
+        if (variantId !== undefined && variantId !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>fields, 'fields');
+            <any>variantId, 'variantId');
         }
 
         let localVarHeaders = this.defaultHeaders;

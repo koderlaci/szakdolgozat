@@ -1,7 +1,9 @@
 <section class="registration" [formGroup]="registrationForm">
     <form class="form-container">
         <img src="assets/icons/logo.svg" alt="logo" class="logo">
+
         <div class="subtitle">Az Eszterházy Károly Katolikus Egyetem saját kriptotokenje</div>
+
         <input type="text" class="input" [ngClass]="{'invalid': !controlValid('name') }" placeholder="Név" name="name" formControlName="name">
         <div class="error-message" *ngIf="!controlValid('name')">{{ getErrorMessage('name') }}</div>
         <input type="text" class="input" [ngClass]="{'invalid': !controlValid('neptun') }" placeholder="Neptun kód" name="neptun" formControlName="neptun">
@@ -10,8 +12,9 @@
         <div class="error-message" *ngIf="!controlValid('email')">{{ getErrorMessage('email') }}</div>
         <input type="password" class="input" [ngClass]="{'invalid': !controlValid('password') }" placeholder="Jelszó" name="password" formControlName="password">
         <div class="error-message" *ngIf="!controlValid('password')">{{ getErrorMessage('password') }}</div>
+        
         <div class="buttons-container">
-            <button class="button main" (click)="registrate()">Regisztrálok</button>
+            <button class="button main" (click)="register()">Regisztrálok</button>
             <button class="button secondary" routerLink="/login">Bejelentkezés</button>
         </div>
     </form>
