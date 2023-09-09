@@ -9,10 +9,16 @@ paths:
   /allusers:
     get:
       summary: Returns a list of all users.
+      tags:
+        - user
+      operationId: getUserById
 
   /adduser:
     post:
       summary: Creates a user.
+      tags:
+        - user
+      operationId: addUser
       requestBody:
         content:
           application/json:
@@ -39,12 +45,15 @@ paths:
   /edituser/{id}:
     post:
       summary: Edits a user by id.
+      tags:
+        - user
+      operationId: editUser
       parameters:
         - name: id
           in: path
           required: true
           schema:
-            type : integer
+            type: integer
             format: int64
       requestBody:
         content:
@@ -66,17 +75,23 @@ paths:
   /deleteuser/{id}:
     delete:
       summary: Deletes a user by id.
+      tags:
+        - user
+      operationId: deleteUser
       parameters:
         - name: id
           in: path
           required: true
           schema:
-            type : integer
+            type: integer
             format: int64
 
   /login:
     post:
       summary: Authorises a user.
+      tags:
+        - user
+      operationId: login
       requestBody:
         content:
           application/json:
@@ -94,30 +109,47 @@ paths:
   /shatest:
     get:
       summary: Returns a hash for testing purposes.
+      tags:
+        - test
+      operationId: testSHA
 
   /menProducts:
     get:
       summary: Returns an array of men products for the products page.
+      tags:
+        - product
+      operationId: getMenProducts
 
   /womenProducts:
     get:
       summary: Returns an array of women products for the products page.
+      tags:
+        - product
+      operationId: getWomenProducts
 
   /accessaryProducts:
     get:
       summary: Returns an array of accessary products for the products page.
+      tags:
+        - product
+      operationId: getAccessaryProducts
 
   /productSlider:
     get:
       summary: Returns an array of all products for the product slider component.
+      tags:
+        - product
+      operationId: getSliderProducts
 
   /product:
     get:
       summary: Returns a product for the product page.
+      tags:
+        - product
+      operationId: getProduct
       parameters:
         - name: fields
           in: query
           required: true
           schema:
-            type : string
-  
+            type: string

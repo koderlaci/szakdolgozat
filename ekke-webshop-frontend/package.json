@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "generate-api": "openapi-generator-cli generate -g typescript-angular -i ../api/openapi.yaml -o ./api-generated --skip-validate-spec",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -29,6 +30,7 @@
     "@angular-devkit/build-angular": "^16.2.1",
     "@angular/cli": "^16.2.1",
     "@angular/compiler-cli": "^16.2.3",
+    "@openapitools/openapi-generator-cli": "^2.7.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.8.0",

@@ -1,0 +1,17 @@
+.gitignore
+README.md
+api.module.ts
+api/api.ts
+api/product.service.ts
+api/test.service.ts
+api/user.service.ts
+configuration.ts
+encoder.ts
+git_push.sh
+index.ts
+model/addUserRequest.ts
+model/editUserRequest.ts
+model/loginRequest.ts
+model/models.ts
+param.ts
+variables.ts
