@@ -1,0 +1,123 @@
+openapi: 3.0.0
+info:
+  title: EKKE Token Webshop API
+  version: 1.0.0
+servers:
+  - url: http://localhost:4201
+    description: Local server
+paths:
+  /allusers:
+    get:
+      summary: Returns a list of all users.
+
+  /adduser:
+    post:
+      summary: Creates a user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                name:
+                  type: string
+                neptun:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - name
+                - neptun
+                - email
+                - password
+
+  /edituser/{id}:
+    post:
+      summary: Edits a user by id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                name:
+                  type: string
+                neptun:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+
+  /deleteuser/{id}:
+    delete:
+      summary: Deletes a user by id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type : integer
+            format: int64
+
+  /login:
+    post:
+      summary: Authorises a user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+
+  /shatest:
+    get:
+      summary: Returns a hash for testing purposes.
+
+  /menProducts:
+    get:
+      summary: Returns an array of men products for the products page.
+
+  /womenProducts:
+    get:
+      summary: Returns an array of women products for the products page.
+
+  /accessaryProducts:
+    get:
+      summary: Returns an array of accessary products for the products page.
+
+  /productSlider:
+    get:
+      summary: Returns an array of all products for the product slider component.
+
+  /product:
+    get:
+      summary: Returns a product for the product page.
+      parameters:
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type : string
+  
