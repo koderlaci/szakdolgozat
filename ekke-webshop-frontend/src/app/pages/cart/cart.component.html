@@ -1,1 +1,50 @@
-<p>cart works!</p>
+<section class="main-container">
+    <div class="cart">
+        <div class="title">Kosár</div>
+        <div class="products">
+            <div class="product">
+                <img class="product-image" src="../../../assets/products/MSHIRT01.jpg">
+                <div class="product-details">
+                    <div class="product-title">Teszt Termék</div>
+                    <div>Ár: 200 UniToken</div>
+                    <div>Méret: L</div>
+                    <div>Szín: Kék</div>
+                    <div>Mennyiség: 1 db</div>
+                </div>
+            </div>
+            <div class="product">
+                <img class="product-image" src="../../../assets/products/MSHIRT01.jpg">
+                <div class="product-details">
+                    <div class="product-title">Teszt Termék</div>
+                    <div>Ár: 200 UniToken</div>
+                    <div>Méret: L</div>
+                    <div>Szín: Kék</div>
+                    <div>Mennyiség: 1 db</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="delivery-options">
+
+        </div>
+        <div class="delivery-address">
+
+        </div>
+    </div>
+    <div class="summary">
+        <div class="title">Összesítés</div>
+        <div>
+            Részösszeg
+            <span>{{ productsPrice }} UniToken</span>
+        </div>
+        <div>
+            Szállítási díj
+            <span>{{ deliveryFee }} UniToken</span>
+        </div>
+        <div>
+            Összesen
+            <span>{{ productsPrice }} UniToken</span>
+        </div>
+        <button class="button main" (click)="pay()">Fizetés</button>
+    </div>
+</section>
