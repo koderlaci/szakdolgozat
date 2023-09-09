@@ -86,7 +86,7 @@ app.post('/edituser/:id', (request, response) => {
 })
 
 // delete user
-app.get('/deleteuser/(:id)', (request, response) => {
+app.delete('/deleteuser/(:id)', (request, response) => {
 
   con.query('DELETE FROM user WHERE id = ' + request.params.id, (err, result) => {
     if (err) throw err
