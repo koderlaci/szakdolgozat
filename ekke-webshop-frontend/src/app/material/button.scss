@@ -1,0 +1,15 @@
+.mat-mdc-raised-button {
+    background: linear-gradient(94deg, #0032D2 -13.21%, #329DFF 112.93%) !important;
+    --mdc-protected-button-label-text-color: white !important;
+    max-width: 250px;
+    border-radius: 32px !important;
+    height: 42px !important;
+}
+
+.mat-mdc-outlined-button {
+    --mdc-outlined-button-label-text-color: white !important;
+    max-width: 250px;
+    border: 2px solid #329DFF !important;
+    border-radius: 32px !important;
+    height: 42px !important;
+}

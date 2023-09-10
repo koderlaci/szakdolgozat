@@ -14,8 +14,8 @@
         <div class="error-message" *ngIf="!controlValid('password')">{{ getErrorMessage('password') }}</div>
         
         <div class="buttons-container">
-            <button class="button main" (click)="register()">Regisztrálok</button>
-            <button class="button secondary" routerLink="/login">Bejelentkezés</button>
+            <button mat-raised-button (click)="register()">Regisztrálok</button>
+            <button mat-stroked-button routerLink="/login">Bejelentkezés</button>
         </div>
     </form>
     <img src="assets/images/tokens_login.svg" alt="tokens" class="tokens">

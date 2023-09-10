@@ -28,6 +28,7 @@ import { SandboxComponent } from './pages/sandbox/sandbox.component';
 // material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     HttpClientModule,
     MatExpansionModule,
     BrowserAnimationsModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
