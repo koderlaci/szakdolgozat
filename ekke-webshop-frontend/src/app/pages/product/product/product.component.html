@@ -4,12 +4,18 @@
         <div class="details">
             <div class="product-name">{{ product.name }}</div>
             <div class="product-price">{{ product.price }} UniToken</div>
-            <select name="color" placeholder="Válassz színt" class="select">
-                <option *ngFor="let color of product.colors" value="{{ color }}">{{ color }}</option>
-            </select>
-            <select name="size" placeholder="Válassz méretet" class="select">
-                <option *ngFor="let size of product.sizes" value="{{ size }}">{{ size }}</option>
-            </select>
+            <mat-form-field class="select-field">
+                <mat-label>Szín</mat-label>
+                <mat-select panelClass="custom-panel">
+                  <mat-option *ngFor="let color of product.colors" [value]="color">{{color}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="select-field">
+                <mat-label>Méret</mat-label>
+                <mat-select panelClass="custom-panel">
+                  <mat-option *ngFor="let size of product.sizes" [value]="size">{{size}}</mat-option>
+                </mat-select>
+            </mat-form-field>
             <button mat-raised-button>Kosárba teszem</button>
         </div>
     </div>

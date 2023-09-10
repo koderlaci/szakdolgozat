@@ -1,0 +1,52 @@
+.mat-mdc-select {
+    border-radius: 48px !important;
+    border: none !important;
+    --mat-select-enabled-trigger-text-color: white;
+}
+
+.mdc-line-ripple::before, .mdc-line-ripple::after {
+    display: none;
+}
+
+.mat-mdc-select-arrow svg {
+    fill: white !important;
+}
+
+.mat-primary
+.mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
+.mat-primary
+.mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
+    color: white;
+}
+.select-field {
+    --mdc-filled-text-field-label-text-color: white;
+    --mdc-filled-text-field-focus-label-text-color: white;
+    --mdc-filled-text-field-active-indicator-color: transparent;
+}
+
+.select-field .mdc-text-field--filled .mdc-floating-label {
+    font-size: 12px;
+}
+
+.select-field .mat-mdc-form-field-flex {
+    height: 48px;
+    align-items: center;
+}
+
+.select-field .mdc-text-field--filled {
+    border-radius: 48px !important;
+}
+
+.select-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #0A2169;
+}
+
+.custom-panel {
+    --mat-option-label-text-color: white;
+    --mat-option-selected-state-label-text-color: white;
+    top: 15px !important;
+    color: white !important;
+    background-color: #0A2169 !important;
+    border-radius: 12px !important;
+    position: absolute !important;
+}
