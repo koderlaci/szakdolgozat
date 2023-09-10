@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { ProductsService } from 'src/app/services/products.service';
 
 export type Product = {
@@ -19,7 +20,6 @@ export class ProductComponent implements OnInit {
   private productsService = inject(ProductsService);
   private route = inject(ActivatedRoute);
 
-  private variant: string | null = '';
   protected product: Product = {
     variantId: '',
     name: '',
@@ -29,13 +29,13 @@ export class ProductComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.variant = params.get('variant');
+    this.route.paramMap.subscribe(async (params) => {
+      const product = await firstValueFrom(
+        this.productsService.getProductForProductPageByVariantId(
+          params.get('variant') as string
+        )
+      );
+      this.product = product;
     });
-    this.productsService
-      .getProductForProductPageByVariantId(this.variant as string)
-      .subscribe((product) => {
-        this.product = product as Product;
-      });
   }
 }
