@@ -25,6 +25,10 @@ import { ProductSliderComponent } from './components/product-slider/product-slid
 import { ProductComponent } from './pages/product/product/product.component';
 import { SandboxComponent } from './pages/sandbox/sandbox.component';
 
+// material
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +50,8 @@ import { SandboxComponent } from './pages/sandbox/sandbox.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatExpansionModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
