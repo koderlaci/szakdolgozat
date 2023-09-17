@@ -14,9 +14,10 @@
             <img src="assets/icons/profile.svg" alt="Profil">
             <span>Bejelentkezés</span>
         </a>
-        <a routerLink="/cart" class="icon-item">
-            <img src="assets/icons/bag.svg" alt="Táska">
+        <a routerLink="/cart" class="icon-item" [matBadgeHidden]="cartService.getCartProductsCount() === 0" [matBadge]="cartService.getCartProductsCount()" matBadgePosition="before" matBadgeColor="primary">
+            <img src="assets/icons/bag.svg" alt="Táska" >
             <span>Kosár</span>
+            <span class="notification" [ngClass]="{'visible' : showCartNotification}">Termék hozzáadva!</span>
         </a>
         <a routerLink="/profile" class="icon-item" *ngIf="userHandlerService.userLoggedIn()">
             <img src="assets/icons/profile.svg" alt="Profil">

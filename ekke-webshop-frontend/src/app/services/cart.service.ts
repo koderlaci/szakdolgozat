@@ -6,6 +6,7 @@ import { CartProduct, EndProduct } from '../types/types';
 })
 export class CartService {
   public cart = signal<CartProduct[]>([]);
+  public itemAddedToCart = signal<number | null>(null);
 
   addProductToCart(product: EndProduct) {
     let tempCart = this.cart();
@@ -20,6 +21,7 @@ export class CartService {
       });
     }
 
+    this.itemAddedToCart.set(Date.now());
     this.cart.set(tempCart);
   }
 
@@ -40,5 +42,15 @@ export class CartService {
     });
 
     return sum;
+  }
+
+  getCartProductsCount() {
+    let count = 0;
+
+    this.cart().forEach((product) => {
+      count = count + product.selectedQuantity;
+    });
+
+    return count;
   }
 }

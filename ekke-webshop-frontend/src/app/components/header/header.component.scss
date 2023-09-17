@@ -23,10 +23,23 @@
 }
 
 .icon-item {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
+
+    .notification {
+        position: absolute;
+        opacity: 0;
+        top: 30px;
+        font-size: 12px;
+        transition: all 0.5s ease;
+
+        &.visible {
+            opacity: 1;
+        }
+    }
 }
 
 .item {
