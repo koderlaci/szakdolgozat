@@ -1,11 +1,11 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { AddUserRequest, LoginRequest, UserService } from 'api-generated';
+import { AddUserRequest, LoginRequest, UserApiService } from 'api-generated';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserHandlerService {
-  private userService = inject(UserService);
+  private userService = inject(UserApiService);
 
   userLoggedIn = signal<boolean>(
     sessionStorage.getItem('userLoggedIn') as unknown as boolean

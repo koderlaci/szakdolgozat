@@ -1,7 +1,7 @@
-export * from './product.service';
-import { ProductService } from './product.service';
+export * from './productApi.service';
+import { ProductApiService } from './productApi.service';
 export * from './test.service';
 import { TestService } from './test.service';
-export * from './user.service';
-import { UserService } from './user.service';
-export const APIS = [ProductService, TestService, UserService];
+export * from './userApi.service';
+import { UserApiService } from './userApi.service';
+export const APIS = [ProductApiService, TestService, UserApiService];

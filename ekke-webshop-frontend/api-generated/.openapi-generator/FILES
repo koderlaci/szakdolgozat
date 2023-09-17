@@ -2,9 +2,9 @@
 README.md
 api.module.ts
 api/api.ts
-api/product.service.ts
+api/productApi.service.ts
 api/test.service.ts
-api/user.service.ts
+api/userApi.service.ts
 configuration.ts
 encoder.ts
 git_push.sh
