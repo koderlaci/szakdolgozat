@@ -157,12 +157,12 @@ paths:
           schema:
             type: string
 
-  /productSize:
+  /productSizes:
     get:
-      summary: Returns a product's size by variantId and color.
+      summary: Returns a product's sizes by variantId and color.
       tags:
         - productApi
-      operationId: getProductSizeByVariantIdAndColor
+      operationId: getProductSizesByVariantIdAndColor
       parameters:
         - name: variantId
           in: query
@@ -170,6 +170,47 @@ paths:
           schema:
             type: string
         - name: color
+          in: query
+          required: true
+          schema:
+            type: string
+
+  /productColors:
+    get:
+      summary: Returns a product's colors by variantId and size.
+      tags:
+        - productApi
+      operationId: getProductColorsByVariantIdAndSize
+      parameters:
+        - name: variantId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: size
+          in: query
+          required: true
+          schema:
+            type: string
+
+  /productFinal:
+    get:
+      summary: Returns a product by the product's details.
+      tags:
+        - productApi
+      operationId: getProductByDetails
+      parameters:
+        - name: variantId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: color
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: size
           in: query
           required: true
           schema:
