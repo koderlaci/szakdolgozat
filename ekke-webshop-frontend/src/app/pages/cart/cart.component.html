@@ -2,34 +2,38 @@
     <div class="cart">
         <div class="title">Kosár</div>
         <div class="products">
-            <div class="product">
-                <img class="product-image" src="../../../assets/products/MSHIRT01.jpg">
+            <div class="product" *ngFor="let product of cartService.cart()">
+                <img class="product-image" src="../../../assets/products/{{ product.variantId }}.jpg">
                 <div class="product-details">
-                    <div class="product-title">Teszt Termék</div>
-                    <div>Ár: 200 UniToken</div>
-                    <div>Méret: L</div>
-                    <div>Szín: Kék</div>
-                    <div>Mennyiség: 1 db</div>
-                </div>
-            </div>
-            <div class="product">
-                <img class="product-image" src="../../../assets/products/MSHIRT01.jpg">
-                <div class="product-details">
-                    <div class="product-title">Teszt Termék</div>
-                    <div>Ár: 200 UniToken</div>
-                    <div>Méret: L</div>
-                    <div>Szín: Kék</div>
-                    <div>Mennyiség: 1 db</div>
+                    <div class="product-title">{{ product.name }}</div>
+                    <div>Ár: {{ product.price }} UniToken</div>
+                    <div>Szín: {{ product.color }}</div>
+                    <div>Méret: {{ product.size }}</div>
+                    <div>Mennyiség: {{ product.selectedQuantity }} db</div>
                 </div>
             </div>
         </div>
 
-        <div class="delivery-options">
-
-        </div>
-        <div class="delivery-address">
-
-        </div>
+        <mat-accordion class="accordion">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Szállítás
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>This is the primary content of the panel.</p>
+            </mat-expansion-panel>
+          </mat-accordion>
+        <mat-accordion class="accordion">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Szállítási cím
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>This is the primary content of the panel.</p>
+            </mat-expansion-panel>
+          </mat-accordion>
     </div>
     <div class="summary">
         <div class="title">Összesítés</div>
@@ -43,8 +47,8 @@
         </div>
         <div>
             Összesen
-            <span>{{ productsPrice }} UniToken</span>
+            <span>{{ totalPrice }} UniToken</span>
         </div>
-        <button class="button main" (click)="pay()">Fizetés</button>
+        <button mat-raised-button (click)="pay()">Fizetés</button>
     </div>
 </section>

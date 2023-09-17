@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -6,7 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent {
-  protected productsPrice = 500;
+  protected cartService = inject(CartService);
+
+  protected productsPrice = this.cartService.getCartProductsPrice();
   protected deliveryFee = 100;
   protected totalPrice: number;
 
