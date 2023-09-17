@@ -4,19 +4,21 @@
         <div class="details">
             <div class="product-name">{{ product.name }}</div>
             <div class="product-price">{{ product.price }} UniToken</div>
-            <mat-form-field class="select-field">
-                <mat-label>Szín</mat-label>
-                <mat-select panelClass="custom-panel">
-                  <mat-option *ngFor="let color of product.colors" [value]="color">{{color}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field class="select-field">
-                <mat-label>Méret</mat-label>
-                <mat-select panelClass="custom-panel">
-                  <mat-option *ngFor="let size of product.sizes" [value]="size">{{size}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <button mat-raised-button>Kosárba teszem</button>
+            <ng-container [formGroup]="productDetailsForm">
+                <mat-form-field class="select-field">
+                    <mat-label>Szín</mat-label>
+                    <mat-select panelClass="custom-panel" formControlName="color" (valueChange)="onColorChange($event)">
+                      <mat-option *ngFor="let color of product.colors" [value]="color">{{color}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="select-field">
+                    <mat-label>Méret</mat-label>
+                    <mat-select panelClass="custom-panel" formControlName="size">
+                      <mat-option *ngFor="let size of product.sizes" [value]="size">{{size}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </ng-container>
+            <button mat-raised-button [disabled]="productDetailsForm.invalid" (click)="addProductToCart()">Kosárba teszem</button>
         </div>
     </div>
     <div class="product-slider-container">

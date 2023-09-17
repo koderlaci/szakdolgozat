@@ -1,6 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, effect, inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 export type Product = {
@@ -16,9 +18,15 @@ export type Product = {
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent {
+  private cartService = inject(CartService);
   private productsService = inject(ProductsService);
   private route = inject(ActivatedRoute);
+
+  protected productDetailsForm = new FormGroup({
+    color: new FormControl('', Validators.required),
+    size: new FormControl('', Validators.required),
+  });
 
   protected product: Product = {
     variantId: '',
@@ -28,7 +36,7 @@ export class ProductComponent implements OnInit {
     sizes: [],
   };
 
-  ngOnInit(): void {
+  constructor() {
     this.route.paramMap.subscribe(async (params) => {
       const product = await firstValueFrom(
         this.productsService.getProductForProductPageByVariantId(
@@ -37,5 +45,35 @@ export class ProductComponent implements OnInit {
       );
       this.product = product;
     });
+  }
+
+  async onColorChange(color: string) {
+    const sizes: string[] = await firstValueFrom(
+      this.productsService.getProductSizesByVariantIdAndColor(
+        this.product.variantId,
+        color
+      )
+    );
+    this.product.sizes = sizes;
+    this.productDetailsForm.controls.size.reset();
+  }
+
+  async addProductToCart() {
+    const product = {
+      variantId: this.product.variantId,
+      color: this.productDetailsForm.controls.color.value,
+      size: this.productDetailsForm.controls.size.value,
+    };
+
+    if (product.variantId && product.color && product.size) {
+      const productToCart = await firstValueFrom(
+        this.productsService.getProductByDetails(
+          product.variantId,
+          product.color,
+          product.size
+        )
+      );
+      this.cartService.addProductToCart(productToCart);
+    }
   }
 }
