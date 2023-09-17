@@ -293,3 +293,60 @@ app.get("/product", jsonParser, (request, response) => {
     response.send(mappedProduct);
   });
 });
+
+// get product's sizes by variantId and color
+app.get("/productSizes", jsonParser, (request, response) => {
+  let query = `SELECT size FROM product WHERE variant_id = '${request.query.variantId}' AND color = '${request.query.color}'`;
+
+  con.query(query, (err, result) => {
+    if (err) throw err;
+
+    let sizes = [];
+
+    result.forEach((sizeElement) => {
+      sizes.push(sizeElement.size);
+    });
+
+    response.send(sizes);
+  });
+});
+
+// get product's colors by variantId and size
+app.get("/productColors", jsonParser, (request, response) => {
+  let query = `SELECT color FROM product WHERE variant_id = '${request.query.variantId}' AND size = '${request.query.size}'`;
+
+  con.query(query, (err, result) => {
+    if (err) throw err;
+
+    let colors = [];
+
+    result.forEach((colorElement) => {
+      colors.push(colorElement.color);
+    });
+
+    response.send(colors);
+  });
+});
+
+// get final product for cart by the product's details
+app.get("/productFinal", jsonParser, (request, response) => {
+  let query = `SELECT * FROM product WHERE variant_id = '${request.query.variantId}' AND color = '${request.query.color}' AND size = '${request.query.size}'`;
+
+  con.query(query, (err, result) => {
+    if (err) throw err;
+
+    let mappedProduct = {
+      id: result[0].id,
+      variantId: result[0].variant_id,
+      name: result[0].name,
+      type: result[0].type,
+      style: result[0].style,
+      color: result[0].color,
+      size: result[0].size,
+      price: result[0].price,
+      quantity: result[0].quantity,
+    };
+
+    response.send(mappedProduct);
+  });
+});
