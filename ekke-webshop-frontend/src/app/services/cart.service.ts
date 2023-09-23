@@ -53,4 +53,8 @@ export class CartService {
 
     return count;
   }
+
+  clearCart() {
+    this.cart.set([]);
+  }
 }
