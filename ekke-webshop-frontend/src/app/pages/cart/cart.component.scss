@@ -5,65 +5,98 @@
     max-width: 1280px;
     margin: 0px auto;
     padding: 50px;
+
+    .title {
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .cart {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 60%;
+    }
+    
+    .products {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .product {
+        display: flex;
+        width: 100%;
+        max-width: 600px;
+        height: 250px;
+        padding: 20px;
+        gap: 20px;
+        font-size: 16px;
+        border-radius: 12px;
+        background-color: #0b1e58;
+        box-shadow: 0px 4px 6px 2px #010D36;
+    }
+    
+    .product-details {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        gap: 10px;
+    }
+    
+    .product-title {
+        font-size: 20px;
+    }
+    
+    .product-image {
+        object-fit: cover;
+        width: 175px;
+        height: 100%;
+        border-radius: 12px;
+    }
+    
+    .accordion {
+        max-width: 600px;
+    }
+    
+    .summary {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 40%;
+        margin-top: 50px;
+    }
 }
 
-.cart {
+.secondary-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    width: 60%;
-}
-
-.products {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.product {
-    display: flex;
+    align-items: center;
     width: 100%;
-    max-width: 600px;
-    height: 250px;
-    padding: 20px;
-    gap: 20px;
-    font-size: 16px;
-    border-radius: 12px;
-    background-color: #0b1e58;
-    box-shadow: 0px 4px 6px 2px #010D36;
-}
+    max-width: 1280px;
+    margin: 0px auto;
+    padding: 50px;
 
-.product-details {
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-    gap: 10px;
-}
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 400px;
 
-.product-title {
-    font-size: 20px;
-}
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+        }
+    
+        .disclaimer {
+            font-size: 16px;
+        }
 
-.product-image {
-    object-fit: cover;
-    width: 175px;
-    height: 100%;
-    border-radius: 12px;
-}
+        .button {
+            margin: auto;
+        }
+    }
 
-.accordion {
-    max-width: 600px;
-}
-
-.summary {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 40%;
-    margin-top: 50px;
-}
-
-.title {
-    font-size: 24px;
-    font-weight: 700;
+    
 }

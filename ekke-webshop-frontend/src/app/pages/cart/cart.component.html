@@ -1,4 +1,4 @@
-<section class="main-container">
+<section class="main-container" *ngIf="!succesfulPayment()">
     <div class="cart">
         <div class="title">Kosár</div>
         <div class="products">
@@ -49,6 +49,14 @@
             Összesen
             <span>{{ totalPrice }} UniToken</span>
         </div>
-        <button mat-raised-button (click)="pay()">Fizetés</button>
+        <button mat-raised-button (click)="pay()" [disabled]="isPayButtonDisabled()">Fizetés</button>
     </div>
+</section>
+<section class="secondary-container" *ngIf="succesfulPayment()">
+  <div class="container">
+    <div class="title">Sikeres fizetés!</div>
+    <div class="disclaimer">Rendelésed sikeresen rögzítettük!</div>
+    <div class="disclaimer">A rendelésed státuszáról a továbbiakban emailben értesítünk.</div>
+    <button mat-raised-button class="button" routerLink="/landing">Vissza a főoldalra</button>
+  </div>
 </section>
