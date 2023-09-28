@@ -1,70 +1,102 @@
 <section class="section introduction">
-    <div class="title-container">
-        <div class="title">EKKE UNITOKEN</div>
-        <div class="subtitle">
-            Az Eszterházy Károly Katolikus Egyetem saját kriptotokenje.
-        </div>
-        <img src="assets/images/tokens_left.svg" alt="tokens" class="tokens left">
-        <img src="assets/images/tokens_right.svg" alt="tokens" class="tokens right">
+  <div class="title-container">
+    <div class="title">EKKE UNITOKEN</div>
+    <div class="subtitle">
+      Az Eszterházy Károly Katolikus Egyetem saját kriptotokenje.
     </div>
-    <img src="assets/images/flare_left.svg" class="flare left" alt="flare"/>
-    <img src="assets/images/flare_right.svg" class="flare right" alt="flare"/>
+    <img src="assets/images/tokens_left.svg" alt="tokens" class="tokens left" />
+    <img
+      src="assets/images/tokens_right.svg"
+      alt="tokens"
+      class="tokens right"
+    />
+  </div>
+  <img src="assets/images/flare_left.svg" class="flare left" alt="flare" />
+  <img src="assets/images/flare_right.svg" class="flare right" alt="flare" />
 </section>
 
 <section class="section tutorial">
-    <div class="text">
-        <div class="section-title">Hogyan működik a UniToken?</div>
-        <div class="steps">
-            <div class="icon-title-disclaimer">
-                <img src="assets/images/tokens_stack.svg" class="icon" alt="token stack"/>
-                <div class="title">Pénztárca létrehozása</div>
-                <div>
-                    Hozz létre itt egy fiókot, hogy tudd tárolni tokenjeidet. (Metamask)
-                </div>
-            </div>
-            <div class="icon-title-disclaimer">
-                <img src="assets/images/tokens_stack.svg" class="icon" alt="token stack"/>
-                <div class="title">Töltsd ki az egyetem által küldött kérdőíveket</div>
-                <div>
-                    Első kitöltés előtt regisztrálj a www.ekkekerdoiv.hu oldalon, majd jelentkezz be.
-                </div>
-            </div>
-            <div class="icon-title-disclaimer">
-                <img src="assets/images/tokens_stack.svg" class="icon" alt="token stack"/>
-                <div class="title">Zsebeld be érte a jutalmat</div>
-                <div>
-                    Minden egyes kitöltött kérdőívért UniTokent adunk neked,
-                    amelyeket különböző Eszterházys dolgokra válthatsz be.
-                </div>
-            </div>
+  <div class="text">
+    <div class="section-title">Hogyan működik a UniToken?</div>
+    <div class="steps">
+      <div class="icon-title-disclaimer">
+        <img src="assets/images/wallet.png" class="icon" alt="token stack" />
+        <div class="title">Pénztárca létrehozása</div>
+        <div>
+          Hozz létre itt egy fiókot, hogy tudd tárolni tokenjeidet. (Metamask)
         </div>
-        <button mat-raised-button routerLink="/registration" class="registration-button">Regisztrálok</button>
-        <div class="disclaimer">
-            Az UniToken pénzre nem váltható,
-            illetve a webshopban kizárólag UniTokennel lehetséges a fizetés.
+      </div>
+      <div class="icon-title-disclaimer">
+        <img
+          src="assets/images/tokens_stack.svg"
+          class="icon"
+          alt="token stack"
+        />
+        <div class="title">Töltsd ki az egyetem által küldött kérdőíveket</div>
+        <div>
+          Első kitöltés előtt regisztrálj a www.ekkekerdoiv.hu oldalon, majd
+          jelentkezz be.
         </div>
+      </div>
+      <div class="icon-title-disclaimer">
+        <img
+          src="assets/images/tokens_stack.svg"
+          class="icon"
+          alt="token stack"
+        />
+        <div class="title">Zsebeld be érte a jutalmat</div>
+        <div>
+          Minden egyes kitöltött kérdőívért UniTokent adunk neked, amelyeket
+          különböző Eszterházys dolgokra válthatsz be.
+        </div>
+      </div>
     </div>
-    <div class="image"></div>
+    <div class="button-and-disclaimer">
+      <button
+        mat-raised-button
+        routerLink="/registration"
+        class="registration-button"
+      >
+        Regisztrálok
+      </button>
+      <div class="disclaimer">
+        Az UniToken pénzre nem váltható, illetve a webshopban kizárólag
+        UniTokennel lehetséges a fizetés.
+      </div>
+    </div>
+  </div>
+  <div class="image"></div>
 </section>
 
 <section class="section sending">
-    <div class="text">
-        <div class="title">Küldj UniTokent a haveroknak</div>
-        <div class="subtitle">
-            Ha kevés a haverod tokenje,
-            de együtt szeretnétek EKKE-s pólóban feszíteni,
-            küldj neki párat a metamaskon keresztül.
-        </div>
-        <button mat-raised-button>Placeholder</button>
+  <div class="text">
+    <div class="title">Küldj UniTokent a haveroknak</div>
+    <div class="subtitle">
+      Ha kevés a haverod tokenje, de együtt szeretnétek EKKE-s pólóban
+      feszíteni, küldj neki párat a metamaskon keresztül.
     </div>
-    <img src="assets/images/tokens_stack.svg" class="image" alt="token stack">
+    <button
+      mat-raised-button
+      class="registration-button"
+      routerLink="/registration"
+    >
+      Regisztrálok
+    </button>
+  </div>
+  <img src="assets/images/transfer.png" class="image" alt="mobile phones" />
 </section>
 
 <section class="section products">
-    <div class="section-title">Váltsd be UniTokenjeidet és zsebeld be az értük járó jutalmat</div>
-    <app-product-slider></app-product-slider>
+  <div class="section-title">
+    Váltsd be UniTokenjeidet és zsebeld be az értük járó jutalmat
+  </div>
+  <app-product-slider></app-product-slider>
 </section>
 
 <section class="section contact">
-    <div class="section-title">Kérdésed van?</div>
+  <div class="section-title">Kérdésed van?</div>
+  <div class="subtitle">
+    Írj nekünk üzenetet és felvesszük veled a kapcsolatot.
+  </div>
+  <div class="subtitle">ekkeunitoken@info.com</div>
 </section>

@@ -1,194 +1,334 @@
 $main-title-max-width: 1920px;
 
 .section {
-    width: 100%;
-    min-height: 100vh;
-    max-width: 1920px;
-    margin: 0px auto;
+  width: 100%;
+  min-height: 100vh;
+  max-width: 1920px;
+  margin: 0px auto;
 
-    &.introduction {
-        display: flex;
-        flex-direction: column;
-        min-height: calc(100vh - 100px);
+  &.introduction {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 100px);
+    padding: 0px 20px;
 
-        .title-container {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: calc(100vh - 100px);
-            max-width: $main-title-max-width;
-            width: fit-content;
-            margin: auto;
-            z-index: 2;
+    .title-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(100vh - 100px);
+      max-width: $main-title-max-width;
+      width: fit-content;
+      margin: auto;
+      z-index: 2;
+      margin-top: 50px;
 
-            .title {
-                font-size: 12vw;
-                font-family: Bebas Neue;
-            }
+      @media (min-width: 768px) {
+        margin-top: 0;
+      }
 
-            .subtitle {
-                font-size: 1vw;
-                margin-bottom: 100px;
-            }
+      .title {
+        font-size: 60px;
+        font-family: Bebas Neue;
 
-            .tokens {
-                position: absolute;
-                top: 50%;
-                height: 30vw;
-                max-width: $main-title-max-width;
-                z-index: 3;
-    
-                &.left {
-                    left: 0;
-                    transform: translateY(-60%) translateX(-50%);
-                }
-    
-                &.right {
-                    right: 0;
-                    transform: translateY(-60%) translateX(50%);
-                }
-            }
+        @media (min-width: 768px) {
+          font-size: 100px;
         }
 
-        .flare {
-            position: absolute;
-            z-index: -1;
-
-            &.left {
-                left: 0;
-            }
-
-            &.right {
-                right: 0;
-            }
+        @media (min-width: 1920px) {
+          font-size: 150px;
         }
+      }
+
+      .subtitle {
+        font-size: 16px;
+        margin-bottom: 100px;
+        text-align: center;
+
+        @media (min-width: 768px) {
+          text-align: unset;
+        }
+      }
+
+      .tokens {
+        max-width: 250px;
+        max-height: 400px;
+
+        &.left {
+          width: 80%;
+        }
+
+        &.right {
+          display: none;
+        }
+
+        @media (min-width: 768px) {
+          position: absolute;
+          top: 50%;
+          height: 30vw;
+          z-index: 3;
+
+          &.left {
+            width: unset;
+            left: 0;
+            transform: translateY(-60%) translateX(-60%);
+          }
+
+          &.right {
+            display: initial;
+            right: 0;
+            transform: translateY(-60%) translateX(60%);
+          }
+        }
+      }
     }
 
-    &.tutorial {
-        display: flex;
-        flex-direction: column;
-        
-        .text {
-            display: flex;
-            flex-direction: column;
-            gap: 80px;
-            width: 100%;
+    .flare {
+      position: absolute;
+      z-index: -1;
 
-            .section-title {
-                text-align: center;
-                margin-bottom: 10vw;
-            }
-    
-            .steps {
-                display: flex;
-                justify-content: space-between;
-                padding: 0px 100px;
-    
-                .icon-title-disclaimer {
-                    position: relative;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 20px;
-                    width: 30%;
-                    padding: 70px 20px 30px 20px;
-                    text-align: center;
-                    background: rgba(255, 255, 255, 0.05);
-                    border-radius: 12px;
+      &.left {
+        left: 0;
+      }
 
-                    .icon {
-                        position: absolute;
-                        width: 150px;
-                        top: -50%;
-                        left: 50%;
-                        transform: translateX(-50%);
-                    }
-                
-                    .title {
-                        min-height: 5vw;
-                        text-align: center;
-                    }
-                }
-            }
-        }
+      &.right {
+        right: 0;
+      }
+    }
+  }
 
-        .registration-button {
-            margin: 0 auto;
-            width: 250px;
-        }
-        
-        .disclaimer {
-            margin: 0 auto;
-            text-align: center;
-            width: 300px;
-        }
+  &.tutorial {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    padding: 0px 20px;
+
+    @media (min-width: 768px) {
+      margin-top: 0px;
     }
 
-    &.sending {
+    .text {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      width: 100%;
+
+      .section-title {
+        font-size: 60px;
+        text-align: center;
+        margin-bottom: 10vw;
+
+        @media (min-width: 1920px) {
+          font-size: 80px;
+        }
+      }
+
+      .steps {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        gap: 50px;
-        padding: 0px 100px;
+        gap: 200px;
+        padding: 0px 10px;
 
-        .text {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 40%;
-            max-width: 400px;
-            margin: auto;
+        @media (min-width: 1000px) {
+          flex-direction: row;
+          padding: 0px 100px;
+          gap: 0px;
+        }
 
-            .title {
-                font-size: 2vw;
+        .icon-title-disclaimer {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 20px;
+          width: 100%;
+          height: 300px;
+          text-align: center;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 12px;
+          padding: 70px 10px;
+
+          @media (min-width: 1000px) {
+            width: 250px;
+            padding: 70px 20px 30px 20px;
+          }
+
+          @media (min-width: 1280px) {
+            width: 300px;
+            padding: 70px 20px 30px 20px;
+          }
+
+          @media (min-width: 1920px) {
+            width: 500px;
+          }
+
+          .icon {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: -40%;
+
+            @media (min-width: 1000px) {
+              top: -50%;
             }
-        }
+          }
 
-        .image {
-            width: 60%;
-            height: 70vh;
-            background-color: #184375;
-            border-radius: 12px;
-        }
-    }
-
-    &.products {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        padding: 0px 100px;
-
-        .section-title {
+          .title {
+            min-height: 5vw;
             text-align: center;
-            margin: 0 auto;
+
+            @media (min-width: 1920px) {
+              font-size: 20px;
+            }
+          }
         }
+      }
     }
 
-    &.contact {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        padding: 0px 100px;
+    .button-and-disclaimer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
 
-        .section-title {
-            text-align: center;
-            margin: 0 auto;
-        }
+      .registration-button {
+        margin: 0 auto;
+        width: 250px;
+      }
+
+      .disclaimer {
+        font-size: 12px;
+        margin: 0px auto;
+        text-align: center;
+        width: 300px;
+      }
     }
+  }
+
+  &.sending {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    margin-top: 100px;
+    padding: 0px 20px;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 0px;
+      padding: 0px 100px;
+    }
+
+    .text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 400px;
+
+      @media (min-width: 768px) {
+        width: 40%;
+        gap: 30px;
+        justify-content: start;
+        align-items: start;
+      }
+
+      .title {
+        font-size: 20px;
+
+        @media (min-width: 768px) {
+          font-size: 40px;
+        }
+      }
+
+      .subtitle {
+        text-align: center;
+
+        @media (min-width: 768px) {
+          text-align: unset;
+        }
+      }
+
+      .registration-button {
+        width: 250px;
+      }
+    }
+
+    .image {
+      width: 100%;
+      border-radius: 12px;
+
+      @media (min-width: 768px) {
+        width: 60%;
+      }
+    }
+  }
+
+  &.products {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0px 20px;
+
+    .section-title {
+      font-size: 40px;
+      text-align: center;
+      margin: auto;
+
+      @media (min-width: 768px) {
+        font-size: 60px;
+        max-width: 700px;
+      }
+
+      @media (min-width: 1920px) {
+        font-size: 80px;
+        max-width: 1000px;
+      }
+    }
+  }
+
+  &.contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 0px 20px;
+
+    .section-title {
+      font-size: 40px;
+      text-align: center;
+      margin: 0 auto;
+
+      @media (min-width: 768px) {
+        font-size: 60px;
+      }
+
+      @media (min-width: 1920px) {
+        font-size: 80px;
+      }
+    }
+
+    .subtitle {
+      font-size: 20px;
+      text-align: center;
+    }
+  }
 }
 
 .section-title {
-    font-size: 5vw;
-    font-weight: 400;
-    font-family: Bebas Neue;
+  font-family: Bebas Neue;
 }
 
 .title {
-    font-size: 1.5vw;
-    font-weight: 600;
-}
-
-.subtitle {
-    font-size: 20px;
+  font-weight: 600;
 }
