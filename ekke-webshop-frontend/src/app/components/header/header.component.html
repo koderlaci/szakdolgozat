@@ -1,27 +1,78 @@
-<div class="navbar">
-    <div class="logo-container">
-        <a routerLink="/landing">
-            <img class="logo" src="assets/icons/logo.svg" alt="Egyetem logo">
-        </a>
-    </div>
-    <div class="item-group">
-        <a routerLink="/products/women" class="item">Női</a>
-        <a routerLink="/products/men" class="item">Férfi</a>
-        <a routerLink="/products/accessary" class="item">Kiegészítők</a>
-    </div>
-    <div class="item-group">
-        <a routerLink="/login" class="icon-item" *ngIf="!userHandlerService.userLoggedIn()">
-            <img src="assets/icons/profile.svg" alt="Profil">
-            <span>Bejelentkezés</span>
-        </a>
-        <a routerLink="/cart" class="icon-item" [matBadgeHidden]="cartService.getCartProductsCount() === 0" [matBadge]="cartService.getCartProductsCount()" matBadgePosition="before" matBadgeColor="primary">
-            <img src="assets/icons/bag.svg" alt="Táska" >
-            <span>Kosár</span>
-            <span class="notification" [ngClass]="{'visible' : showCartNotification}">Termék hozzáadva!</span>
-        </a>
-        <a routerLink="/profile" class="icon-item" *ngIf="userHandlerService.userLoggedIn()">
-            <img src="assets/icons/profile.svg" alt="Profil">
-            <span>Profil</span>
-        </a>
-    </div>
+<div class="navbar mobile">
+  <div class="logo-container">
+    <a routerLink="/landing">
+      <img class="logo" src="assets/icons/logo.svg" alt="Egyetem logo" />
+    </a>
+  </div>
+  <mat-icon class="trigger" [matMenuTriggerFor]="menu">menu</mat-icon>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="products">Termékek</button>
+    <mat-menu #products="matMenu">
+      <a mat-menu-item routerLink="/products/women">Női</a>
+      <a mat-menu-item routerLink="/products/men">Férfi</a>
+      <a mat-menu-item routerLink="/products/accessary">Kiegészítők</a>
+    </mat-menu>
+    <a
+      mat-menu-item
+      routerLink="/cart"
+      [matBadgeHidden]="cartService.getCartProductsCount() === 0"
+      [matBadge]="cartService.getCartProductsCount()"
+      matBadgePosition="before"
+      matBadgeColor="primary"
+    >
+      Kosár
+    </a>
+    <a
+      mat-menu-item
+      routerLink="/login"
+      *ngIf="!userHandlerService.userLoggedIn()"
+    >
+      Bejelentkezés
+    </a>
+  </mat-menu>
+</div>
+
+<div class="navbar desktop">
+  <div class="logo-container">
+    <a routerLink="/landing">
+      <img class="logo" src="assets/icons/logo.svg" alt="Egyetem logo" />
+    </a>
+  </div>
+  <div class="item-group">
+    <a routerLink="/products/women" class="item">Női</a>
+    <a routerLink="/products/men" class="item">Férfi</a>
+    <a routerLink="/products/accessary" class="item">Kiegészítők</a>
+  </div>
+  <div class="item-group">
+    <a
+      routerLink="/login"
+      class="icon-item"
+      *ngIf="!userHandlerService.userLoggedIn()"
+    >
+      <img src="assets/icons/profile.svg" alt="Profil" />
+      <span>Bejelentkezés</span>
+    </a>
+    <a
+      routerLink="/cart"
+      class="icon-item"
+      [matBadgeHidden]="cartService.getCartProductsCount() === 0"
+      [matBadge]="cartService.getCartProductsCount()"
+      matBadgePosition="before"
+      matBadgeColor="primary"
+    >
+      <img src="assets/icons/bag.svg" alt="Táska" />
+      <span>Kosár</span>
+      <span class="notification" [ngClass]="{ visible: showCartNotification }"
+        >Termék hozzáadva!</span
+      >
+    </a>
+    <a
+      routerLink="/profile"
+      class="icon-item"
+      *ngIf="userHandlerService.userLoggedIn()"
+    >
+      <img src="assets/icons/profile.svg" alt="Profil" />
+      <span>Profil</span>
+    </a>
+  </div>
 </div>
