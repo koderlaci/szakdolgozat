@@ -4,7 +4,18 @@
       <img class="logo" src="assets/icons/logo.svg" alt="Egyetem logo" />
     </a>
   </div>
-  <mat-icon class="trigger" [matMenuTriggerFor]="menu">menu</mat-icon>
+  <mat-icon
+    class="trigger"
+    [matMenuTriggerFor]="menu"
+    [matBadgeHidden]="cartService.getCartProductsCount() === 0"
+    [matBadge]="cartService.getCartProductsCount()"
+    matBadgeColor="primary"
+    matBadgePosition="below after"
+    >menu</mat-icon
+  >
+  <span class="notification" [ngClass]="{ visible: showCartNotification }"
+    >Termék hozzáadva!</span
+  >
   <mat-menu #menu="matMenu">
     <button mat-menu-item [matMenuTriggerFor]="products">Termékek</button>
     <mat-menu #products="matMenu">
@@ -12,15 +23,14 @@
       <a mat-menu-item routerLink="/products/men">Férfi</a>
       <a mat-menu-item routerLink="/products/accessary">Kiegészítők</a>
     </mat-menu>
-    <a
-      mat-menu-item
-      routerLink="/cart"
-      [matBadgeHidden]="cartService.getCartProductsCount() === 0"
-      [matBadge]="cartService.getCartProductsCount()"
-      matBadgePosition="before"
-      matBadgeColor="primary"
-    >
-      Kosár
+    <a mat-menu-item routerLink="/cart">
+      <span
+        [matBadgeHidden]="cartService.getCartProductsCount() === 0"
+        [matBadge]="cartService.getCartProductsCount()"
+        matBadgeColor="primary"
+        matBadgeOverlap="false"
+        >Kosár</span
+      >
     </a>
     <a
       mat-menu-item
