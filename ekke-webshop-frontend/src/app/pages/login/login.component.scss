@@ -1,59 +1,90 @@
 .login {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: calc(100vh - 100px);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: calc(100vh - 100px);
+  background-image: unset;
+  background-size: cover;
+  padding: 0px 20px;
+
+  @media (min-width: 900px) {
     background-image: url("../../../assets/images/login_background.jpg");
-    background-size: cover;
+  }
 }
 
 .form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  border-radius: 0 30% 30% 0;
+  margin-bottom: 100px;
+
+  @media (min-width: 900px) {
+    width: 60%;
+  }
+
+  .logo {
+    width: 250px;
+    margin-bottom: -40px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .input {
+    width: 100%;
+    height: 50px;
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    transition: 0.5s all;
+
+    @media (min-width: 768px) {
+      width: 500px;
+    }
+  }
+
+  .buttons-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    width: 60%;
-    border-radius: 0 30% 30% 0;
-    margin-bottom: 100px;
+    gap: 15px;
+    width: 100%;
 
-    .logo {
-        width: 250px;
-        margin-bottom: -40px;
+    @media (min-width: 768px) {
+      width: 500px;
+      flex-direction: row;
     }
 
-    .subtitle {
-        font-size: 16px;
-    }
+    button {
+      width: 100%;
+      max-width: unset;
 
-    .input {
-        width: 500px;
-        height: 50px;
-        border: 2px solid white;
-        background-color: transparent;
-        color: white;
-        border-radius: 12px;
-        padding: 20px;
+      @media (min-width: 768px) {
+        width: 50%;
+      }
     }
-
-    .buttons-container {
-        display: flex;
-        gap: 15px;
-        width: 500px;
-
-        button {
-            width: 50%;
-        }
-    }
+  }
 }
 
 .tokens {
-    height: 70%;
-    margin: auto;
+  display: none;
+  height: 70%;
+  margin: auto;
+
+  @media (min-width: 900px) {
+    display: initial;
+  }
 }
 
 .error-message {
-    color: red;
-    width: 500px;
-    padding: 0px 20px;
+  color: red;
+  width: 500px;
+  padding: 0px 20px;
 }
