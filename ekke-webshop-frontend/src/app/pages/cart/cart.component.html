@@ -1,62 +1,75 @@
 <section class="main-container" *ngIf="!succesfulPayment()">
-    <div class="cart">
-        <div class="title">Kosár</div>
-        <div class="products">
-            <div class="product" *ngFor="let product of cartService.cart()">
-                <img class="product-image" src="../../../assets/products/{{ product.variantId }}.jpg">
-                <div class="product-details">
-                    <div class="product-title">{{ product.name }}</div>
-                    <div>Ár: {{ product.price }} UniToken</div>
-                    <div>Szín: {{ product.color }}</div>
-                    <div>Méret: {{ product.size }}</div>
-                    <div>Mennyiség: {{ product.selectedQuantity }} db</div>
-                </div>
-            </div>
+  <div class="cart">
+    <div class="title">Kosár</div>
+    <div class="products">
+      <div class="product" *ngFor="let product of cartService.cart()">
+        <img
+          class="product-image"
+          src="../../../assets/products/{{ product.variantId }}.jpg"
+        />
+        <div class="product-details">
+          <div class="product-title">{{ product.name }}</div>
+          <div>Ár: {{ product.price }} UniToken</div>
+          <div>Szín: {{ product.color }}</div>
+          <div>Méret: {{ product.size }}</div>
+          <div>Mennyiség: {{ product.selectedQuantity }} db</div>
         </div>
+      </div>
+    </div>
 
-        <mat-accordion class="accordion">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Szállítás
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <p>This is the primary content of the panel.</p>
-            </mat-expansion-panel>
-          </mat-accordion>
-        <mat-accordion class="accordion">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Szállítási cím
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <p>This is the primary content of the panel.</p>
-            </mat-expansion-panel>
-          </mat-accordion>
+    <mat-accordion class="accordion">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Szállítás </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>This is the primary content of the panel.</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion class="accordion">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Szállítási cím </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>This is the primary content of the panel.</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="summary">
+    <div class="title">Összesítés</div>
+    <div class="details">
+      <div>
+        Részösszeg
+        <span>{{ productsPrice }} UniToken</span>
+      </div>
+      <div>
+        Szállítási díj
+        <span>{{ deliveryFee }} UniToken</span>
+      </div>
+      <div>
+        Összesen
+        <span>{{ totalPrice }} UniToken</span>
+      </div>
     </div>
-    <div class="summary">
-        <div class="title">Összesítés</div>
-        <div>
-            Részösszeg
-            <span>{{ productsPrice }} UniToken</span>
-        </div>
-        <div>
-            Szállítási díj
-            <span>{{ deliveryFee }} UniToken</span>
-        </div>
-        <div>
-            Összesen
-            <span>{{ totalPrice }} UniToken</span>
-        </div>
-        <button mat-raised-button (click)="pay()" [disabled]="isPayButtonDisabled()">Fizetés</button>
-    </div>
+
+    <button
+      mat-raised-button
+      class="button"
+      (click)="pay()"
+      [disabled]="isPayButtonDisabled()"
+    >
+      Fizetés
+    </button>
+  </div>
 </section>
 <section class="secondary-container" *ngIf="succesfulPayment()">
   <div class="container">
     <div class="title">Sikeres fizetés!</div>
     <div class="disclaimer">Rendelésed sikeresen rögzítettük!</div>
-    <div class="disclaimer">A rendelésed státuszáról a továbbiakban emailben értesítünk.</div>
-    <button mat-raised-button class="button" routerLink="/landing">Vissza a főoldalra</button>
+    <div class="disclaimer">
+      A rendelésed státuszáról a továbbiakban emailben értesítünk.
+    </div>
+    <button mat-raised-button class="button" routerLink="/landing">
+      Vissza a főoldalra
+    </button>
   </div>
 </section>
