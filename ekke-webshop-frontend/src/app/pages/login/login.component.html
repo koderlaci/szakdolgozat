@@ -1,16 +1,35 @@
 <section class="login" [formGroup]="loginForm">
-    <form class="form-container">
-        <img src="assets/icons/logo.svg" alt="logo" class="logo">
-        <div class="subtitle">Az Eszterházy Károly Katolikus Egyetem saját kriptotokenje</div>
-        <input type="text" class="input" placeholder="Email" name="email" formControlName="email">
-        <div class="error-message" *ngIf="!controlValid('email')">{{ getErrorMessage('email') }}</div>
-        <input type="password" class="input" placeholder="Jelszó" name="password" formControlName="password">
-        <div class="error-message" *ngIf="!controlValid('password')">{{ getErrorMessage('password') }}</div>
-        <div class="error-message" *ngIf="loginResponse.errorMessage">{{ loginResponse.errorMessage }}</div>
-        <div class="buttons-container">
-            <button mat-raised-button (click)="login()">Bejelentkezés</button>
-            <button mat-stroked-button routerLink="/registration">Regisztrálok</button>
-        </div>
-    </form>
-    <img src="assets/images/tokens_login.svg" alt="tokens" class="tokens">
+  <form class="form-container">
+    <img src="assets/icons/logo.svg" alt="logo" class="logo" />
+    <div class="subtitle">
+      Az Eszterházy Károly Katolikus Egyetem saját kriptotokenje
+    </div>
+    <mat-form-field class="input">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="address@mail.com" formControlName="email" />
+      <mat-error> {{ getErrorMessage("email") }} </mat-error>
+    </mat-form-field>
+    <mat-form-field class="input">
+      <mat-label>Jelszó</mat-label>
+      <input
+        matInput
+        type="password"
+        placeholder="Jelszó"
+        formControlName="password"
+      />
+      <mat-error>
+        {{ getErrorMessage("password") }}
+      </mat-error>
+    </mat-form-field>
+    <mat-error class="error-message" *ngIf="loginResponse.errorMessage">
+      {{ loginResponse.errorMessage }}
+    </mat-error>
+    <div class="buttons-container">
+      <button mat-raised-button (click)="login()">Bejelentkezés</button>
+      <button mat-stroked-button routerLink="/registration">
+        Regisztrálok
+      </button>
+    </div>
+  </form>
+  <img src="assets/images/tokens_login.svg" alt="tokens" class="tokens" />
 </section>
