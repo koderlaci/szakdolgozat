@@ -8,7 +8,7 @@ export class UserHandlerService {
   private userService = inject(UserApiService);
 
   userLoggedIn = signal<boolean>(
-    sessionStorage.getItem('userLoggedIn') as unknown as boolean
+    sessionStorage.getItem('userLoggedIn') === 'true' ? true : false
   );
 
   login(formData: LoginRequest) {
