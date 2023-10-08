@@ -6,7 +6,7 @@
     </div>
     <mat-form-field class="input">
       <mat-label>Email</mat-label>
-      <input matInput placeholder="address@mail.com" formControlName="email" />
+      <input matInput placeholder="email@mail.com" formControlName="email" />
       <mat-error> {{ getErrorMessage("email") }} </mat-error>
     </mat-form-field>
     <mat-form-field class="input">
@@ -27,7 +27,7 @@
     <div class="buttons-container">
       <button mat-raised-button (click)="login()">Bejelentkezés</button>
       <button mat-stroked-button routerLink="/registration">
-        Regisztrálok
+        Regisztráció
       </button>
     </div>
   </form>

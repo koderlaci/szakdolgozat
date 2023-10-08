@@ -1,22 +1,58 @@
 <section class="registration" [formGroup]="registrationForm">
-    <form class="form-container">
-        <img src="assets/icons/logo.svg" alt="logo" class="logo">
+  <form class="form-container">
+    <img src="assets/icons/logo.svg" alt="logo" class="logo" />
 
-        <div class="subtitle">Az Eszterházy Károly Katolikus Egyetem saját kriptotokenje</div>
+    <div class="subtitle">
+      Az Eszterházy Károly Katolikus Egyetem saját kriptotokenje
+    </div>
 
-        <input type="text" class="input" [ngClass]="{'invalid': !controlValid('name') }" placeholder="Név" name="name" formControlName="name">
-        <div class="error-message" *ngIf="!controlValid('name')">{{ getErrorMessage('name') }}</div>
-        <input type="text" class="input" [ngClass]="{'invalid': !controlValid('neptun') }" placeholder="Neptun kód" name="neptun" formControlName="neptun">
-        <div class="error-message" *ngIf="!controlValid('neptun')">{{ getErrorMessage('neptun') }}</div>
-        <input type="text" class="input" [ngClass]="{'invalid': !controlValid('email') }" placeholder="Email" name="email" formControlName="email">
-        <div class="error-message" *ngIf="!controlValid('email')">{{ getErrorMessage('email') }}</div>
-        <input type="password" class="input" [ngClass]="{'invalid': !controlValid('password') }" placeholder="Jelszó" name="password" formControlName="password">
-        <div class="error-message" *ngIf="!controlValid('password')">{{ getErrorMessage('password') }}</div>
-        
-        <div class="buttons-container">
-            <button mat-raised-button (click)="register()">Regisztrálok</button>
-            <button mat-stroked-button routerLink="/login">Bejelentkezés</button>
-        </div>
-    </form>
-    <img src="assets/images/tokens_login.svg" alt="tokens" class="tokens">
+    <mat-form-field class="input">
+      <mat-label>Név</mat-label>
+      <input matInput placeholder="Minta János" formControlName="name" />
+      <mat-error> {{ getErrorMessage("name") }} </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Neptun kód</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="NEP123"
+        formControlName="neptun"
+      />
+      <mat-error>
+        {{ getErrorMessage("neptun") }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="email@mail.com"
+        formControlName="email"
+      />
+      <mat-error>
+        {{ getErrorMessage("email") }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Jelszó</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <mat-error>
+        {{ getErrorMessage("password") }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-error class="error-message" *ngIf="responseError">{{
+      responseError
+    }}</mat-error>
+    <div class="buttons-container">
+      <button mat-raised-button (click)="register()">Regisztráció</button>
+      <button mat-stroked-button routerLink="/login">Bejelentkezés</button>
+    </div>
+  </form>
+  <img src="assets/images/tokens_login.svg" alt="tokens" class="tokens" />
 </section>

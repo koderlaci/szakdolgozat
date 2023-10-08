@@ -16,6 +16,8 @@ export class RegistrationComponent {
   private userHandlerService = inject(UserHandlerService);
   private router = inject(Router);
 
+  protected responseError = null;
+
   registrationForm = new UntypedFormGroup({
     name: new UntypedFormControl('', [
       Validators.required,
@@ -45,9 +47,11 @@ export class RegistrationComponent {
       this.userHandlerService
         .register(this.registrationForm.getRawValue())
         .subscribe((res) => {
-          this.userHandlerService.setUserLoggedIn(res as boolean);
-          if (res) {
-            this.router.navigate(['/landing']);
+          if (res.error) {
+            this.responseError = res.message;
+          } else {
+            this.userHandlerService.setUserLoggedIn(true);
+            this.router.navigateByUrl('/landing');
           }
         });
     } else {
