@@ -1,0 +1,18 @@
+.mat-mdc-radio-button .mdc-form-field {
+  color: white;
+}
+
+.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-disabled-selected-icon-color: white;
+  --mdc-radio-disabled-unselected-icon-color: white;
+  --mdc-radio-unselected-hover-icon-color: white;
+  --mdc-radio-unselected-icon-color: white;
+  --mdc-radio-unselected-pressed-icon-color: white;
+  --mdc-radio-selected-focus-icon-color: white;
+  --mdc-radio-selected-hover-icon-color: white;
+  --mdc-radio-selected-icon-color: white;
+  --mdc-radio-selected-pressed-icon-color: white;
+  --mat-radio-ripple-color: white;
+  --mat-radio-checked-ripple-color: white;
+  --mat-radio-disabled-label-color: white;
+}
