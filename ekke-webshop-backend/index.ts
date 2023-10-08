@@ -55,17 +55,34 @@ app.post("/adduser", jsonParser, (request, response) => {
     permission: 0,
   };
 
+  let responseDto = {
+    error: false,
+    message: null,
+  };
+
   if (
     !formData.name ||
     !formData.neptun ||
     !formData.email ||
     !request.body.password
   ) {
-    response.send(false);
+    responseDto.error = true;
+    responseDto.message = "Kérjük minden adatot adj meg.";
+    response.send(responseDto);
   } else {
     con.query(query, formData, (err, result) => {
-      if (err) throw err;
-      response.send(true);
+      if (err) {
+        responseDto.error = true;
+        switch (err.code) {
+          case "ER_DUP_ENTRY":
+            responseDto.message =
+              "A megadott adatokkal már létezik felhasználó.";
+            break;
+          default:
+            responseDto.message = "Hiba történt, kérjük próbáld újra.";
+        }
+      }
+      response.send(responseDto);
     });
   }
 });
@@ -104,28 +121,28 @@ app.delete("/deleteuser/(:id)", (request, response) => {
 
 // login
 app.post("/login", jsonParser, (request, response) => {
+  let responseDto = {
+    authenticated: false,
+    errorMessage: null,
+  };
+
   con.query(
     `SELECT password FROM user WHERE email = '${request.body.email}'`,
     (err, result) => {
       if (err) throw err;
       if (result.length > 0) {
         if (result[0].password === sha1(request.body.password)) {
-          response.send({
-            authenticated: true,
-            errorMessage: null,
-          });
+          responseDto.authenticated = true;
+          responseDto.errorMessage = null;
         } else {
-          response.send({
-            authenticated: false,
-            errorMessage: "Helytelen email vagy jelszó!",
-          });
+          responseDto.authenticated = false;
+          responseDto.errorMessage = "Helytelen email vagy jelszó!";
         }
       } else {
-        response.send({
-          authenticated: false,
-          errorMessage: "Helytelen email vagy jelszó!",
-        });
+        responseDto.authenticated = false;
+        responseDto.errorMessage = "Helytelen email vagy jelszó!";
       }
+      response.send(responseDto);
     }
   );
 });
