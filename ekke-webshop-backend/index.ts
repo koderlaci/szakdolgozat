@@ -367,3 +367,93 @@ app.get("/productFinal", jsonParser, (request, response) => {
     response.send(mappedProduct);
   });
 });
+
+// add shipping address
+app.post("/addshippingaddress", jsonParser, (request, response) => {
+  let formData = {
+    country: request.body.country,
+    zip_code: request.body.zip_code,
+    city: request.body.city,
+    street_name: request.body.street_name,
+    street_type: request.body.street_type,
+    house_number: request.body.house_number,
+    apartment: request.body.apartment,
+    floor: request.body.floor,
+    door: request.body.door,
+  };
+
+  let responseDto = {
+    error: false,
+    message: null,
+  };
+
+  if (
+    !formData.country ||
+    !formData.zip_code ||
+    !formData.city ||
+    !formData.street_name ||
+    !formData.street_type ||
+    !formData.house_number
+  ) {
+    responseDto.error = true;
+    responseDto.message = "Kérjük minden kötelező adatot adj meg.";
+    response.send(responseDto);
+  } else {
+    con.query(`INSERT INTO shipping_address SET ?`, formData, (err, result) => {
+      if (err) {
+        responseDto.error = true;
+        switch (err.code) {
+          default:
+            responseDto.message = "Hiba történt, kérjük próbáld újra.";
+        }
+      }
+      response.send(responseDto);
+    });
+  }
+});
+
+// edit shipping address
+app.post("/editshippingaddress/:id", (request, response) => {
+  let formData = {
+    country: request.body.country,
+    zip_code: request.body.zip_code,
+    city: request.body.city,
+    street_name: request.body.street_name,
+    street_type: request.body.street_type,
+    house_number: request.body.house_number,
+    apartment: request.body.apartment,
+    floor: request.body.floor,
+    door: request.body.door,
+  };
+
+  con.query(
+    "UPDATE shipping_address SET ? WHERE id = " + request.params.id,
+    formData,
+    (err, result) => {
+      if (err) throw err;
+      response.send(result);
+    }
+  );
+});
+
+// delete shipping address
+app.delete("/deleteshippingaddress/:id", (request, response) => {
+  con.query(
+    "DELETE FROM shipping_address WHERE id = " + request.params.id,
+    (err, result) => {
+      if (err) throw err;
+      response.send(result);
+    }
+  );
+});
+
+// get shipping address
+app.get("/getshippingaddress", jsonParser, (request, response) => {
+  let query = `SELECT * FROM shipping_address WHERE id = '${request.query.id}'`;
+
+  con.query(query, (err, result) => {
+    if (err) throw err;
+
+    response.send(result);
+  });
+});
