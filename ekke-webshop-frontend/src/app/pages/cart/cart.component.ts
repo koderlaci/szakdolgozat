@@ -1,4 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
@@ -18,6 +19,18 @@ export class CartComponent {
   protected productsPrice = this.cartService.getCartProductsPrice();
   protected deliveryFee = 100;
   protected totalPrice: number;
+
+  protected form = new FormGroup({
+    country: new FormControl(null, [Validators.required]),
+    zipCode: new FormControl(null, [Validators.required]),
+    city: new FormControl(null, [Validators.required]),
+    streetName: new FormControl(null, [Validators.required]),
+    streetType: new FormControl(null, [Validators.required]),
+    houseNumber: new FormControl(null, [Validators.required]),
+    apartment: new FormControl(null),
+    floor: new FormControl(null),
+    door: new FormControl(null),
+  });
 
   constructor() {
     this.succesfulPayment.set(false);
@@ -42,6 +55,9 @@ export class CartComponent {
       return true;
     }
     if (!this.userHandlerService.userLoggedIn()) {
+      return true;
+    }
+    if (this.form.invalid) {
       return true;
     }
 
