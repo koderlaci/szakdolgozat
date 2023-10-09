@@ -1,4 +1,4 @@
-<section class="registration" [formGroup]="registrationForm">
+<section class="registration" [formGroup]="form">
   <form class="form-container">
     <img src="assets/icons/logo.svg" alt="logo" class="logo" />
 
@@ -9,7 +9,11 @@
     <mat-form-field class="input">
       <mat-label>Név</mat-label>
       <input matInput placeholder="Minta János" formControlName="name" />
-      <mat-error> {{ getErrorMessage("name") }} </mat-error>
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(this.form.controls.name.errors)
+        }}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="input">
@@ -21,7 +25,9 @@
         formControlName="neptun"
       />
       <mat-error>
-        {{ getErrorMessage("neptun") }}
+        {{
+          errorMessageService.getErrorMessage(this.form.controls.neptun.errors)
+        }}
       </mat-error>
     </mat-form-field>
 
@@ -34,7 +40,9 @@
         formControlName="email"
       />
       <mat-error>
-        {{ getErrorMessage("email") }}
+        {{
+          errorMessageService.getErrorMessage(this.form.controls.email.errors)
+        }}
       </mat-error>
     </mat-form-field>
 
@@ -42,7 +50,12 @@
       <mat-label>Jelszó</mat-label>
       <input matInput type="password" formControlName="password" />
       <mat-error>
-        {{ getErrorMessage("password") }}
+        {{
+          errorMessageService.getErrorMessage(
+            this.form.controls.password.errors,
+            "password"
+          )
+        }}
       </mat-error>
     </mat-form-field>
 

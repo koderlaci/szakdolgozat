@@ -1,4 +1,4 @@
-<section class="login" [formGroup]="loginForm">
+<section class="login" [formGroup]="form">
   <form class="form-container">
     <img src="assets/icons/logo.svg" alt="logo" class="logo" />
     <div class="subtitle">
@@ -7,7 +7,11 @@
     <mat-form-field class="input">
       <mat-label>Email</mat-label>
       <input matInput placeholder="email@mail.com" formControlName="email" />
-      <mat-error> {{ getErrorMessage("email") }} </mat-error>
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(this.form.controls.email.errors)
+        }}
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="input">
       <mat-label>Jelszó</mat-label>
@@ -18,7 +22,11 @@
         formControlName="password"
       />
       <mat-error>
-        {{ getErrorMessage("password") }}
+        {{
+          errorMessageService.getErrorMessage(
+            this.form.controls.password.errors
+          )
+        }}
       </mat-error>
     </mat-form-field>
     <mat-error class="error-message" *ngIf="loginResponse.errorMessage">

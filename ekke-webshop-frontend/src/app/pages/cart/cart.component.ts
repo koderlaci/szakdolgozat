@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
+import { ErrorMessageService } from 'src/app/services/error-messages.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 
@@ -13,6 +14,7 @@ export class CartComponent {
   protected cartService = inject(CartService);
   protected paymentService = inject(PaymentService);
   protected userHandlerService = inject(UserHandlerService);
+  protected errorMessageService = inject(ErrorMessageService);
 
   protected succesfulPayment = signal(false);
 

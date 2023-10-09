@@ -42,7 +42,11 @@
             <mat-label>Ország</mat-label>
             <input matInput type="text" formControlName="country" />
             <mat-error>
-              <!-- {{ getErrorMessage("country") }} -->
+              {{
+                errorMessageService.getErrorMessage(
+                  this.form.controls.country.errors
+                )
+              }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -52,7 +56,11 @@
             <mat-label>Irányítószám</mat-label>
             <input matInput type="text" formControlName="zipCode" />
             <mat-error>
-              <!-- {{ getErrorMessage("zipCode") }} -->
+              {{
+                errorMessageService.getErrorMessage(
+                  this.form.controls.zipCode.errors
+                )
+              }}
             </mat-error>
           </mat-form-field>
 
@@ -60,7 +68,11 @@
             <mat-label>Város</mat-label>
             <input matInput type="text" formControlName="city" />
             <mat-error>
-              <!-- {{ getErrorMessage("city") }} -->
+              {{
+                errorMessageService.getErrorMessage(
+                  this.form.controls.city.errors
+                )
+              }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -70,7 +82,11 @@
             <mat-label>Közterület neve</mat-label>
             <input matInput type="text" formControlName="streetName" />
             <mat-error>
-              <!-- {{ getErrorMessage("streetName") }} -->
+              {{
+                errorMessageService.getErrorMessage(
+                  this.form.controls.streetName.errors
+                )
+              }}
             </mat-error>
           </mat-form-field>
 
@@ -78,7 +94,11 @@
             <mat-label>Közterület jellege</mat-label>
             <input matInput type="text" formControlName="streetType" />
             <mat-error>
-              <!-- {{ getErrorMessage("streetType") }} -->
+              {{
+                errorMessageService.getErrorMessage(
+                  this.form.controls.streetType.errors
+                )
+              }}
             </mat-error>
           </mat-form-field>
 
@@ -86,7 +106,11 @@
             <mat-label>Házszám</mat-label>
             <input matInput type="text" formControlName="houseNumber" />
             <mat-error>
-              <!-- {{ getErrorMessage("houseNumber") }} -->
+              {{
+                errorMessageService.getErrorMessage(
+                  this.form.controls.houseNumber.errors
+                )
+              }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -96,7 +120,11 @@
             <mat-label>Lakás</mat-label>
             <input matInput type="text" formControlName="apartment" />
             <mat-error>
-              <!-- {{ getErrorMessage("apartment") }} -->
+              {{
+                errorMessageService.getErrorMessage(
+                  this.form.controls.apartment.errors
+                )
+              }}
             </mat-error>
           </mat-form-field>
 
@@ -104,7 +132,11 @@
             <mat-label>Emelet</mat-label>
             <input matInput type="text" formControlName="floor" />
             <mat-error>
-              <!-- {{ getErrorMessage("floor") }} -->
+              {{
+                errorMessageService.getErrorMessage(
+                  this.form.controls.floor.errors
+                )
+              }}
             </mat-error>
           </mat-form-field>
 
@@ -112,7 +144,11 @@
             <mat-label>Ajtó</mat-label>
             <input matInput type="text" formControlName="door" />
             <mat-error>
-              <!-- {{ getErrorMessage("door") }} -->
+              {{
+                errorMessageService.getErrorMessage(
+                  this.form.controls.door.errors
+                )
+              }}
             </mat-error>
           </mat-form-field>
         </div>
