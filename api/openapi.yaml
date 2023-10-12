@@ -6,14 +6,14 @@ servers:
   - url: http://localhost:4201
     description: Local server
 paths:
-  /all-users:
+  /user/get-all-users:
     get:
       summary: Returns a list of all users.
       tags:
         - userApi
       operationId: getAllUsers
 
-  /add-user:
+  /user/add-user:
     post:
       summary: Creates a user.
       tags:
@@ -43,7 +43,7 @@ paths:
                 - email
                 - password
 
-  /edit-user/{id}:
+  /user/edit-user/{id}:
     post:
       summary: Edits a user by id.
       tags:
@@ -74,7 +74,7 @@ paths:
                 password:
                   type: string
 
-  /delete-user/{id}:
+  /user/delete-user/{id}:
     delete:
       summary: Deletes a user by id.
       tags:
@@ -88,7 +88,7 @@ paths:
             type: integer
             format: int64
 
-  /login:
+  /user/login:
     post:
       summary: Authorises a user.
       tags:
@@ -109,9 +109,9 @@ paths:
                 - email
                 - password
 
-  /get-shipping-address:
+  /user/get-shipping-address/{id}:
     get:
-      summary: Returns a shipping address by id.
+      summary: Returns a shipping address by user id.
       tags:
         - userApi
       operationId: getShippingAddress
@@ -122,11 +122,18 @@ paths:
           schema:
             type: string
 
-  /add-shipping-address:
+  /shipping-address/get-all-shipping-addresses:
+    get:
+      summary: Returns all shipping addresses.
+      tags:
+        - shippingAddressApi
+      operationId: getAllShippingAddresses
+
+  /shipping-address/add-shipping-address:
     post:
       summary: Creates a shipping address associated with a user.
       tags:
-        - userApi
+        - shippingAddressApi
       operationId: addShippingAddress
       requestBody:
         required: true
@@ -163,11 +170,11 @@ paths:
                 - street_type
                 - house_number
 
-  /edit-shipping-address/{id}:
+  /shipping-address/edit-shipping-address/{id}:
     post:
       summary: Edits a shipping address by id.
       tags:
-        - userApi
+        - shippingAddressApi
       operationId: editShippingAddress
       parameters:
         - name: id
@@ -202,11 +209,11 @@ paths:
                 door:
                   type: string
 
-  /delete-shipping-address/{id}:
+  /shipping-address/delete-shipping-address/{id}:
     delete:
       summary: Deletes a shipping address by id.
       tags:
-        - userApi
+        - shippingAddressApi
       operationId: deleteShippingAddress
       parameters:
         - name: id
@@ -216,42 +223,132 @@ paths:
             type: integer
             format: int64
 
-  /shatest:
+  /product/get-all-products:
     get:
-      summary: Returns a hash for testing purposes.
+      summary: Returns a list of all products.
       tags:
-        - test
-      operationId: testSHA
+        - productApi
+      operationId: getAllProducts
 
-  /men-products:
+  /product/add-product:
+    post:
+      summary: Creates a product.
+      tags:
+        - productApi
+      operationId: addProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                variant_id:
+                  type: string
+                name:
+                  type: string
+                type:
+                  type: string
+                style:
+                  type: string
+                color:
+                  type: string
+                size:
+                  type: string
+                price:
+                  type: number
+                quantity:
+                  type: number
+              required:
+                - variant_id
+                - name
+                - type
+                - style
+                - color
+                - size
+                - price
+                - quantity
+
+  /product/edit-product/{id}:
+    post:
+      summary: Edits a product by id.
+      tags:
+        - productApi
+      operationId: editProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                variant_id:
+                  type: string
+                name:
+                  type: string
+                type:
+                  type: string
+                style:
+                  type: string
+                color:
+                  type: string
+                size:
+                  type: string
+                price:
+                  type: number
+                quantity:
+                  type: number
+
+  /product/delete-product/{id}:
+    delete:
+      summary: Deletes a product by id.
+      tags:
+        - productApi
+      operationId: deleteProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+  /product/get-men-products:
     get:
       summary: Returns an array of men products for the products page.
       tags:
         - productApi
       operationId: getMenProducts
 
-  /women-products:
+  /product/get-women-products:
     get:
       summary: Returns an array of women products for the products page.
       tags:
         - productApi
       operationId: getWomenProducts
 
-  /accessary-products:
+  /product/get-accessary-products:
     get:
       summary: Returns an array of accessary products for the products page.
       tags:
         - productApi
       operationId: getAccessaryProducts
 
-  /product-slider:
+  /product/get-product-slider-all:
     get:
       summary: Returns an array of all products for the product slider component.
       tags:
         - productApi
       operationId: getSliderProducts
 
-  /product:
+  /product/get-specific-product:
     get:
       summary: Returns a product for the product page.
       tags:
@@ -264,7 +361,7 @@ paths:
           schema:
             type: string
 
-  /product-sizes:
+  /product/get-product-sizes:
     get:
       summary: Returns a product's sizes by variantId and color.
       tags:
@@ -282,7 +379,7 @@ paths:
           schema:
             type: string
 
-  /product-colors:
+  /product/get-product-colors:
     get:
       summary: Returns a product's colors by variantId and size.
       tags:
@@ -300,7 +397,7 @@ paths:
           schema:
             type: string
 
-  /product-final:
+  /product/get-final-product:
     get:
       summary: Returns a product by the product's details.
       tags:
