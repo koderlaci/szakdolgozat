@@ -34,7 +34,7 @@ app.listen(port, () => {
 });
 
 // get all users
-app.get("/allusers", (request, response) => {
+app.get("/all-users", (request, response) => {
   let query = "SELECT * FROM `user`";
 
   con.query(query, (err, result) => {
@@ -44,7 +44,7 @@ app.get("/allusers", (request, response) => {
 });
 
 // add user
-app.post("/adduser", jsonParser, (request, response) => {
+app.post("/add-user", jsonParser, (request, response) => {
   let query = `INSERT INTO user SET ?`;
 
   let formData = {
@@ -88,7 +88,7 @@ app.post("/adduser", jsonParser, (request, response) => {
 });
 
 // edit user
-app.post("/edituser/:id", (request, response) => {
+app.post("/edit-user/:id", (request, response) => {
   let formData = {
     name: request.body.name,
     neptun: request.body.neptun,
@@ -108,7 +108,7 @@ app.post("/edituser/:id", (request, response) => {
 });
 
 // delete user
-app.delete("/deleteuser/(:id)", (request, response) => {
+app.delete("/delete-user/(:id)", (request, response) => {
   con.query(
     "DELETE FROM user WHERE id = " + request.params.id,
     (err, result) => {
@@ -176,7 +176,7 @@ function getSizes(products, variantId) {
 }
 
 // get men products for products screen
-app.get("/menProducts", (request, response) => {
+app.get("/men-products", (request, response) => {
   let query = "SELECT * FROM product WHERE type = 'men'";
 
   con.query(query, (err, result) => {
@@ -203,7 +203,7 @@ app.get("/menProducts", (request, response) => {
 });
 
 // get women products for products screen
-app.get("/womenProducts", (request, response) => {
+app.get("/women-products", (request, response) => {
   let query = "SELECT * FROM product WHERE type = 'women'";
 
   con.query(query, (err, result) => {
@@ -230,7 +230,7 @@ app.get("/womenProducts", (request, response) => {
 });
 
 // get accessary products for products screen
-app.get("/accessaryProducts", (request, response) => {
+app.get("/accessary-products", (request, response) => {
   let query = "SELECT * FROM product WHERE type = 'accessary'";
 
   con.query(query, (err, result) => {
@@ -257,7 +257,7 @@ app.get("/accessaryProducts", (request, response) => {
 });
 
 // get all products for product-slider
-app.get("/productSlider", (request, response) => {
+app.get("/product-slider", (request, response) => {
   let query = "SELECT * FROM product";
 
   con.query(query, (err, result) => {
@@ -312,7 +312,7 @@ app.get("/product", jsonParser, (request, response) => {
 });
 
 // get product's sizes by variantId and color
-app.get("/productSizes", jsonParser, (request, response) => {
+app.get("/product-sizes", jsonParser, (request, response) => {
   let query = `SELECT size FROM product WHERE variant_id = '${request.query.variantId}' AND color = '${request.query.color}'`;
 
   con.query(query, (err, result) => {
@@ -329,7 +329,7 @@ app.get("/productSizes", jsonParser, (request, response) => {
 });
 
 // get product's colors by variantId and size
-app.get("/productColors", jsonParser, (request, response) => {
+app.get("/product-colors", jsonParser, (request, response) => {
   let query = `SELECT color FROM product WHERE variant_id = '${request.query.variantId}' AND size = '${request.query.size}'`;
 
   con.query(query, (err, result) => {
@@ -346,7 +346,7 @@ app.get("/productColors", jsonParser, (request, response) => {
 });
 
 // get final product for cart by the product's details
-app.get("/productFinal", jsonParser, (request, response) => {
+app.get("/product-final", jsonParser, (request, response) => {
   let query = `SELECT * FROM product WHERE variant_id = '${request.query.variantId}' AND color = '${request.query.color}' AND size = '${request.query.size}'`;
 
   con.query(query, (err, result) => {
@@ -369,7 +369,7 @@ app.get("/productFinal", jsonParser, (request, response) => {
 });
 
 // add shipping address
-app.post("/addshippingaddress", jsonParser, (request, response) => {
+app.post("/add-shipping-address", jsonParser, (request, response) => {
   let formData = {
     country: request.body.country,
     zip_code: request.body.zip_code,
@@ -397,7 +397,6 @@ app.post("/addshippingaddress", jsonParser, (request, response) => {
   ) {
     responseDto.error = true;
     responseDto.message = "Kérjük minden kötelező adatot adj meg.";
-    response.send(responseDto);
   } else {
     con.query(`INSERT INTO shipping_address SET ?`, formData, (err, result) => {
       if (err) {
@@ -407,13 +406,16 @@ app.post("/addshippingaddress", jsonParser, (request, response) => {
             responseDto.message = "Hiba történt, kérjük próbáld újra.";
         }
       }
-      response.send(responseDto);
     });
+    if (request.body.userId) {
+      // TODO: update user's shipping address field
+    }
   }
+  response.send(responseDto);
 });
 
 // edit shipping address
-app.post("/editshippingaddress/:id", (request, response) => {
+app.post("/edit-shipping-address/:id", (request, response) => {
   let formData = {
     country: request.body.country,
     zip_code: request.body.zip_code,
@@ -437,7 +439,7 @@ app.post("/editshippingaddress/:id", (request, response) => {
 });
 
 // delete shipping address
-app.delete("/deleteshippingaddress/:id", (request, response) => {
+app.delete("/delete-shipping-address/:id", (request, response) => {
   con.query(
     "DELETE FROM shipping_address WHERE id = " + request.params.id,
     (err, result) => {
@@ -448,7 +450,7 @@ app.delete("/deleteshippingaddress/:id", (request, response) => {
 });
 
 // get shipping address
-app.get("/getshippingaddress", jsonParser, (request, response) => {
+app.get("/get-shipping-address", jsonParser, (request, response) => {
   let query = `SELECT * FROM shipping_address WHERE id = '${request.query.id}'`;
 
   con.query(query, (err, result) => {

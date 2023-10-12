@@ -9,7 +9,9 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/addShippingAddressRequest.ts
 model/addUserRequest.ts
+model/editShippingAddressRequest.ts
 model/editUserRequest.ts
 model/loginRequest.ts
 model/models.ts
