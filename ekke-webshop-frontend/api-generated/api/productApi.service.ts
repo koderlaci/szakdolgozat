@@ -129,7 +129,7 @@ export class ProductApiService {
             }
         }
 
-        let localVarPath = `/accessaryProducts`;
+        let localVarPath = `/accessary-products`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -182,7 +182,7 @@ export class ProductApiService {
             }
         }
 
-        let localVarPath = `/menProducts`;
+        let localVarPath = `/men-products`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -325,7 +325,7 @@ export class ProductApiService {
             }
         }
 
-        let localVarPath = `/productFinal`;
+        let localVarPath = `/product-final`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -397,7 +397,7 @@ export class ProductApiService {
             }
         }
 
-        let localVarPath = `/productColors`;
+        let localVarPath = `/product-colors`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -469,7 +469,7 @@ export class ProductApiService {
             }
         }
 
-        let localVarPath = `/productSizes`;
+        let localVarPath = `/product-sizes`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -523,7 +523,7 @@ export class ProductApiService {
             }
         }
 
-        let localVarPath = `/productSlider`;
+        let localVarPath = `/product-slider`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -576,7 +576,7 @@ export class ProductApiService {
             }
         }
 
-        let localVarPath = `/womenProducts`;
+        let localVarPath = `/women-products`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
