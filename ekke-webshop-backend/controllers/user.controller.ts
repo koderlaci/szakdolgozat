@@ -1,6 +1,9 @@
 import { User } from "../models/user.model.js";
 import asyncHandler from "express-async-handler";
+import CartController from "../controllers/cart.controller.js";
 import sha1 from "sha1";
+
+const cartController = new CartController();
 
 export default class UserController {
   getAllUsers = asyncHandler(async (req, res) => {
@@ -57,8 +60,11 @@ export default class UserController {
       password: req.body.password,
       permission: 0,
     })
-      .then((result) => {
+      .then(async (result) => {
         console.log(result);
+        if (result) {
+          await cartController.createCartForUser(result.getDataValue("id"));
+        }
       })
       .catch((error) => {
         responseDto.error = true;

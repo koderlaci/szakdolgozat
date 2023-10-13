@@ -38,11 +38,6 @@ export const User = sequelize.define(
         this.setDataValue("password", sha1(value));
       },
     },
-    cart: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      unique: true,
-    },
     shippingAddress: {
       field: "shipping_address",
       type: DataTypes.INTEGER,
