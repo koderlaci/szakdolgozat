@@ -1,7 +1,7 @@
 import { Cart } from "../models/cart.model.js";
 import asyncHandler from "express-async-handler";
 
-export default class ShippingAddressController {
+export default class CartController {
   getAllCarts = asyncHandler(async (req, res) => {
     const data = await Cart.findAll();
     res.send(data);
