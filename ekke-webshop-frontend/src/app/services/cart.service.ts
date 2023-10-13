@@ -1,14 +1,29 @@
-import { Injectable, effect, signal } from '@angular/core';
+import { Injectable, effect, inject, signal } from '@angular/core';
 import { CartProduct, EndProduct } from '../types/types';
+import { UserHandlerService } from './user-handler.service';
+import { CartApiService } from 'api-generated';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  private userHandlerService = inject(UserHandlerService);
+  private cartApiService = inject(CartApiService);
+
   public cart = signal<CartProduct[]>([]);
   public itemAddedToCart = signal<number | null>(null);
 
-  addProductToCart(product: EndProduct) {
+  constructor() {
+    effect(() => {
+      const userId = this.userHandlerService.userLoggedIn();
+      if (userId) {
+        this.syncCart(userId);
+      }
+    });
+  }
+
+  async addProductToCart(product: EndProduct) {
     let tempCart = this.cart();
     const tempProduct = tempCart.find((pr) => pr.id === product.id);
 
@@ -18,6 +33,16 @@ export class CartService {
       tempCart.push({
         ...product,
         selectedQuantity: 1,
+      });
+    }
+
+    const userId = this.userHandlerService.userLoggedIn();
+
+    if (userId) {
+      await this.cartApiService.addCartItem({
+        userId: userId,
+        productId: product.id,
+        date: Date.now().toString(),
       });
     }
 
@@ -56,5 +81,30 @@ export class CartService {
 
   clearCart() {
     this.cart.set([]);
+  }
+
+  async syncCart(userId: number) {
+    await this.cart().forEach(async (item) => {
+      await this.cartApiService.addCartItem({
+        userId: userId,
+        productId: item.id,
+        date: Date.now().toString(),
+      });
+    });
+
+    // const cart = await firstValueFrom(
+    //   this.cartApiService.getAllCartProductsByUserId(userId)
+    // );
+    await firstValueFrom(this.cartApiService.getAllCartProductsByUserId(userId))
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // console.log(cart);
+
+    // this.cart.set(cart);
   }
 }
