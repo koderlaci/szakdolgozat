@@ -3,14 +3,16 @@ README.md
 api.module.ts
 api/api.ts
 api/productApi.service.ts
-api/test.service.ts
+api/shippingAddressApi.service.ts
 api/userApi.service.ts
 configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/addProductRequest.ts
 model/addShippingAddressRequest.ts
 model/addUserRequest.ts
+model/editProductRequest.ts
 model/editShippingAddressRequest.ts
 model/editUserRequest.ts
 model/loginRequest.ts
