@@ -486,3 +486,92 @@ paths:
           schema:
             type: integer
             format: int64
+
+  /cart/get-all-cart-items:
+    get:
+      summary: Returns a list of all cart items.
+      tags:
+        - cartApi
+      operationId: getAllCartItems
+
+  /cart/add-cart-item:
+    post:
+      summary: Creates a cart item.
+      tags:
+        - cartApi
+      operationId: addCartItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: number
+                cartId:
+                  type: number
+                productId:
+                  type: number
+                date:
+                  type: date
+              required:
+                - userId
+                - productId
+                - date
+
+  /cart/edit-cart-item/{id}:
+    post:
+      summary: Edits a cart item by id.
+      tags:
+        - cartApi
+      operationId: editCartItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: number
+                cartId:
+                  type: number
+                productId:
+                  type: number
+                date:
+                  type: date
+
+  /cart/delete-cart-item/{id}:
+    delete:
+      summary: Deletes a cart item by id.
+      tags:
+        - cartApi
+      operationId: deleteCartItem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+
+  /cart/get-all-cart-product-by-user-id/{id}:
+    get:
+      summary: Returns a list of all products the user added to it's cart.
+      tags:
+        - cartApi
+      operationId: getAllCartProductsByUserId
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: number
