@@ -29,8 +29,8 @@
         }}
       </mat-error>
     </mat-form-field>
-    <mat-error class="error-message" *ngIf="loginResponse.errorMessage">
-      {{ loginResponse.errorMessage }}
+    <mat-error class="error-message" *ngIf="loginResponse.message">
+      {{ loginResponse.message }}
     </mat-error>
     <div class="buttons-container">
       <button mat-raised-button (click)="login()">Bejelentkezés</button>

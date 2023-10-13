@@ -11,7 +11,7 @@ import { UserHandlerService } from 'src/app/services/user-handler.service';
 
 type LoginResponse = {
   authenticated: boolean;
-  errorMessage: string;
+  message: string;
 };
 
 @Component({
@@ -36,7 +36,7 @@ export class LoginComponent {
 
   protected loginResponse = {
     authenticated: false,
-    errorMessage: '',
+    message: '',
   };
 
   login() {
