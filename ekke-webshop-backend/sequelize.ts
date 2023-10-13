@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
 import express from "express";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 //routes
 import user from "./routes/user.route.js";
@@ -16,6 +17,8 @@ const corsOptions = {
 const app = express();
 
 app.use(cors(corsOptions));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //routes
 app.use("/user", user);

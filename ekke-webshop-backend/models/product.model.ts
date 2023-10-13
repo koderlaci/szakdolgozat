@@ -1,4 +1,5 @@
 import { Sequelize, DataTypes } from "sequelize";
+// import { ColumnName } from 'sequelize';
 
 const sequelize = new Sequelize("ekke-webshop", "root", "", {
   host: "localhost",
@@ -13,10 +14,11 @@ export const Product = sequelize.define(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       primaryKey: true,
     },
-    variant_id: {
+    variantId: {
+      field: "variant_id",
       type: DataTypes.STRING,
       allowNull: false,
     },

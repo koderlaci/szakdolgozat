@@ -14,7 +14,7 @@ export default class ProductController {
     };
 
     if (
-      !req.body.variant_id ||
+      !req.body.variantId ||
       !req.body.name ||
       !req.body.type ||
       !req.body.style ||
@@ -28,7 +28,7 @@ export default class ProductController {
       res.send(responseDto);
     } else {
       await Product.create({
-        variant_id: req.body.variant_id,
+        variantId: req.body.variantId,
         name: req.body.name,
         type: req.body.type,
         style: req.body.style,
@@ -59,7 +59,7 @@ export default class ProductController {
 
     await Product.update(
       {
-        variant_id: req.body.variant_id,
+        variantId: req.body.variantId,
         name: req.body.name,
         type: req.body.type,
         style: req.body.style,
@@ -122,14 +122,14 @@ export default class ProductController {
         let productVariants = [];
 
         result.forEach((product) => {
-          if (!productVariants.includes(product.getDataValue("variant_id"))) {
+          if (!productVariants.includes(product.getDataValue("variantId"))) {
             products.push({
-              variantId: product.getDataValue("variant_id"),
+              variantId: product.getDataValue("variantId"),
               name: product.getDataValue("name"),
               price: product.getDataValue("price"),
-              colors: getColors(result, product.getDataValue("variant_id")),
+              colors: getColors(result, product.getDataValue("variantId")),
             });
-            productVariants.push(product.getDataValue("variant_id"));
+            productVariants.push(product.getDataValue("variantId"));
           }
         });
 
@@ -151,14 +151,14 @@ export default class ProductController {
         let productVariants = [];
 
         result.forEach((product) => {
-          if (!productVariants.includes(product.getDataValue("variant_id"))) {
+          if (!productVariants.includes(product.getDataValue("variantId"))) {
             products.push({
-              variantId: product.getDataValue("variant_id"),
+              variantId: product.getDataValue("variantId"),
               name: product.getDataValue("name"),
               price: product.getDataValue("price"),
-              colors: getColors(result, product.getDataValue("variant_id")),
+              colors: getColors(result, product.getDataValue("variantId")),
             });
-            productVariants.push(product.getDataValue("variant_id"));
+            productVariants.push(product.getDataValue("variantId"));
           }
         });
 
@@ -180,14 +180,14 @@ export default class ProductController {
         let productVariants = [];
 
         result.forEach((product) => {
-          if (!productVariants.includes(product.getDataValue("variant_id"))) {
+          if (!productVariants.includes(product.getDataValue("variantId"))) {
             products.push({
-              variantId: product.getDataValue("variant_id"),
+              variantId: product.getDataValue("variantId"),
               name: product.getDataValue("name"),
               price: product.getDataValue("price"),
-              colors: getColors(result, product.getDataValue("variant_id")),
+              colors: getColors(result, product.getDataValue("variantId")),
             });
-            productVariants.push(product.getDataValue("variant_id"));
+            productVariants.push(product.getDataValue("variantId"));
           }
         });
 
@@ -205,14 +205,14 @@ export default class ProductController {
         let productVariants = [];
 
         result.forEach((product) => {
-          if (!productVariants.includes(product.getDataValue("variant_id"))) {
+          if (!productVariants.includes(product.getDataValue("variantId"))) {
             products.push({
-              variantId: product.getDataValue("variant_id"),
+              variantId: product.getDataValue("variantId"),
               name: product.getDataValue("name"),
               price: product.getDataValue("price"),
-              colors: getColors(result, product.getDataValue("variant_id")),
+              colors: getColors(result, product.getDataValue("variantId")),
             });
-            productVariants.push(product.getDataValue("variant_id"));
+            productVariants.push(product.getDataValue("variantId"));
           }
         });
 
@@ -226,7 +226,7 @@ export default class ProductController {
   getSpecificProduct = asyncHandler(async (req, res) => {
     await Product.findAll({
       where: {
-        variant_id: req.query.variantId,
+        variantId: req.query.variantId,
       },
     })
       .then((result) => {
@@ -234,15 +234,15 @@ export default class ProductController {
         let productVariants = [];
 
         result.forEach((product) => {
-          if (!productVariants.includes(product.getDataValue("variant_id"))) {
+          if (!productVariants.includes(product.getDataValue("variantId"))) {
             mappedProduct = {
-              variantId: product.getDataValue("variant_id"),
+              variantId: product.getDataValue("variantId"),
               name: product.getDataValue("name"),
               price: product.getDataValue("price"),
-              colors: getColors(result, product.getDataValue("variant_id")),
-              sizes: getSizes(result, product.getDataValue("variant_id")),
+              colors: getColors(result, product.getDataValue("variantId")),
+              sizes: getSizes(result, product.getDataValue("variantId")),
             };
-            productVariants.push(product.getDataValue("variant_id"));
+            productVariants.push(product.getDataValue("variantId"));
           }
         });
 
@@ -256,7 +256,7 @@ export default class ProductController {
   getProductSizes = asyncHandler(async (req, res) => {
     await Product.findAll({
       where: {
-        variant_id: req.query.variantId,
+        variantId: req.query.variantId,
         color: req.query.color,
       },
     })
@@ -277,7 +277,7 @@ export default class ProductController {
   getProductColors = asyncHandler(async (req, res) => {
     await Product.findAll({
       where: {
-        variant_id: req.query.variantId,
+        variantId: req.query.variantId,
         size: req.query.size,
       },
     })
@@ -298,7 +298,7 @@ export default class ProductController {
   getFinalProduct = asyncHandler(async (req, res) => {
     await Product.findOne({
       where: {
-        variant_id: req.query.variantId,
+        variantId: req.query.variantId,
         size: req.query.size,
         color: req.query.color,
       },
@@ -315,7 +315,7 @@ export default class ProductController {
 function getColors(products, variantId) {
   let colors = [];
   products.forEach((product) => {
-    if (product.variant_id === variantId && !colors.includes(product.color)) {
+    if (product.variantId === variantId && !colors.includes(product.color)) {
       colors.push(product.color);
     }
   });
@@ -326,7 +326,7 @@ function getColors(products, variantId) {
 function getSizes(products, variantId) {
   let sizes = [];
   products.forEach((product) => {
-    if (product.variant_id === variantId && !sizes.includes(product.size)) {
+    if (product.variantId === variantId && !sizes.includes(product.size)) {
       sizes.push(product.size);
     }
   });
