@@ -13,7 +13,7 @@ export default class UserController {
 
   createUser = asyncHandler(async (req, res) => {
     let responseDto = {
-      error: false,
+      userId: null,
       message: null,
     };
 
@@ -23,7 +23,6 @@ export default class UserController {
       !req.body.email ||
       !req.body.password
     ) {
-      responseDto.error = true;
       responseDto.message = "Kérjük minden adatot adj meg.";
       res.send(responseDto);
       return;
@@ -35,7 +34,6 @@ export default class UserController {
       },
     });
     if (neptunAlreadyExists) {
-      responseDto.error = true;
       responseDto.message = "A megadott neptun kóddal már létezik felhasználó.";
       res.send(responseDto);
       return;
@@ -47,7 +45,6 @@ export default class UserController {
       },
     });
     if (emailAlreadyExists) {
-      responseDto.error = true;
       responseDto.message = "A megadott email címmel már létezik felhasználó.";
       res.send(responseDto);
       return;
@@ -61,14 +58,12 @@ export default class UserController {
       permission: 0,
     })
       .then(async (result) => {
-        console.log(result);
         if (result) {
+          responseDto.userId = result.getDataValue("id");
           await cartController.createCartForUser(result.getDataValue("id"));
         }
       })
-      .catch((error) => {
-        responseDto.error = true;
-        console.log(error);
+      .catch(() => {
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
       })
       .finally(() => {
@@ -135,7 +130,7 @@ export default class UserController {
 
   login = asyncHandler(async (req, res) => {
     let responseDto = {
-      authenticated: false,
+      userId: null,
       message: null,
     };
 
@@ -151,12 +146,12 @@ export default class UserController {
       })
         .then((result) => {
           if (result) {
-            responseDto.authenticated = true;
+            responseDto.userId = result.getDataValue("id");
           } else {
             responseDto.message = "Helytelen email vagy jelszó!";
           }
         })
-        .catch((error) => {
+        .catch(() => {
           responseDto.message = "Helytelen email vagy jelszó!";
         })
         .finally(() => {
