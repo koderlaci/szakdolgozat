@@ -142,19 +142,19 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
+                userId:
                   type: number
                 country:
                   type: string
-                zip_code:
+                zipCode:
                   type: string
                 city:
                   type: string
-                street_name:
+                streetName:
                   type: string
-                street_type:
+                streetType:
                   type: string
-                house_number:
+                houseNumber:
                   type: string
                 apartment:
                   type: string
@@ -164,11 +164,11 @@ paths:
                   type: string
               required:
                 - country
-                - zip_code
+                - zipCode
                 - city
-                - street_name
-                - street_type
-                - house_number
+                - streetName
+                - streetType
+                - houseNumber
 
   /shipping-address/edit-shipping-address/{id}:
     post:
@@ -192,15 +192,15 @@ paths:
               properties:
                 country:
                   type: string
-                zip_code:
+                zipCode:
                   type: string
                 city:
                   type: string
-                street_name:
+                streetName:
                   type: string
-                street_type:
+                streetType:
                   type: string
-                house_number:
+                houseNumber:
                   type: string
                 apartment:
                   type: string
@@ -243,7 +243,7 @@ paths:
             schema:
               type: object
               properties:
-                variant_id:
+                variantId:
                   type: string
                 name:
                   type: string
@@ -260,7 +260,7 @@ paths:
                 quantity:
                   type: number
               required:
-                - variant_id
+                - variantId
                 - name
                 - type
                 - style
@@ -289,7 +289,7 @@ paths:
             schema:
               type: object
               properties:
-                variant_id:
+                variantId:
                   type: string
                 name:
                   type: string

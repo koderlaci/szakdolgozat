@@ -20,7 +20,8 @@ export const ShippingAddress = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    zip_code: {
+    zipCode: {
+      field: "zip_code",
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -28,15 +29,18 @@ export const ShippingAddress = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    street_name: {
+    streetName: {
+      field: "street_name",
       type: DataTypes.STRING,
       allowNull: false,
     },
-    street_type: {
+    streetType: {
+      field: "street_type",
       type: DataTypes.STRING,
       allowNull: false,
     },
-    house_number: {
+    houseNumber: {
+      field: "house_number",
       type: DataTypes.STRING,
       allowNull: false,
     },

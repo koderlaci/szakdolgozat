@@ -16,11 +16,11 @@ export default class ShippingAddressController {
 
     if (
       !req.body.country ||
-      !req.body.zip_code ||
+      !req.body.zipCode ||
       !req.body.city ||
-      !req.body.street_name ||
-      !req.body.street_type ||
-      !req.body.house_number
+      !req.body.streetName ||
+      !req.body.streetType ||
+      !req.body.houseNumber
     ) {
       responseDto.error = true;
       responseDto.message = "Kérjük minden adatot adj meg.";
@@ -28,17 +28,17 @@ export default class ShippingAddressController {
     } else {
       await ShippingAddress.create({
         country: req.body.country,
-        zip_code: req.body.zip_code,
+        zipCode: req.body.zipCode,
         city: req.body.city,
-        street_name: req.body.street_name,
-        street_type: req.body.street_type,
-        house_number: req.body.house_number,
+        streetName: req.body.streetName,
+        streetType: req.body.streetType,
+        houseNumber: req.body.houseNumber,
         apartment: req.body.apartment,
         floor: req.body.floor,
         door: req.body.door,
       })
         .then(async (result) => {
-          const user = await User.findByPk(req.body.user_id);
+          const user = await User.findByPk(req.body.userId);
           if (user) {
             await user.update({ shipping_address: result.getDataValue("id") });
           } else {
@@ -66,11 +66,11 @@ export default class ShippingAddressController {
     await ShippingAddress.update(
       {
         country: req.body.country,
-        zip_code: req.body.zip_code,
+        zipCode: req.body.zipCode,
         city: req.body.city,
-        street_name: req.body.street_name,
-        street_type: req.body.street_type,
-        house_number: req.body.house_number,
+        streetName: req.body.streetName,
+        streetType: req.body.streetType,
+        houseNumber: req.body.houseNumber,
         apartment: req.body.apartment,
         floor: req.body.floor,
         door: req.body.door,
