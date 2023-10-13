@@ -10,10 +10,12 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/addCartItemRequest.ts
 model/addCartRequest.ts
 model/addProductRequest.ts
 model/addShippingAddressRequest.ts
 model/addUserRequest.ts
+model/editCartItemRequest.ts
 model/editCartRequest.ts
 model/editProductRequest.ts
 model/editShippingAddressRequest.ts
