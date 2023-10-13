@@ -7,8 +7,8 @@ import { AddUserRequest, LoginRequest, UserApiService } from 'api-generated';
 export class UserHandlerService {
   private userService = inject(UserApiService);
 
-  userLoggedIn = signal<boolean>(
-    sessionStorage.getItem('userLoggedIn') === 'true' ? true : false
+  userLoggedIn = signal<number | null>(
+    Number(sessionStorage.getItem('userLoggedIn'))
   );
 
   login(formData: LoginRequest) {
@@ -23,8 +23,10 @@ export class UserHandlerService {
     return this.userService.getAllUsers();
   }
 
-  setUserLoggedIn(value: boolean) {
+  setUserLoggedIn(value: number | null) {
     this.userLoggedIn.set(value);
-    sessionStorage.setItem('userLoggedIn', value.toString());
+    if (value) {
+      sessionStorage.setItem('userLoggedIn', value.toString());
+    }
   }
 }

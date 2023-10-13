@@ -1,18 +1,8 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormGroup,
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ErrorMessageService } from 'src/app/services/error-messages.service';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
-
-type LoginResponse = {
-  authenticated: boolean;
-  message: string;
-};
 
 @Component({
   selector: 'app-login',
@@ -35,7 +25,7 @@ export class LoginComponent {
   });
 
   protected loginResponse = {
-    authenticated: false,
+    userId: null,
     message: '',
   };
 
@@ -44,11 +34,11 @@ export class LoginComponent {
       this.userHandlerService
         .login(this.form.getRawValue())
         .subscribe((res) => {
-          this.loginResponse = res as LoginResponse;
+          this.loginResponse = res;
           this.userHandlerService.setUserLoggedIn(
-            this.loginResponse.authenticated
+            Number(this.loginResponse.userId)
           );
-          if (this.loginResponse.authenticated) {
+          if (this.loginResponse.userId) {
             this.router.navigate(['/landing']);
           }
         });

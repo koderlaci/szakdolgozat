@@ -59,9 +59,11 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-error class="error-message" *ngIf="responseError">{{
-      responseError
-    }}</mat-error>
+    <mat-error
+      class="error-message"
+      *ngIf="this.registrationResponse.message"
+      >{{ this.registrationResponse.message }}</mat-error
+    >
     <div class="buttons-container">
       <button mat-raised-button (click)="register()">Regisztráció</button>
       <button mat-stroked-button routerLink="/login">Bejelentkezés</button>

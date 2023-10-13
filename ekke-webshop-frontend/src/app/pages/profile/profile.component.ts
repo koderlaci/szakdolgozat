@@ -10,6 +10,6 @@ export class ProfileComponent {
   private userHandlerService = inject(UserHandlerService);
 
   logout() {
-    this.userHandlerService.setUserLoggedIn(false);
+    this.userHandlerService.setUserLoggedIn(null);
   }
 }

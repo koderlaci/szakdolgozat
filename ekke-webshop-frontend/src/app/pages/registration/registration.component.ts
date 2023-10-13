@@ -18,7 +18,10 @@ export class RegistrationComponent {
   private router = inject(Router);
   protected errorMessageService = inject(ErrorMessageService);
 
-  protected responseError = null;
+  protected registrationResponse = {
+    userId: null,
+    message: '',
+  };
 
   form = new UntypedFormGroup({
     name: new UntypedFormControl(null, [
@@ -50,9 +53,12 @@ export class RegistrationComponent {
         .register(this.form.getRawValue())
         .subscribe((res) => {
           if (res.error) {
-            this.responseError = res.message;
+            this.registrationResponse.userId = res.userId;
+            this.registrationResponse.message = res.message;
           } else {
-            this.userHandlerService.setUserLoggedIn(true);
+            this.userHandlerService.setUserLoggedIn(
+              this.registrationResponse.userId
+            );
             this.router.navigateByUrl('/landing');
           }
         });
