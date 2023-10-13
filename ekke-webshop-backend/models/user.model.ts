@@ -24,10 +24,12 @@ export const User = sequelize.define(
     neptun: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     password: {
       type: DataTypes.STRING,
@@ -36,9 +38,16 @@ export const User = sequelize.define(
         this.setDataValue("password", sha1(value));
       },
     },
-    shipping_address: {
-      type: DataTypes.STRING,
-      allowNull: true,
+    cart: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
+    },
+    shippingAddress: {
+      field: "shipping_address",
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
     },
     permission: {
       type: DataTypes.INTEGER,
