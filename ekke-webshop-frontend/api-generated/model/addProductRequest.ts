@@ -12,7 +12,7 @@
 
 
 export interface AddProductRequest { 
-    variant_id: string;
+    variantId: string;
     name: string;
     type: string;
     style: string;

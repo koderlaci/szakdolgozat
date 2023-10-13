@@ -12,13 +12,13 @@
 
 
 export interface AddShippingAddressRequest { 
-    user_id?: number;
+    userId?: number;
     country: string;
-    zip_code: string;
+    zipCode: string;
     city: string;
-    street_name: string;
-    street_type: string;
-    house_number: string;
+    streetName: string;
+    streetType: string;
+    houseNumber: string;
     apartment?: string;
     floor?: string;
     door?: string;
