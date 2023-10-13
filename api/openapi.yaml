@@ -419,3 +419,70 @@ paths:
           required: true
           schema:
             type: string
+
+  /cart/get-all-carts:
+    get:
+      summary: Returns a list of all carts.
+      tags:
+        - cartApi
+      operationId: getAllCarts
+
+  /cart/add-cart:
+    post:
+      summary: Creates a cart.
+      tags:
+        - cartApi
+      operationId: addCart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: number
+                active:
+                  type: number
+              required:
+                - userId
+                - active
+
+  /cart/edit-cart/{id}:
+    post:
+      summary: Edits a cart by id.
+      tags:
+        - cartApi
+      operationId: editCart
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: number
+                active:
+                  type: number
+
+  /cart/delete-cart/{id}:
+    delete:
+      summary: Deletes a cart by id.
+      tags:
+        - cartApi
+      operationId: deleteCart
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
