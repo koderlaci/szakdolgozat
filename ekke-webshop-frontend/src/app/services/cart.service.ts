@@ -17,6 +17,7 @@ export class CartService {
   constructor() {
     effect(() => {
       const userId = this.userHandlerService.userLoggedIn();
+
       if (userId) {
         this.syncCart(userId);
       }
@@ -39,11 +40,13 @@ export class CartService {
     const userId = this.userHandlerService.userLoggedIn();
 
     if (userId) {
-      await this.cartApiService.addCartItem({
-        userId: userId,
-        productId: product.id,
-        date: Date.now().toString(),
-      });
+      this.cartApiService
+        .addCartItem({
+          userId: userId,
+          productId: product.id,
+          date: new Date().toString(),
+        })
+        .subscribe((result) => console.log(result));
     }
 
     this.itemAddedToCart.set(Date.now());
@@ -92,19 +95,13 @@ export class CartService {
       });
     });
 
-    // const cart = await firstValueFrom(
-    //   this.cartApiService.getAllCartProductsByUserId(userId)
-    // );
-    await firstValueFrom(this.cartApiService.getAllCartProductsByUserId(userId))
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const newCart = await firstValueFrom(
+      this.cartApiService.getAllCartProductsByUserId(userId)
+    );
+    const currentCart = this.cart();
 
-    // console.log(cart);
-
-    // this.cart.set(cart);
+    if (JSON.stringify(newCart) !== JSON.stringify(currentCart)) {
+      this.cart.set(newCart);
+    }
   }
 }
