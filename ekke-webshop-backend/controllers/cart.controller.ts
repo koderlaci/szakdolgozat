@@ -84,12 +84,12 @@ export default class CartController {
       });
   });
 
-  createCartForUser = async (userId) => {
+  createCartForUser = async (id) => {
     await Cart.create({
-      userId: userId,
+      userId: id,
       active: 1,
     })
-      .then(async (result) => {
+      .then((result) => {
         console.log(result);
       })
       .catch((error) => {
@@ -102,7 +102,7 @@ export default class CartController {
       id: id,
       active: 0,
     })
-      .then(async (result) => {
+      .then((result) => {
         console.log(result);
       })
       .catch((error) => {
