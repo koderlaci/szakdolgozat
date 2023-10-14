@@ -563,7 +563,7 @@ paths:
             type: integer
             format: int64
 
-  /cart/get-all-cart-product-by-user-id/{id}:
+  /cart/get-all-cart-product-by-user-id:
     get:
       summary: Returns a list of all products the user added to it's cart.
       tags:

@@ -14,7 +14,7 @@ router.post("/edit-cart-item/:id", cartItemController.editCartItem);
 router.delete("/delete-cart-item/:id", cartItemController.deleteCartItem);
 
 router.get(
-  "/get-all-cart-product-by-user-id/:id",
+  "/get-all-cart-product-by-user-id",
   cartItemController.getAllCartProductByUserId
 );
 

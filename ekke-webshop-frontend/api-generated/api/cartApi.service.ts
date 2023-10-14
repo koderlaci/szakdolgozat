@@ -590,7 +590,7 @@ export class CartApiService {
             }
         }
 
-        let localVarPath = `/cart/get-all-cart-product-by-user-id/`;
+        let localVarPath = `/cart/get-all-cart-product-by-user-id`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
