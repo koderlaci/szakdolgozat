@@ -28,14 +28,15 @@ export default class CartItemController {
 
     await CartItem.create({
       userId: req.body.userId,
-      cartId: req.body.cartId ? req.body.cartId : cart.getDataValue("cartId"),
+      cartId: req.body.cartId ? req.body.cartId : cart.getDataValue("id"),
       productId: req.body.productId,
       date: req.body.date,
     })
-      .then(async () => {
+      .then(() => {
         responseDto.created = true;
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
       })
       .finally(() => {
@@ -116,7 +117,7 @@ export default class CartItemController {
 
           let mappedProduct = {
             ...product.dataValues,
-            quantity: 1,
+            selectedQuantity: 1,
           };
 
           if (mappedProducts.includes(mappedProduct.id)) {
@@ -124,7 +125,7 @@ export default class CartItemController {
               mappedProducts.findIndex(
                 (product) => product.id === mappedProduct.id
               )
-            ].quantity++;
+            ].selectedQuantity++;
           } else {
             mappedProducts.push(mappedProduct);
           }
