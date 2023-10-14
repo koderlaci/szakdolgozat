@@ -14,8 +14,9 @@ export const Product = sequelize.define(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
     },
     variantId: {
       field: "variant_id",

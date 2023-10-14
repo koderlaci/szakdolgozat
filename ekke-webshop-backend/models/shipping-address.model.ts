@@ -13,8 +13,9 @@ export const ShippingAddress = sequelize.define(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
     },
     country: {
       type: DataTypes.STRING,

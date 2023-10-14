@@ -14,8 +14,9 @@ export const User = sequelize.define(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -41,7 +42,7 @@ export const User = sequelize.define(
     shippingAddress: {
       field: "shipping_address",
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       unique: true,
     },
     permission: {

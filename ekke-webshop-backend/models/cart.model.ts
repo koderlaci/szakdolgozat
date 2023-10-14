@@ -13,8 +13,9 @@ export const Cart = sequelize.define(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
     },
     userId: {
       field: "user_id",
