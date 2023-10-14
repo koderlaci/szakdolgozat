@@ -94,7 +94,7 @@ export default class CartItemController {
   getAllCartProductByUserId = asyncHandler(async (req, res) => {
     const activeCartId = await Cart.findOne({
       where: {
-        userId: req.params.userId,
+        userId: req.query.userId,
         active: 1,
       },
     });
