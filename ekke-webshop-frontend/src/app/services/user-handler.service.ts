@@ -1,5 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { AddUserRequest, LoginRequest, UserApiService } from 'api-generated';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +9,12 @@ export class UserHandlerService {
   private userService = inject(UserApiService);
 
   userLoggedIn = signal<number | null>(
-    Number(sessionStorage.getItem('userLoggedIn'))
+    sessionStorage.getItem('userLoggedIn')
+      ? Number(sessionStorage.getItem('userLoggedIn'))
+      : null
   );
+
+  userLoggedIn_ = new BehaviorSubject<boolean>(false);
 
   login(formData: LoginRequest) {
     return this.userService.login(formData);
@@ -26,7 +31,11 @@ export class UserHandlerService {
   setUserLoggedIn(value: number | null) {
     this.userLoggedIn.set(value);
     if (value) {
+      this.userLoggedIn_.next(true);
       sessionStorage.setItem('userLoggedIn', value.toString());
+    } else {
+      this.userLoggedIn_.next(false);
+      sessionStorage.removeItem('userLoggedIn');
     }
   }
 }

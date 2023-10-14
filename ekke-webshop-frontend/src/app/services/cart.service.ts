@@ -15,11 +15,14 @@ export class CartService {
   public itemAddedToCart = signal<number | null>(null);
 
   constructor() {
-    effect(() => {
-      const userId = this.userHandlerService.userLoggedIn();
-
-      if (userId) {
-        this.syncCart(userId);
+    this.userHandlerService.userLoggedIn_.subscribe((loggedIn) => {
+      if (loggedIn) {
+        const userId = this.userHandlerService.userLoggedIn();
+        if (userId) {
+          this.syncCart(userId);
+        }
+      } else {
+        this.clearCart();
       }
     });
   }
@@ -40,13 +43,13 @@ export class CartService {
     const userId = this.userHandlerService.userLoggedIn();
 
     if (userId) {
-      this.cartApiService
-        .addCartItem({
+      await firstValueFrom(
+        this.cartApiService.addCartItem({
           userId: userId,
           productId: product.id,
           date: new Date().toString(),
         })
-        .subscribe((result) => console.log(result));
+      );
     }
 
     this.itemAddedToCart.set(Date.now());
@@ -87,13 +90,15 @@ export class CartService {
   }
 
   async syncCart(userId: number) {
-    await this.cart().forEach(async (item) => {
-      await this.cartApiService.addCartItem({
-        userId: userId,
-        productId: item.id,
-        date: Date.now().toString(),
-      });
-    });
+    for (const item of this.cart()) {
+      await firstValueFrom(
+        this.cartApiService.addCartItem({
+          userId: userId,
+          productId: item.id,
+          date: Date.now().toString(),
+        })
+      );
+    }
 
     const newCart = await firstValueFrom(
       this.cartApiService.getAllCartProductsByUserId(userId)
