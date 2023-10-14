@@ -93,46 +93,54 @@ export default class CartItemController {
   });
 
   getAllCartProductByUserId = asyncHandler(async (req, res) => {
-    const activeCartId = await Cart.findOne({
+    const activeCart = await Cart.findOne({
       where: {
         userId: req.query.userId,
         active: 1,
       },
     });
 
-    if (activeCartId) {
+    if (activeCart) {
       await CartItem.findAll({
         where: {
-          cartId: activeCartId,
+          cartId: activeCart.getDataValue("id"),
         },
-      }).then((result) => {
-        let mappedProducts = [];
+      })
+        .then(async (result) => {
+          let mappedProducts = [];
 
-        result.forEach(async (cartItem) => {
-          const product = await Product.findOne({
-            where: {
-              id: cartItem.getDataValue("product_id"),
-            },
-          });
+          for (const cartItem of result) {
+            const product = await Product.findOne({
+              where: {
+                id: cartItem.getDataValue("productId"),
+              },
+            });
 
-          let mappedProduct = {
-            ...product.dataValues,
-            selectedQuantity: 1,
-          };
+            let mappedProduct = {
+              ...product.dataValues,
+              selectedQuantity: 1,
+            };
 
-          if (mappedProducts.includes(mappedProduct.id)) {
-            mappedProducts[
-              mappedProducts.findIndex(
-                (product) => product.id === mappedProduct.id
-              )
-            ].selectedQuantity++;
-          } else {
-            mappedProducts.push(mappedProduct);
+            const productAlreadyInMappedProducts = mappedProducts.find(
+              (product) => product.id === mappedProduct.id
+            );
+
+            if (productAlreadyInMappedProducts) {
+              mappedProducts[
+                mappedProducts.findIndex(
+                  (product) => product.id === mappedProduct.id
+                )
+              ].selectedQuantity++;
+            } else {
+              mappedProducts.push(mappedProduct);
+            }
           }
-        });
 
-        res.send(mappedProducts);
-      });
+          res.send(mappedProducts);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   });
 }
