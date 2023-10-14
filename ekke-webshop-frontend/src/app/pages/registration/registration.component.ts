@@ -52,10 +52,10 @@ export class RegistrationComponent {
       this.userHandlerService
         .register(this.form.getRawValue())
         .subscribe((res) => {
-          if (res.error) {
-            this.registrationResponse.userId = res.userId;
+          if (res.message) {
             this.registrationResponse.message = res.message;
           } else {
+            this.registrationResponse.userId = res.userId;
             this.userHandlerService.setUserLoggedIn(
               this.registrationResponse.userId
             );

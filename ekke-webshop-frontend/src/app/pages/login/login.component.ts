@@ -35,10 +35,10 @@ export class LoginComponent {
         .login(this.form.getRawValue())
         .subscribe((res) => {
           this.loginResponse = res;
-          this.userHandlerService.setUserLoggedIn(
-            Number(this.loginResponse.userId)
-          );
           if (this.loginResponse.userId) {
+            this.userHandlerService.setUserLoggedIn(
+              Number(this.loginResponse.userId)
+            );
             this.router.navigate(['/landing']);
           }
         });
