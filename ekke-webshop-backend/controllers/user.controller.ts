@@ -60,10 +60,11 @@ export default class UserController {
       .then(async (result) => {
         if (result) {
           responseDto.userId = result.getDataValue("id");
-          await cartController.createCartForUser(result.getDataValue("id"));
+          await cartController.createCartForUser(responseDto.userId);
         }
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
       })
       .finally(() => {
