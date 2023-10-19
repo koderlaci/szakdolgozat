@@ -36,6 +36,8 @@ export class ProductComponent {
     sizes: [],
   };
 
+  protected errorMessage = '';
+
   constructor() {
     this.route.paramMap.subscribe(async (params) => {
       const product = await firstValueFrom(
@@ -73,7 +75,13 @@ export class ProductComponent {
           product.size
         )
       );
-      this.cartService.addProductToCart(productToCart);
+
+      if (this.cartService.getCartProductsCount() >= 20) {
+        this.errorMessage = 'A kosárba maximum 20 db terméket helyezhetsz.';
+      } else {
+        this.errorMessage = 'A kosárba maximum 20 db terméket helyezhetsz.';
+        this.cartService.addProductToCart(productToCart);
+      }
     }
   }
 }
