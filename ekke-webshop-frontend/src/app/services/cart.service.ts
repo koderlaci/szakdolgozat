@@ -95,7 +95,7 @@ export class CartService {
         this.cartApiService.addCartItem({
           userId: userId,
           productId: item.id,
-          date: Date.now().toString(),
+          date: new Date().toString(),
         })
       );
     }
