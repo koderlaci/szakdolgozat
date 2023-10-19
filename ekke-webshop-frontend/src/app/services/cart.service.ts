@@ -15,7 +15,11 @@ export class CartService {
   public itemAddedToCart = signal<number | null>(null);
 
   constructor() {
+    this.setCart();
     this.userHandlerService.userLoggedIn_.subscribe((loggedIn) => {
+      if (loggedIn === null) {
+        return;
+      }
       if (loggedIn) {
         const userId = this.userHandlerService.userLoggedIn();
         if (userId) {
@@ -25,6 +29,21 @@ export class CartService {
         this.clearCart();
       }
     });
+  }
+
+  async setCart() {
+    const userId = this.userHandlerService.userLoggedIn();
+    if (userId) {
+      const dbCart = await firstValueFrom(
+        this.cartApiService.getAllCartProductsByUserId(userId)
+      );
+      this.cart.set(dbCart);
+    } else {
+      const sessionCart = sessionStorage.getItem('cart');
+      if (sessionCart) {
+        this.cart.set(JSON.parse(sessionCart));
+      }
+    }
   }
 
   async addProductToCart(product: EndProduct) {
@@ -39,9 +58,10 @@ export class CartService {
         selectedQuantity: 1,
       });
     }
+    this.cart.set(tempCart);
+    this.itemAddedToCart.set(Date.now());
 
     const userId = this.userHandlerService.userLoggedIn();
-
     if (userId) {
       await firstValueFrom(
         this.cartApiService.addCartItem({
@@ -50,10 +70,9 @@ export class CartService {
           date: new Date().toString(),
         })
       );
+    } else {
+      sessionStorage.setItem('cart', JSON.stringify(this.cart()));
     }
-
-    this.itemAddedToCart.set(Date.now());
-    this.cart.set(tempCart);
   }
 
   removeProductFromCart(product: EndProduct) {
@@ -91,22 +110,31 @@ export class CartService {
 
   async syncCart(userId: number) {
     for (const item of this.cart()) {
-      await firstValueFrom(
-        this.cartApiService.addCartItem({
-          userId: userId,
-          productId: item.id,
-          date: new Date().toString(),
-        })
-      );
+      if (item.selectedQuantity > 1) {
+        for (let i = 0; i < item.selectedQuantity; i++) {
+          await firstValueFrom(
+            this.cartApiService.addCartItem({
+              userId: userId,
+              productId: item.id,
+              date: new Date().toString(),
+            })
+          );
+        }
+      } else {
+        await firstValueFrom(
+          this.cartApiService.addCartItem({
+            userId: userId,
+            productId: item.id,
+            date: new Date().toString(),
+          })
+        );
+      }
     }
 
     const newCart = await firstValueFrom(
       this.cartApiService.getAllCartProductsByUserId(userId)
     );
-    const currentCart = this.cart();
 
-    if (JSON.stringify(newCart) !== JSON.stringify(currentCart)) {
-      this.cart.set(newCart);
-    }
+    this.cart.set(newCart);
   }
 }

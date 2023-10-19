@@ -14,7 +14,7 @@ export class UserHandlerService {
       : null
   );
 
-  userLoggedIn_ = new BehaviorSubject<boolean>(false);
+  userLoggedIn_ = new BehaviorSubject<boolean | null>(null);
 
   login(formData: LoginRequest) {
     return this.userService.login(formData);
