@@ -23,15 +23,15 @@
     </div>
 
     <mat-accordion class="accordion">
-      <mat-expansion-panel>
+      <mat-expansion-panel [formGroup]="form">
         <mat-expansion-panel-header>
           <mat-panel-title>Szállítás</mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-radio-group class="radio-group">
-          <mat-radio-button value="1"
+        <mat-radio-group class="radio-group" formControlName="deliveryMethod">
+          <mat-radio-button value="true"
             >Átvétel az egyetem B épületének portáján</mat-radio-button
           >
-          <mat-radio-button value="2">Házhozszállítás</mat-radio-button>
+          <mat-radio-button value="false">Házhozszállítás</mat-radio-button>
         </mat-radio-group>
       </mat-expansion-panel>
     </mat-accordion>
@@ -186,6 +186,11 @@
     >
       Fizetés
     </button>
+    <div
+      *ngIf="errorMessage"
+      class="error-message"
+      [innerHTML]="errorMessage"
+    ></div>
   </div>
 </section>
 <section class="secondary-container" *ngIf="succesfulPayment()">

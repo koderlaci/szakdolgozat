@@ -1,5 +1,8 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { firstValueFrom } from 'rxjs';
+import { AccountChooserDialog } from 'src/app/dialogs/account-chooser.dialog';
 import { CartService } from 'src/app/services/cart.service';
 import { ErrorMessageService } from 'src/app/services/error-messages.service';
 import { PaymentService } from 'src/app/services/payment.service';
@@ -15,6 +18,7 @@ export class CartComponent {
   protected paymentService = inject(PaymentService);
   protected userHandlerService = inject(UserHandlerService);
   protected errorMessageService = inject(ErrorMessageService);
+  protected dialog = inject(MatDialog);
 
   protected succesfulPayment = signal(false);
 
@@ -24,29 +28,39 @@ export class CartComponent {
     return this.productsPrice() + this.deliveryFee();
   });
 
+  protected errorMessage = '';
+
   protected form = new FormGroup({
-    country: new FormControl(null, [Validators.required]),
-    zipCode: new FormControl(null, [Validators.required]),
-    city: new FormControl(null, [Validators.required]),
-    streetName: new FormControl(null, [Validators.required]),
-    streetType: new FormControl(null, [Validators.required]),
-    houseNumber: new FormControl(null, [Validators.required]),
-    apartment: new FormControl(null),
-    floor: new FormControl(null),
-    door: new FormControl(null),
+    country: new FormControl<string | null>('null', [Validators.required]),
+    zipCode: new FormControl<string | null>('null', [Validators.required]),
+    city: new FormControl<string | null>('null', [Validators.required]),
+    streetName: new FormControl<string | null>('null', [Validators.required]),
+    streetType: new FormControl<string | null>('null', [Validators.required]),
+    houseNumber: new FormControl<string | null>('null', [Validators.required]),
+    apartment: new FormControl<string | null>('null'),
+    floor: new FormControl<string | null>('null'),
+    door: new FormControl<string | null>('null'),
+    deliveryMethod: new FormControl<boolean | null>(true, [
+      Validators.required,
+    ]),
   });
 
-  pay() {
-    this.paymentService
-      .purchase(this.totalPrice())
-      .then(() => {
-        console.log('sikeres fizetes');
-        this.cartService.clearCart();
-        this.succesfulPayment.set(true);
-      })
-      .catch((e) => {
-        console.log('valami hiba tortent: ' + e);
-      });
+  async pay() {
+    await this.paymentService.connect();
+    if (await this.openDialog(this.paymentService.accounts)) {
+      this.paymentService
+        .purchase(this.totalPrice())
+        .then(() => {
+          console.log('sikeres fizetes');
+          this.cartService.clearCart();
+          this.succesfulPayment.set(true);
+        })
+        .catch((e) => {
+          this.errorMessage =
+            'Nem találtunk MetaMask fiókot, kérjük telepítsd fel a bővítményt a következő oldalon: <a href="https://metamask.io/" target="_blank">metamask.io</a>';
+          console.log('Error happened: ' + e);
+        });
+    }
   }
 
   isPayButtonDisabled(): boolean {
@@ -65,5 +79,13 @@ export class CartComponent {
 
   removeProduct(productId: number) {
     this.cartService.removeProductFromCart(productId);
+  }
+
+  async openDialog(dialogData: any) {
+    const dialogRef = this.dialog.open(AccountChooserDialog, {
+      data: dialogData,
+    });
+
+    return await firstValueFrom(dialogRef.afterClosed());
   }
 }

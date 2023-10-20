@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import Web3 from 'web3';
 
 @Injectable({
@@ -7,11 +7,10 @@ import Web3 from 'web3';
 export class PaymentService {
   private ethereum: any;
   private tokenContractAddress = '0x94463fe3011de32F140cc684fBD0cAA8BB5a4C1a';
-  private paymentAddress = '0x619d3fbC6880F2fCEFD8715b27845513bcCB5076';
-  // todo delete
-  private buyerAddress = '0x47987278BEf8B52E0cf536B6FeFACaCF2162ebF4';
-  //
-  private accounts: string[] = [];
+  private mainAddress = '0x619d3fbC6880F2fCEFD8715b27845513bcCB5076';
+
+  public accounts: string[] = [];
+  public paymentAddress = signal<string>('');
 
   constructor() {
     const { ethereum } = <any>window;
@@ -34,12 +33,9 @@ export class PaymentService {
         method: 'eth_sendTransaction',
         params: [
           {
-            from: this.buyerAddress, // The user's active address.
-            to: this.tokenContractAddress, // Required except during contract publications.
-            data: this.getDataFieldValue(
-              this.paymentAddress,
-              String(price * 10)
-            ),
+            from: this.paymentAddress(),
+            to: this.tokenContractAddress,
+            data: this.getDataFieldValue(this.mainAddress, String(price * 10)),
           },
         ],
       })
