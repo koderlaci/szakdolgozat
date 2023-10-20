@@ -79,7 +79,7 @@ export class ProductComponent {
       if (this.cartService.getCartProductsCount() >= 20) {
         this.errorMessage = 'A kosárba maximum 20 db terméket helyezhetsz.';
       } else {
-        this.errorMessage = 'A kosárba maximum 20 db terméket helyezhetsz.';
+        this.errorMessage = '';
         this.cartService.addProductToCart(productToCart);
       }
     }
