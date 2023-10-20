@@ -41,6 +41,7 @@
   }
 
   .product {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -60,6 +61,15 @@
     }
   }
 
+  .bin {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+
   .product-details {
     display: flex;
     flex-direction: column;
@@ -73,6 +83,7 @@
 
   .product-title {
     font-size: 20px;
+    padding-right: 36px;
   }
 
   .product-image {

@@ -4,6 +4,11 @@
     <div class="products">
       <div class="product" *ngFor="let product of cartService.cart()">
         <img
+          class="bin"
+          src="../../../assets/icons/bin.svg"
+          (click)="removeProduct(product.id)"
+        />
+        <img
           class="product-image"
           src="../../../assets/products/{{ product.variantId }}.jpg"
         />

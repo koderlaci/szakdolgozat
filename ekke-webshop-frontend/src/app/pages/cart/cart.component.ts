@@ -62,4 +62,8 @@ export class CartComponent {
 
     return false;
   }
+
+  removeProduct(productId: number) {
+    this.cartService.removeProductFromCart(productId);
+  }
 }

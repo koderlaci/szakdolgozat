@@ -84,13 +84,34 @@ export class CartService {
     }
   }
 
-  removeProductFromCart(product: EndProduct) {
+  async removeProductFromCart(productId: number) {
     const tempCart = this.cart();
-    tempCart.splice(
-      tempCart.findIndex((prd) => prd.id === product.id),
-      1
+    const userId = this.userHandlerService.userLoggedIn();
+
+    if (userId) {
+      await firstValueFrom(
+        this.cartApiService.deleteCartItemByProductIdAndUserId(
+          productId,
+          userId
+        )
+      );
+    }
+
+    const productInTempCartIndex = tempCart.findIndex(
+      (prd) => prd.id === productId
     );
+
+    if (tempCart[productInTempCartIndex].selectedQuantity > 1) {
+      tempCart[productInTempCartIndex].selectedQuantity--;
+    } else {
+      tempCart.splice(productInTempCartIndex, 1);
+    }
+
     this.cart.set(tempCart);
+
+    if (!userId) {
+      sessionStorage.setItem('cart', JSON.stringify(this.cart()));
+    }
   }
 
   getCartProductsCount() {
