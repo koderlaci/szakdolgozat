@@ -92,6 +92,38 @@ export default class CartItemController {
       });
   });
 
+  deleteCartItemByProductIdAndUserId = asyncHandler(async (req, res) => {
+    let responseDto = {
+      error: false,
+      message: null,
+    };
+
+    const activeCart = await Cart.findOne({
+      where: {
+        userId: req.params.userId,
+        active: 1,
+      },
+    });
+
+    const cartItem = await CartItem.findOne({
+      order: [["id", "DESC"]],
+      where: {
+        cartId: activeCart.getDataValue("id"),
+        productId: req.params.productId,
+      },
+    });
+
+    cartItem
+      .destroy()
+      .catch(() => {
+        responseDto.error = true;
+        responseDto.message = "Hiba történt, kérjük próbáld újra.";
+      })
+      .finally(() => {
+        res.send(responseDto);
+      });
+  });
+
   getAllCartProductByUserId = asyncHandler(async (req, res) => {
     const activeCart = await Cart.findOne({
       where: {

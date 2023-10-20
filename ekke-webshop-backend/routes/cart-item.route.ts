@@ -13,6 +13,11 @@ router.post("/edit-cart-item/:id", cartItemController.editCartItem);
 
 router.delete("/delete-cart-item/:id", cartItemController.deleteCartItem);
 
+router.delete(
+  "/delete-cart-item-by-product-id-and-user-id/:productId/:userId",
+  cartItemController.deleteCartItemByProductIdAndUserId
+);
+
 router.get(
   "/get-all-cart-product-by-user-id",
   cartItemController.getAllCartProductByUserId

@@ -563,6 +563,26 @@ paths:
             type: integer
             format: int64
 
+  /cart/delete-cart-item-by-product-id-and-user-id/{productId}/{userId}:
+    delete:
+      summary: Deletes a cart item by product id and user id.
+      tags:
+        - cartApi
+      operationId: deleteCartItemByProductIdAndUserId
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+
   /cart/get-all-cart-product-by-user-id:
     get:
       summary: Returns a list of all products the user added to it's cart.
