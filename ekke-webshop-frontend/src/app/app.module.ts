@@ -12,6 +12,9 @@ register();
 // components
 import { HeaderComponent } from './components/header/header.component';
 
+// dialogs
+import { AccountChooserDialog } from './dialogs/account-chooser.dialog';
+
 // pages
 import { LandingComponent } from './pages/landing/landing.component';
 import { ProductsComponent } from './pages/products/products.component';
@@ -35,6 +38,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,7 @@ import { MatRadioModule } from '@angular/material/radio';
     ProductSliderComponent,
     ProductComponent,
     SandboxComponent,
+    AccountChooserDialog,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +71,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatMenuModule,
     MatInputModule,
     MatRadioModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
