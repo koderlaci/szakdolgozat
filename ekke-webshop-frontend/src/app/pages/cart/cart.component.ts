@@ -46,21 +46,28 @@ export class CartComponent {
   });
 
   async pay() {
-    await this.paymentService.connect();
-    if (await this.openDialog(this.paymentService.accounts)) {
-      this.paymentService
-        .purchase(this.totalPrice())
-        .then(() => {
-          console.log('sikeres fizetes');
-          this.cartService.clearCart();
-          this.succesfulPayment.set(true);
-        })
-        .catch((e) => {
-          this.errorMessage =
-            'Nem találtunk MetaMask fiókot, kérjük telepítsd fel a bővítményt a következő oldalon: <a href="https://metamask.io/" target="_blank">metamask.io</a>';
-          console.log('Error happened: ' + e);
-        });
-    }
+    await this.paymentService
+      .connect()
+      .then(async () => {
+        if (await this.openDialog(this.paymentService.accounts)) {
+          this.paymentService
+            .purchase(this.totalPrice())
+            .then(() => {
+              console.log('sikeres fizetes');
+              this.cartService.clearCart();
+              this.succesfulPayment.set(true);
+            })
+            .catch((e) => {
+              this.errorMessage = 'Sikertelen fizetés, kérjük próbáld újra.';
+              console.log('Error happened: ' + e);
+            });
+        }
+      })
+      .catch((e) => {
+        this.errorMessage =
+          'Nem találtunk MetaMask fiókot, kérjük telepítsd fel a bővítményt a következő oldalon: <a href="https://metamask.io/" target="_blank">metamask.io</a>';
+        console.log('Error happened: ' + e);
+      });
   }
 
   isPayButtonDisabled(): boolean {
