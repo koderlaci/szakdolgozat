@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
 import { ErrorMessageService } from 'src/app/services/error-messages.service';
@@ -18,9 +18,11 @@ export class CartComponent {
 
   protected succesfulPayment = signal(false);
 
-  protected productsPrice = this.cartService.getCartProductsPrice();
-  protected deliveryFee = 100;
-  protected totalPrice: number;
+  protected productsPrice = this.cartService.cartProductsPrice;
+  protected deliveryFee = signal<number>(100);
+  protected totalPrice = computed(() => {
+    return this.productsPrice() + this.deliveryFee();
+  });
 
   protected form = new FormGroup({
     country: new FormControl(null, [Validators.required]),
@@ -34,14 +36,9 @@ export class CartComponent {
     door: new FormControl(null),
   });
 
-  constructor() {
-    this.succesfulPayment.set(false);
-    this.totalPrice = this.productsPrice + this.deliveryFee;
-  }
-
   pay() {
     this.paymentService
-      .purchase(this.totalPrice)
+      .purchase(this.totalPrice())
       .then(() => {
         console.log('sikeres fizetes');
         this.cartService.clearCart();
@@ -53,7 +50,7 @@ export class CartComponent {
   }
 
   isPayButtonDisabled(): boolean {
-    if (this.productsPrice === 0) {
+    if (this.productsPrice() === 0) {
       return true;
     }
     if (!this.userHandlerService.userLoggedIn()) {

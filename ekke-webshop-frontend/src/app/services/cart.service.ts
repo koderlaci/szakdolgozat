@@ -1,4 +1,4 @@
-import { Injectable, effect, inject, signal } from '@angular/core';
+import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { CartProduct, EndProduct } from '../types/types';
 import { UserHandlerService } from './user-handler.service';
 import { CartApiService } from 'api-generated';
@@ -12,6 +12,15 @@ export class CartService {
   private cartApiService = inject(CartApiService);
 
   public cart = signal<CartProduct[]>([]);
+  public cartProductsPrice = computed(() => {
+    let sum = 0;
+
+    this.cart().forEach((product) => {
+      sum = sum + product.price * product.selectedQuantity;
+    });
+
+    return sum;
+  });
   public itemAddedToCart = signal<number | null>(null);
 
   constructor() {
@@ -82,16 +91,6 @@ export class CartService {
       1
     );
     this.cart.set(tempCart);
-  }
-
-  getCartProductsPrice() {
-    let sum = 0;
-
-    this.cart().forEach((product) => {
-      sum = sum + product.price * product.selectedQuantity;
-    });
-
-    return sum;
   }
 
   getCartProductsCount() {
