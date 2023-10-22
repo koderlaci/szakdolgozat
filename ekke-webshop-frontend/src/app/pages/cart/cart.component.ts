@@ -21,6 +21,7 @@ export class CartComponent {
   protected dialog = inject(MatDialog);
 
   protected succesfulPayment = signal(false);
+  protected pendingPayment = signal(false);
 
   protected productsPrice = this.cartService.cartProductsPrice;
   protected deliveryFee = signal<number>(100);
@@ -45,28 +46,44 @@ export class CartComponent {
     ]),
   });
 
+  constructor() {
+    this.paymentService.transactionMined.subscribe((receipt) => {
+      if (receipt && Number(receipt.status) === 1) {
+        this.cartService.clearCart();
+        this.succesfulPayment.set(true);
+      } else if (receipt) {
+        this.errorMessage = 'Sikertelen fizetés, kérjük próbáld újra.';
+      }
+      this.pendingPayment.set(false);
+    });
+  }
+
   async pay() {
+    this.pendingPayment.set(true);
     await this.paymentService
       .connect()
       .then(async () => {
         if (await this.openDialog(this.paymentService.accounts)) {
           this.paymentService
             .purchase(this.totalPrice())
-            .then(() => {
-              console.log('sikeres fizetes');
-              this.cartService.clearCart();
-              this.succesfulPayment.set(true);
+            .then((isTransactionValid) => {
+              if (!isTransactionValid) {
+                this.errorMessage = 'Sikertelen fizetés, kérjük próbáld újra.';
+                this.pendingPayment.set(false);
+              }
             })
-            .catch((e) => {
+            .catch(() => {
               this.errorMessage = 'Sikertelen fizetés, kérjük próbáld újra.';
-              console.log('Error happened: ' + e);
+              this.pendingPayment.set(false);
             });
+        } else {
+          this.pendingPayment.set(false);
         }
       })
-      .catch((e) => {
+      .catch(() => {
         this.errorMessage =
           'Nem találtunk MetaMask fiókot, kérjük telepítsd fel a bővítményt a következő oldalon: <a href="https://metamask.io/" target="_blank">metamask.io</a>';
-        console.log('Error happened: ' + e);
+        this.pendingPayment.set(false);
       });
   }
 
@@ -78,6 +95,9 @@ export class CartComponent {
       return true;
     }
     if (this.form.invalid) {
+      return true;
+    }
+    if (this.pendingPayment()) {
       return true;
     }
 
