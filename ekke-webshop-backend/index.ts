@@ -10,7 +10,7 @@ import product from "./routes/product.route.js";
 import cart from "./routes/cart.route.js";
 import cart_item from "./routes/cart-item.route.js";
 
-const port = 4201;
+const port = process.env.PORT || 4201;
 const corsOptions = {
   origin: "*",
   credentials: true,
