@@ -109,32 +109,19 @@ paths:
                 - email
                 - password
 
-  /user/get-shipping-address/{id}:
+  /user-address/get-all-user-addresses:
     get:
-      summary: Returns a shipping address by user id.
+      summary: Returns all user addresses.
       tags:
-        - userApi
-      operationId: getShippingAddress
-      parameters:
-        - name: id
-          in: query
-          required: true
-          schema:
-            type: string
+        - addressApi
+      operationId: getAllUserAddresses
 
-  /shipping-address/get-all-shipping-addresses:
-    get:
-      summary: Returns all shipping addresses.
-      tags:
-        - shippingAddressApi
-      operationId: getAllShippingAddresses
-
-  /shipping-address/add-shipping-address:
+  /user-address/add-user-address:
     post:
-      summary: Creates a shipping address associated with a user.
+      summary: Creates a user address associated with a user.
       tags:
-        - shippingAddressApi
-      operationId: addShippingAddress
+        - addressApi
+      operationId: addUserAddress
       requestBody:
         required: true
         content:
@@ -163,6 +150,7 @@ paths:
                 door:
                   type: string
               required:
+                - userId
                 - country
                 - zipCode
                 - city
@@ -170,12 +158,12 @@ paths:
                 - streetType
                 - houseNumber
 
-  /shipping-address/edit-shipping-address/{id}:
+  /user-address/edit-user-address/{id}:
     post:
-      summary: Edits a shipping address by id.
+      summary: Edits a user address by id.
       tags:
-        - shippingAddressApi
-      operationId: editShippingAddress
+        - addressApi
+      operationId: editUserAddress
       parameters:
         - name: id
           in: path
@@ -190,6 +178,8 @@ paths:
             schema:
               type: object
               properties:
+                userId:
+                  type: number
                 country:
                   type: string
                 zipCode:
@@ -209,12 +199,12 @@ paths:
                 door:
                   type: string
 
-  /shipping-address/delete-shipping-address/{id}:
+  /user-address/delete-user-address/{id}:
     delete:
-      summary: Deletes a shipping address by id.
+      summary: Deletes a user address by id.
       tags:
-        - shippingAddressApi
-      operationId: deleteShippingAddress
+        - addressApi
+      operationId: deleteUserAddress
       parameters:
         - name: id
           in: path
