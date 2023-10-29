@@ -17,7 +17,6 @@ export default class ProductController {
       !req.body.variantId ||
       !req.body.name ||
       !req.body.type ||
-      !req.body.style ||
       !req.body.color ||
       !req.body.size ||
       !req.body.price ||
@@ -31,7 +30,6 @@ export default class ProductController {
         variantId: req.body.variantId,
         name: req.body.name,
         type: req.body.type,
-        style: req.body.style,
         color: req.body.color,
         size: req.body.size,
         price: req.body.price,
@@ -62,7 +60,6 @@ export default class ProductController {
         variantId: req.body.variantId,
         name: req.body.name,
         type: req.body.type,
-        style: req.body.style,
         color: req.body.color,
         size: req.body.size,
         price: req.body.price,
