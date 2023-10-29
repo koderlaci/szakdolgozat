@@ -10,6 +10,7 @@ import order_address from "./routes/order-address.route.js";
 import product from "./routes/product.route.js";
 import cart from "./routes/cart.route.js";
 import cart_item from "./routes/cart-item.route.js";
+import order from "./routes/user-order.route.js";
 
 const port = process.env.PORT || 4201;
 const corsOptions = {
@@ -29,6 +30,7 @@ app.use("/user-address", user_address);
 app.use("/order-address", order_address);
 app.use("/product", product);
 app.use("/cart", cart, cart_item);
+app.use("/order", order);
 
 const sequelize = new Sequelize("ekke-webshop", "root", "", {
   host: "localhost",
