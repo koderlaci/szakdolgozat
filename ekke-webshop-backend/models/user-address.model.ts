@@ -9,7 +9,7 @@ const sequelize = new Sequelize("ekke-webshop", "root", "", {
 });
 
 export const UserAddress = sequelize.define(
-  "ddress",
+  "user_address",
   {
     id: {
       type: DataTypes.INTEGER,
