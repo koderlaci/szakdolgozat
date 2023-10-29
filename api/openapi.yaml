@@ -259,6 +259,95 @@ paths:
                 - streetType
                 - houseNumber
 
+    /order/get-all-orders:
+    get:
+      summary: Returns all orders.
+      tags:
+        - orderApi
+      operationId: getAllOrders
+
+  /order/add-order:
+    post:
+      summary: Creates an order.
+      tags:
+        - orderApi
+      operationId: addOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: number
+                addressId:
+                  type: number
+                cartId:
+                  type: number
+                price:
+                  type: number
+                deliveryMode:
+                  type: string
+                date:
+                  type: string
+              required:
+                - userId
+                - addressId
+                - cartId
+                - price
+                - deliveryMode
+                - date
+
+  /order/edit-order/{id}:
+    post:
+      summary: Edits an order by id.
+      tags:
+        - orderApi
+      operationId: editOrder
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                userId:
+                  type: number
+                addressId:
+                  type: number
+                cartId:
+                  type: number
+                price:
+                  type: number
+                deliveryMode:
+                  type: string
+                date:
+                  type: string
+
+  /order/delete-order/{id}:
+    delete:
+      summary: Deletes an order by id.
+      tags:
+        - orderApi
+      operationId: deleteOrder
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+
   /product/get-all-products:
     get:
       summary: Returns a list of all products.
