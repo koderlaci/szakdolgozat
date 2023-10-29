@@ -1,10 +1,13 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AddOrderAddressRequest } from 'api-generated';
 import { firstValueFrom } from 'rxjs';
 import { AccountChooserDialog } from 'src/app/dialogs/account-chooser.dialog';
+import { AddressService } from 'src/app/services/address.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ErrorMessageService } from 'src/app/services/error-messages.service';
+import { OrderService } from 'src/app/services/order.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 
@@ -14,6 +17,9 @@ import { UserHandlerService } from 'src/app/services/user-handler.service';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent {
+  private addressService = inject(AddressService);
+  private orderService = inject(OrderService);
+
   protected cartService = inject(CartService);
   protected paymentService = inject(PaymentService);
   protected userHandlerService = inject(UserHandlerService);
@@ -31,26 +37,54 @@ export class CartComponent {
 
   protected errorMessage = '';
 
-  protected form = new FormGroup({
-    country: new FormControl<string | null>('null', [Validators.required]),
-    zipCode: new FormControl<string | null>('null', [Validators.required]),
-    city: new FormControl<string | null>('null', [Validators.required]),
-    streetName: new FormControl<string | null>('null', [Validators.required]),
-    streetType: new FormControl<string | null>('null', [Validators.required]),
-    houseNumber: new FormControl<string | null>('null', [Validators.required]),
-    apartment: new FormControl<string | null>('null'),
-    floor: new FormControl<string | null>('null'),
-    door: new FormControl<string | null>('null'),
-    deliveryMethod: new FormControl<boolean | null>(true, [
-      Validators.required,
-    ]),
+  protected addressForm = new FormGroup({
+    country: new FormControl<string>('', [Validators.required]),
+    zipCode: new FormControl<string>('', [Validators.required]),
+    city: new FormControl<string>('', [Validators.required]),
+    streetName: new FormControl<string>('', [Validators.required]),
+    streetType: new FormControl<string>('', [Validators.required]),
+    houseNumber: new FormControl<string>('', [Validators.required]),
+    apartment: new FormControl<string>(''),
+    floor: new FormControl<string>(''),
+    door: new FormControl<string>(''),
   });
+  protected deliveryMode = '';
 
   constructor() {
-    this.paymentService.transactionMined.subscribe((receipt) => {
+    this.paymentService.transactionMined.subscribe(async (receipt) => {
       if (receipt && Number(receipt.status) === 1) {
-        this.cartService.clearCart();
-        this.succesfulPayment.set(true);
+        const orderAddress = await firstValueFrom(
+          this.addressService.createOrderAddress(
+            this.addressForm.getRawValue() as AddOrderAddressRequest
+          )
+        );
+
+        const userId = this.userHandlerService.userLoggedIn();
+
+        if (userId) {
+          const activeCart = await firstValueFrom(
+            this.cartService.getActiveCartByUserId(userId)
+          );
+
+          firstValueFrom(
+            this.orderService.createOrder({
+              userId: userId,
+              addressId: orderAddress.id,
+              cartId: activeCart.id,
+              price: this.totalPrice(),
+              deliveryMode: this.deliveryMode,
+              date: new Date().toString(),
+            })
+          )
+            .then(() => {
+              this.cartService.clearCart();
+              this.succesfulPayment.set(true);
+            })
+            .catch(() => {
+              this.errorMessage =
+                'Sikertelen fizetés, kérjük vedd fel a kapcsolatot az ügyfélszolgálattal.';
+            });
+        }
       } else if (receipt) {
         this.errorMessage = 'Sikertelen fizetés, kérjük próbáld újra.';
       }
@@ -94,7 +128,7 @@ export class CartComponent {
     if (!this.userHandlerService.userLoggedIn()) {
       return true;
     }
-    if (this.form.invalid) {
+    if (this.addressForm.invalid || this.deliveryMode === '') {
       return true;
     }
     if (this.pendingPayment()) {

@@ -157,4 +157,8 @@ export class CartService {
 
     this.cart.set(newCart);
   }
+
+  getActiveCartByUserId(userId: number) {
+    return this.cartApiService.getActiveCartByUserId(userId);
+  }
 }

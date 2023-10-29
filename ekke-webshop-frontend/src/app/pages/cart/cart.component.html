@@ -23,21 +23,21 @@
     </div>
 
     <mat-accordion class="accordion">
-      <mat-expansion-panel [formGroup]="form">
+      <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>Szállítás</mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-radio-group class="radio-group" formControlName="deliveryMethod">
-          <mat-radio-button value="true"
+        <mat-radio-group class="radio-group" [(ngModel)]="deliveryMode">
+          <mat-radio-button value="personal"
             >Átvétel az egyetem B épületének portáján</mat-radio-button
           >
-          <mat-radio-button value="false">Házhozszállítás</mat-radio-button>
+          <mat-radio-button value="delivery">Házhozszállítás</mat-radio-button>
         </mat-radio-group>
       </mat-expansion-panel>
     </mat-accordion>
 
     <mat-accordion class="accordion">
-      <mat-expansion-panel [formGroup]="form">
+      <mat-expansion-panel [formGroup]="addressForm">
         <mat-expansion-panel-header>
           <mat-panel-title>Szállítási cím</mat-panel-title>
         </mat-expansion-panel-header>
@@ -49,7 +49,7 @@
             <mat-error>
               {{
                 errorMessageService.getErrorMessage(
-                  this.form.controls.country.errors
+                  this.addressForm.controls.country.errors
                 )
               }}
             </mat-error>
@@ -63,7 +63,7 @@
             <mat-error>
               {{
                 errorMessageService.getErrorMessage(
-                  this.form.controls.zipCode.errors
+                  this.addressForm.controls.zipCode.errors
                 )
               }}
             </mat-error>
@@ -75,7 +75,7 @@
             <mat-error>
               {{
                 errorMessageService.getErrorMessage(
-                  this.form.controls.city.errors
+                  this.addressForm.controls.city.errors
                 )
               }}
             </mat-error>
@@ -89,7 +89,7 @@
             <mat-error>
               {{
                 errorMessageService.getErrorMessage(
-                  this.form.controls.streetName.errors
+                  this.addressForm.controls.streetName.errors
                 )
               }}
             </mat-error>
@@ -101,7 +101,7 @@
             <mat-error>
               {{
                 errorMessageService.getErrorMessage(
-                  this.form.controls.streetType.errors
+                  this.addressForm.controls.streetType.errors
                 )
               }}
             </mat-error>
@@ -113,7 +113,7 @@
             <mat-error>
               {{
                 errorMessageService.getErrorMessage(
-                  this.form.controls.houseNumber.errors
+                  this.addressForm.controls.houseNumber.errors
                 )
               }}
             </mat-error>
@@ -127,7 +127,7 @@
             <mat-error>
               {{
                 errorMessageService.getErrorMessage(
-                  this.form.controls.apartment.errors
+                  this.addressForm.controls.apartment.errors
                 )
               }}
             </mat-error>
@@ -139,7 +139,7 @@
             <mat-error>
               {{
                 errorMessageService.getErrorMessage(
-                  this.form.controls.floor.errors
+                  this.addressForm.controls.floor.errors
                 )
               }}
             </mat-error>
@@ -151,7 +151,7 @@
             <mat-error>
               {{
                 errorMessageService.getErrorMessage(
-                  this.form.controls.door.errors
+                  this.addressForm.controls.door.errors
                 )
               }}
             </mat-error>
