@@ -547,6 +547,19 @@ paths:
         - cartApi
       operationId: getAllCarts
 
+  /cart/get-active-cart-by-user-id:
+    get:
+      summary: Returns the user's active cart.
+      tags:
+        - cartApi
+      operationId: getActiveCartByUserId
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: number
+
   /cart/add-cart:
     post:
       summary: Creates a cart.

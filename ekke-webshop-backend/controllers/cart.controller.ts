@@ -7,6 +7,21 @@ export default class CartController {
     res.send(data);
   });
 
+  getActiveCartByUserId = asyncHandler(async (req, res) => {
+    Cart.findOne({
+      where: {
+        userId: req.query.userId,
+        active: 1,
+      },
+    })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        res.send(res);
+      });
+  });
+
   createCart = asyncHandler(async (req, res) => {
     let responseDto = {
       error: false,
