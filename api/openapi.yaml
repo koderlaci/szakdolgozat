@@ -374,8 +374,6 @@ paths:
                   type: string
                 type:
                   type: string
-                style:
-                  type: string
                 color:
                   type: string
                 size:
@@ -388,7 +386,6 @@ paths:
                 - variantId
                 - name
                 - type
-                - style
                 - color
                 - size
                 - price
@@ -419,8 +416,6 @@ paths:
                 name:
                   type: string
                 type:
-                  type: string
-                style:
                   type: string
                 color:
                   type: string
