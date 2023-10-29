@@ -15,7 +15,6 @@ export interface EditProductRequest {
     variantId?: string;
     name?: string;
     type?: string;
-    style?: string;
     color?: string;
     size?: string;
     price?: number;
