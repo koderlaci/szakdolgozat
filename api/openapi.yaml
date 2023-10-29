@@ -213,6 +213,52 @@ paths:
             type: integer
             format: int64
 
+  /order-address/get-all-order-addresses:
+    get:
+      summary: Returns all order addresses.
+      tags:
+        - addressApi
+      operationId: getAllOrderAddresses
+
+  /order-address/add-order-address:
+    post:
+      summary: Creates an order address.
+      tags:
+        - addressApi
+      operationId: addOrderAddress
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country:
+                  type: string
+                zipCode:
+                  type: string
+                city:
+                  type: string
+                streetName:
+                  type: string
+                streetType:
+                  type: string
+                houseNumber:
+                  type: string
+                apartment:
+                  type: string
+                floor:
+                  type: string
+                door:
+                  type: string
+              required:
+                - country
+                - zipCode
+                - city
+                - streetName
+                - streetType
+                - houseNumber
+
   /product/get-all-products:
     get:
       summary: Returns a list of all products.
