@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 
 //routes
 import user from "./routes/user.route.js";
-import shipping_address from "./routes/shipping-address.route.js";
+import user_address from "./routes/user-address.route.js";
 import product from "./routes/product.route.js";
 import cart from "./routes/cart.route.js";
 import cart_item from "./routes/cart-item.route.js";
@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //routes
 app.use("/user", user);
-app.use("/shipping-address", shipping_address);
+app.use("/user-address", user_address);
 app.use("/product", product);
 app.use("/cart", cart, cart_item);
 

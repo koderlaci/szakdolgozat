@@ -1,20 +1,20 @@
-import { ShippingAddress } from "../models/shipping-address.model.js";
-import { User } from "../models/user.model.js";
+import { UserAddress } from "../models/user-address.model.js";
 import asyncHandler from "express-async-handler";
 
-export default class ShippingAddressController {
-  getAllShippingAddresses = asyncHandler(async (req, res) => {
-    const data = await ShippingAddress.findAll();
+export default class AddressController {
+  getAllUserAddresses = asyncHandler(async (req, res) => {
+    const data = await UserAddress.findAll();
     res.send(data);
   });
 
-  createShippingAddress = asyncHandler(async (req, res) => {
+  createUserAddress = asyncHandler(async (req, res) => {
     let responseDto = {
       error: false,
       message: null,
     };
 
     if (
+      !req.body.userId ||
       !req.body.country ||
       !req.body.zipCode ||
       !req.body.city ||
@@ -26,7 +26,8 @@ export default class ShippingAddressController {
       responseDto.message = "Kérjük minden adatot adj meg.";
       res.send(responseDto);
     } else {
-      await ShippingAddress.create({
+      await UserAddress.create({
+        userId: req.body.userId,
         country: req.body.country,
         zipCode: req.body.zipCode,
         city: req.body.city,
@@ -37,15 +38,6 @@ export default class ShippingAddressController {
         floor: req.body.floor,
         door: req.body.door,
       })
-        .then(async (result) => {
-          const user = await User.findByPk(req.body.userId);
-          if (user) {
-            await user.update({ shipping_address: result.getDataValue("id") });
-          } else {
-            responseDto.error = true;
-            responseDto.message = "A felhasználó nem található.";
-          }
-        })
         .catch((error) => {
           console.log(error);
           responseDto.error = true;
@@ -57,14 +49,15 @@ export default class ShippingAddressController {
     }
   });
 
-  editShippingAddress = asyncHandler(async (req, res) => {
+  editUserAddress = asyncHandler(async (req, res) => {
     let responseDto = {
       error: false,
       message: null,
     };
 
-    await ShippingAddress.update(
+    await UserAddress.update(
       {
+        userId: req.body.userId,
         country: req.body.country,
         zipCode: req.body.zipCode,
         city: req.body.city,
@@ -94,13 +87,13 @@ export default class ShippingAddressController {
       });
   });
 
-  deleteShippingAddress = asyncHandler(async (req, res) => {
+  deleteUserAddress = asyncHandler(async (req, res) => {
     let responseDto = {
       error: false,
       message: null,
     };
 
-    await ShippingAddress.destroy({
+    await UserAddress.destroy({
       where: {
         id: req.params.id,
       },

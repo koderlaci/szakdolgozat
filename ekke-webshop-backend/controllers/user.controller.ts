@@ -160,13 +160,4 @@ export default class UserController {
         });
     }
   });
-
-  // getShippingAddressByUserId = asyncHandler(async (req, res) => {
-  //   const data = await User.findAll({
-  //     where: {
-
-  //     }
-  //   });
-  //   res.send(data);
-  // });
 }

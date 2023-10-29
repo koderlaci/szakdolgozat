@@ -39,12 +39,6 @@ export const User = sequelize.define(
         this.setDataValue("password", sha1(value));
       },
     },
-    shippingAddress: {
-      field: "shipping_address",
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      unique: true,
-    },
     permission: {
       type: DataTypes.INTEGER,
       allowNull: false,

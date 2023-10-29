@@ -8,14 +8,19 @@ const sequelize = new Sequelize("ekke-webshop", "root", "", {
   },
 });
 
-export const ShippingAddress = sequelize.define(
-  "shipping_address",
+export const UserAddress = sequelize.define(
+  "ddress",
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+    },
+    userId: {
+      field: "user_id",
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     country: {
       type: DataTypes.STRING,

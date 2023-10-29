@@ -15,9 +15,4 @@ router.delete("/delete-user/:id", userController.deleteUser);
 
 router.post("/login", userController.login);
 
-// router.get(
-//   "/get-shipping-address-by-user-id/:id",
-//   userController.getShippingAddressByUserId
-// );
-
 export default router;
