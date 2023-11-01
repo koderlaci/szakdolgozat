@@ -61,3 +61,17 @@ input::placeholder {
   .mdc-text-field__input {
   color: red !important;
 }
+
+.mdc-text-field--filled.mdc-text-field--disabled {
+  background-color: #183389 !important;
+}
+
+.mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.mdc-text-field--filled.mdc-text-field--disabled .mdc-floating-label,
+.mdc-text-field--filled.mdc-text-field--disabled
+  .mdc-floating-label--float-above {
+  color: rgba(255, 255, 255, 0.5) !important;
+}

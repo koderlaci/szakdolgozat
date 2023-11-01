@@ -1,15 +1,24 @@
 .mat-mdc-raised-button {
-    background: linear-gradient(94deg, #0032D2 -13.21%, #329DFF 112.93%) !important;
-    --mdc-protected-button-label-text-color: white !important;
-    max-width: 250px;
-    border-radius: 32px !important;
-    height: 42px !important;
+  background: linear-gradient(
+    94deg,
+    #0032d2 -13.21%,
+    #329dff 112.93%
+  ) !important;
+  --mdc-protected-button-label-text-color: white !important;
+  max-width: 250px;
+  border-radius: 32px !important;
+  height: 42px !important;
 }
 
 .mat-mdc-outlined-button {
-    --mdc-outlined-button-label-text-color: white !important;
-    max-width: 250px;
-    border: 2px solid #329DFF !important;
-    border-radius: 32px !important;
-    height: 42px !important;
+  --mdc-outlined-button-label-text-color: white !important;
+  max-width: 250px;
+  border: 2px solid #329dff !important;
+  border-radius: 32px !important;
+  height: 42px !important;
+}
+
+.mat-mdc-raised-button:disabled {
+  background: #00278b !important;
+  color: rgba(255, 255, 255, 0.5) !important;
 }
