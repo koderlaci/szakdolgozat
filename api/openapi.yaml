@@ -620,6 +620,24 @@ paths:
             type: integer
             format: int64
 
+  /cart/disable-current-create-new-cart:
+    post:
+      summary: Sets the user's current cart inactive, then creates a new active one.
+      tags:
+        - cartApi
+      operationId: disableCurrentCreateNewCart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: number
+              required:
+                - userId
+
   /cart/get-all-cart-items:
     get:
       summary: Returns a list of all cart items.

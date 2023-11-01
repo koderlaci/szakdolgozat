@@ -13,6 +13,11 @@ router.post("/add-cart", cartController.createCart);
 
 router.post("/edit-cart/:id", cartController.editCart);
 
+router.post(
+  "/disable-current-create-new-cart",
+  cartController.DisableCurrentCreateNewCart
+);
+
 router.delete("/delete-cart/:id", cartController.deleteCart);
 
 export default router;

@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import { Cart } from "../models/cart.model.js";
 import asyncHandler from "express-async-handler";
 
@@ -22,6 +23,35 @@ export default class CartController {
       });
   });
 
+  DisableCurrentCreateNewCart = asyncHandler(async (req, res) => {
+    await Cart.update(
+      {
+        active: 0,
+      },
+      {
+        where: {
+          userId: req.body.userId,
+          active: 1,
+        },
+      }
+    )
+      .then(async () => {
+        await Cart.create({
+          userId: req.body.userId,
+          active: 1,
+        })
+          .then((result) => {
+            res.send(result);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+
   createCart = asyncHandler(async (req, res) => {
     let responseDto = {
       error: false,
@@ -32,7 +62,7 @@ export default class CartController {
       userId: req.body.userId,
       active: req.body.active,
     })
-      .then(async (result) => {
+      .then((result) => {
         console.log(result);
       })
       .catch((error) => {
@@ -103,19 +133,6 @@ export default class CartController {
     await Cart.create({
       userId: id,
       active: 1,
-    })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  disableCart = async (id) => {
-    await Cart.create({
-      id: id,
-      active: 0,
     })
       .then((result) => {
         console.log(result);
