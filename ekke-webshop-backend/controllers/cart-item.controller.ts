@@ -23,6 +23,7 @@ export default class CartItemController {
     const cart = await Cart.findOne({
       where: {
         userId: req.body.userId,
+        active: 1,
       },
     });
 
