@@ -12,7 +12,6 @@
 
 
 export interface EditUserRequest { 
-    username?: string;
     name?: string;
     neptun?: string;
     email?: string;

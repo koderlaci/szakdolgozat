@@ -12,7 +12,6 @@
 
 
 export interface AddUserRequest { 
-    username: string;
     name: string;
     neptun: string;
     email: string;

@@ -26,8 +26,6 @@ paths:
             schema:
               type: object
               properties:
-                username:
-                  type: string
                 name:
                   type: string
                 neptun:
@@ -37,7 +35,6 @@ paths:
                 password:
                   type: string
               required:
-                - username
                 - name
                 - neptun
                 - email
@@ -63,8 +60,6 @@ paths:
             schema:
               type: object
               properties:
-                username:
-                  type: string
                 name:
                   type: string
                 neptun:
