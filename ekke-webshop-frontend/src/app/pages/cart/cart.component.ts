@@ -33,7 +33,7 @@ export class CartComponent {
   protected pendingPayment = signal(false);
 
   protected productsPrice = this.cartService.cartProductsPrice;
-  protected deliveryFee = signal<number>(100);
+  protected deliveryFee = signal<number>(0);
   protected totalPrice = computed(() => {
     return this.productsPrice() + this.deliveryFee();
   });
@@ -162,5 +162,13 @@ export class CartComponent {
   goBackToLanding() {
     this.succesfulPayment.set(false);
     this.router.navigateByUrl('/landing');
+  }
+
+  onDeliveryModeChanged() {
+    if (this.deliveryMode === 'delivery') {
+      this.deliveryFee.set(100);
+    } else {
+      this.deliveryFee.set(0);
+    }
   }
 }

@@ -27,7 +27,11 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Szállítás</mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-radio-group class="radio-group" [(ngModel)]="deliveryMode">
+        <mat-radio-group
+          class="radio-group"
+          [(ngModel)]="deliveryMode"
+          (ngModelChange)="onDeliveryModeChanged()"
+        >
           <mat-radio-button value="personal"
             >Átvétel az egyetem B épületének portáján</mat-radio-button
           >
