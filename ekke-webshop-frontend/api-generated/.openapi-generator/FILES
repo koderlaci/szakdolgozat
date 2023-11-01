@@ -18,6 +18,7 @@ model/addOrderRequest.ts
 model/addProductRequest.ts
 model/addUserAddressRequest.ts
 model/addUserRequest.ts
+model/disableCurrentCreateNewCartRequest.ts
 model/editCartItemRequest.ts
 model/editCartRequest.ts
 model/editOrderRequest.ts

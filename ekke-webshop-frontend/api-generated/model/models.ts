@@ -5,6 +5,7 @@ export * from './addOrderRequest';
 export * from './addProductRequest';
 export * from './addUserAddressRequest';
 export * from './addUserRequest';
+export * from './disableCurrentCreateNewCartRequest';
 export * from './editCartItemRequest';
 export * from './editCartRequest';
 export * from './editOrderRequest';
