@@ -8,17 +8,17 @@ export default class CartController {
   });
 
   getActiveCartByUserId = asyncHandler(async (req, res) => {
-    Cart.findOne({
+    await Cart.findOne({
       where: {
         userId: req.query.userId,
         active: 1,
       },
     })
+      .then((result) => {
+        res.send(result);
+      })
       .catch((error) => {
         console.log(error);
-      })
-      .finally(() => {
-        res.send(res);
       });
   });
 

@@ -19,11 +19,11 @@ export default class OrderAddressController {
       floor: req.body.floor,
       door: req.body.door,
     })
+      .then((result) => {
+        res.send(result);
+      })
       .catch((error) => {
         console.log(error);
-      })
-      .finally(() => {
-        res.send(res);
       });
   });
 }
