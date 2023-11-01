@@ -1,7 +1,7 @@
 <section class="main-container" *ngIf="!succesfulPayment()">
   <div class="cart">
     <div class="title">Kosár</div>
-    <div class="products">
+    <div class="products" [ngClass]="{ disabled: this.pendingPayment() }">
       <div class="product" *ngFor="let product of cartService.cart()">
         <img
           class="bin"
@@ -31,6 +31,7 @@
           class="radio-group"
           [(ngModel)]="deliveryMode"
           (ngModelChange)="onDeliveryModeChanged()"
+          [disabled]="this.pendingPayment()"
         >
           <mat-radio-button value="personal"
             >Átvétel az egyetem B épületének portáján</mat-radio-button

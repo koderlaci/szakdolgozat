@@ -14,6 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
 
 // dialogs
 import { AccountChooserDialog } from './dialogs/account-chooser.dialog';
+import { PaymentWarningDialog } from './dialogs/payment-warning.dialog';
 
 // pages
 import { LandingComponent } from './pages/landing/landing.component';
@@ -39,6 +40,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     ProductComponent,
     SandboxComponent,
     AccountChooserDialog,
+    PaymentWarningDialog,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatInputModule,
     MatRadioModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     FormsModule,
   ],
   providers: [],

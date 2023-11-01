@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { OrderService } from 'src/app/services/order.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PaymentWarningDialog } from 'src/app/dialogs/payment-warning.dialog';
 
 @Component({
   selector: 'app-cart',
@@ -99,6 +100,15 @@ export class CartComponent {
         }
         this.pendingPayment.set(false);
       });
+
+    effect(() => {
+      if (this.pendingPayment()) {
+        this.addressForm.disable();
+      } else {
+        this.addressForm.enable();
+        this.closeDialogs();
+      }
+    });
   }
 
   async pay() {
@@ -107,6 +117,7 @@ export class CartComponent {
       .connect()
       .then(async () => {
         if (await this.openDialog(this.paymentService.accounts)) {
+          this.openWarningDialog();
           this.paymentService
             .purchase(this.totalPrice())
             .then((isTransactionValid) => {
@@ -157,6 +168,14 @@ export class CartComponent {
     });
 
     return await firstValueFrom(dialogRef.afterClosed());
+  }
+
+  openWarningDialog() {
+    this.dialog.open(PaymentWarningDialog);
+  }
+
+  closeDialogs() {
+    this.dialog.closeAll();
   }
 
   goBackToLanding() {
