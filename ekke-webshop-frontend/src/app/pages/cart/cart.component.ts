@@ -1,6 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AddOrderAddressRequest } from 'api-generated';
 import { firstValueFrom } from 'rxjs';
 import { AccountChooserDialog } from 'src/app/dialogs/account-chooser.dialog';
@@ -19,6 +20,7 @@ import { UserHandlerService } from 'src/app/services/user-handler.service';
 export class CartComponent {
   private addressService = inject(AddressService);
   private orderService = inject(OrderService);
+  private router = inject(Router);
 
   protected cartService = inject(CartService);
   protected paymentService = inject(PaymentService);
@@ -79,6 +81,7 @@ export class CartComponent {
             .then(() => {
               this.cartService.clearCart();
               this.succesfulPayment.set(true);
+              this.paymentService.transactionMined.next(null);
             })
             .catch(() => {
               this.errorMessage =
@@ -148,5 +151,10 @@ export class CartComponent {
     });
 
     return await firstValueFrom(dialogRef.afterClosed());
+  }
+
+  goBackToLanding() {
+    this.succesfulPayment.set(false);
+    this.router.navigateByUrl('/landing');
   }
 }
