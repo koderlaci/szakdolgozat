@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AddOrderAddressRequest } from 'api-generated';
-import { firstValueFrom } from 'rxjs';
+import { filter, firstValueFrom, take, takeUntil } from 'rxjs';
 import { AccountChooserDialog } from 'src/app/dialogs/account-chooser.dialog';
 import { AddressService } from 'src/app/services/address.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -11,6 +11,7 @@ import { ErrorMessageService } from 'src/app/services/error-messages.service';
 import { OrderService } from 'src/app/services/order.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-cart',
@@ -53,46 +54,51 @@ export class CartComponent {
   protected deliveryMode = '';
 
   constructor() {
-    this.paymentService.transactionMined.subscribe(async (receipt) => {
-      if (receipt && Number(receipt.status) === 1) {
-        const orderAddress = await firstValueFrom(
-          this.addressService.createOrderAddress(
-            this.addressForm.getRawValue() as AddOrderAddressRequest
-          )
-        );
-
-        const userId = this.userHandlerService.userLoggedIn();
-
-        if (userId) {
-          const activeCart = await firstValueFrom(
-            this.cartService.getActiveCartByUserId(userId)
+    this.paymentService.transactionMined
+      .pipe(
+        filter((receipt) => receipt !== null),
+        takeUntilDestroyed()
+      )
+      .subscribe(async (receipt) => {
+        if (Number(receipt.status) === 1) {
+          const orderAddress = await firstValueFrom(
+            this.addressService.createOrderAddress(
+              this.addressForm.getRawValue() as AddOrderAddressRequest
+            )
           );
 
-          firstValueFrom(
-            this.orderService.createOrder({
-              userId: userId,
-              addressId: orderAddress.id,
-              cartId: activeCart.id,
-              price: this.totalPrice(),
-              deliveryMode: this.deliveryMode,
-              date: new Date().toString(),
-            })
-          )
-            .then(() => {
-              this.cartService.clearCart();
-              this.succesfulPayment.set(true);
-              this.paymentService.transactionMined.next(null);
-            })
-            .catch(() => {
-              this.errorMessage =
-                'Sikertelen fizetés, kérjük vedd fel a kapcsolatot az ügyfélszolgálattal.';
-            });
+          const userId = this.userHandlerService.userLoggedIn();
+
+          if (userId) {
+            const activeCart = await firstValueFrom(
+              this.cartService.getActiveCartByUserId(userId)
+            );
+
+            await firstValueFrom(
+              this.orderService.createOrder({
+                userId: userId,
+                addressId: orderAddress.id,
+                cartId: activeCart.id,
+                price: this.totalPrice(),
+                deliveryMode: this.deliveryMode,
+                date: new Date().toString(),
+              })
+            )
+              .then(() => {
+                this.paymentService.transactionMined.next(null);
+                this.cartService.clearCart(userId);
+                this.succesfulPayment.set(true);
+              })
+              .catch(() => {
+                this.errorMessage =
+                  'Sikertelen fizetés, kérjük vedd fel a kapcsolatot az ügyfélszolgálattal.';
+              });
+          }
+        } else if (receipt) {
+          this.errorMessage = 'Sikertelen fizetés, kérjük próbáld újra.';
         }
-      } else if (receipt) {
-        this.errorMessage = 'Sikertelen fizetés, kérjük próbáld újra.';
-      }
-      this.pendingPayment.set(false);
-    });
+        this.pendingPayment.set(false);
+      });
   }
 
   async pay() {

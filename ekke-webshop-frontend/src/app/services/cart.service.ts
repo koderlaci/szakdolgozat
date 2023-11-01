@@ -124,8 +124,13 @@ export class CartService {
     return count;
   }
 
-  clearCart() {
+  async clearCart(userId?: number) {
     this.cart.set([]);
+    if (userId) {
+      await firstValueFrom(
+        this.cartApiService.disableCurrentCreateNewCart({ userId })
+      );
+    }
   }
 
   async syncCart(userId: number) {
