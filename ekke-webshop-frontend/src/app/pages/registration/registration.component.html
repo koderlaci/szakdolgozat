@@ -58,7 +58,10 @@
         }}
       </mat-error>
     </mat-form-field>
-
+    <mat-checkbox class="checkbox" formControlName="dataHandlingStatement"
+      >Elfogadom az adatkezelési
+      <a href="#TODO" target="_blank">tájékoztatót.</a></mat-checkbox
+    >
     <mat-error
       class="error-message"
       *ngIf="this.registrationResponse.message"

@@ -6,9 +6,10 @@
   background-image: unset;
   background-size: cover;
   padding: 0px 20px;
-  margin-top: 50px;
+  margin-top: 100px;
 
   @media (min-width: 900px) {
+    margin-top: 50px;
     background-image: url("../../../assets/images/login_background.jpg");
   }
 }
@@ -28,8 +29,9 @@
   }
 
   .logo {
-    width: 250px;
-    margin-bottom: -40px;
+    width: 50%;
+    max-width: 250px;
+    margin-bottom: -20px;
   }
 
   .subtitle {
@@ -39,6 +41,18 @@
 
   .input {
     width: 100%;
+
+    @media (min-width: 768px) {
+      width: 500px;
+    }
+  }
+
+  .checkbox {
+    margin-bottom: 10px;
+
+    a {
+      color: #329dff;
+    }
 
     @media (min-width: 768px) {
       width: 500px;
@@ -80,5 +94,11 @@
 .error-message {
   margin-top: -30px;
   margin-bottom: -5px;
+  margin-left: 20px;
   font-size: 12px;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 500px;
+  }
 }

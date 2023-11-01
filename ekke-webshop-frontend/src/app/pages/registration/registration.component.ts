@@ -45,12 +45,25 @@ export class RegistrationComponent {
       Validators.minLength(8),
       Validators.pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,64}$/),
     ]),
+    dataHandlingStatement: new UntypedFormControl(false, Validators.required),
   });
 
   register() {
+    if (!this.form.controls.dataHandlingStatement.value) {
+      this.registrationResponse.message =
+        'Az adatkezelési tájékoztatót kötelező elfogadni.';
+      return;
+    }
+    this.registrationResponse.message = '';
     if (this.form.valid) {
+      const formData = this.form.getRawValue();
       this.userHandlerService
-        .register(this.form.getRawValue())
+        .register({
+          name: formData.name,
+          neptun: formData.neptun,
+          email: formData.email,
+          password: formData.password,
+        })
         .subscribe((res) => {
           if (res.message) {
             this.registrationResponse.message = res.message;
