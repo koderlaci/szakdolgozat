@@ -1,4 +1,5 @@
 import { Component, effect, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 
@@ -8,6 +9,8 @@ import { UserHandlerService } from 'src/app/services/user-handler.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  private router = inject(Router);
+
   public userHandlerService = inject(UserHandlerService);
   public cartService = inject(CartService);
 
@@ -27,5 +30,6 @@ export class HeaderComponent {
 
   logout() {
     this.userHandlerService.setUserLoggedIn(null);
+    this.router.navigateByUrl('/login');
   }
 }
