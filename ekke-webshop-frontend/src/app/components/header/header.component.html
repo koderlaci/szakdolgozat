@@ -24,6 +24,18 @@
       <a mat-menu-item routerLink="/products/men">Férfi</a>
       <a mat-menu-item routerLink="/products/accessary">Kiegészítők</a>
     </mat-menu>
+    <button
+      mat-menu-item
+      [matMenuTriggerFor]="profileMenu"
+      *ngIf="userHandlerService.userLoggedIn()"
+    >
+      Profil
+    </button>
+    <mat-menu #profileMenu="matMenu">
+      <a mat-menu-item routerLink="/profile/details">Személyes adatok</a>
+      <a mat-menu-item routerLink="/profile/orders">Rendeléseim</a>
+      <span mat-menu-item (click)="logout()">Kijelentkezés</span>
+    </mat-menu>
     <a mat-menu-item routerLink="/cart">
       <span
         [matBadgeHidden]="cartService.getCartProductsCount() === 0"
@@ -77,13 +89,19 @@
         >Termék hozzáadva!</span
       >
     </a>
-    <a
-      routerLink="/profile"
+
+    <span
       class="icon-item"
+      [matMenuTriggerFor]="profileMenu"
       *ngIf="userHandlerService.userLoggedIn()"
     >
       <img src="assets/icons/profile.svg" alt="Profil" />
       <span>Profil</span>
-    </a>
+    </span>
+    <mat-menu #profileMenu="matMenu">
+      <a mat-menu-item routerLink="/profile/details">Személyes adatok</a>
+      <a mat-menu-item routerLink="/profile/orders">Rendeléseim</a>
+      <span mat-menu-item (click)="logout()">Kijelentkezés</span>
+    </mat-menu>
   </div>
 </div>

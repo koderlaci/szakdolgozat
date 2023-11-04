@@ -10,6 +10,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
 
 // guards
 import { IsUserLoggedInGuard } from './guards/isUserLoggedIn/is-user-logged-in.guard';
@@ -41,8 +42,17 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent }, // todo: implement guard
   {
     path: 'profile',
-    component: ProfileComponent,
     canActivate: [IsUserLoggedInGuard],
+    children: [
+      {
+        path: 'details',
+        component: ProfileComponent,
+      },
+      {
+        path: 'orders',
+        component: UserOrdersComponent,
+      },
+    ],
   },
   { path: 'product/:variant', component: ProductComponent },
 ];

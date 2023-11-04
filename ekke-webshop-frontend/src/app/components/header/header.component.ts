@@ -24,4 +24,8 @@ export class HeaderComponent {
       }
     });
   }
+
+  logout() {
+    this.userHandlerService.setUserLoggedIn(null);
+  }
 }
