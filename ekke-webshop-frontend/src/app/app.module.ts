@@ -28,6 +28,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { ProductSliderComponent } from './components/product-slider/product-slider/product-slider.component';
 import { ProductComponent } from './pages/product/product/product.component';
 import { SandboxComponent } from './pages/sandbox/sandbox.component';
+import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
 
 // material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -60,6 +61,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     SandboxComponent,
     AccountChooserDialog,
     PaymentWarningDialog,
+    UserOrdersComponent,
   ],
   imports: [
     BrowserModule,
