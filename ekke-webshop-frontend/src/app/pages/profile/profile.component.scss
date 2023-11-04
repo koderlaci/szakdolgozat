@@ -1,0 +1,134 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  max-width: 1920px;
+  margin: 0px auto;
+  padding: 20px;
+
+  @media (min-width: 768px) {
+    align-items: baseline;
+    flex-direction: row;
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.password {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+
+  &.largerg-mt {
+    margin-top: 50px;
+  }
+
+  @media (min-width: 768px) {
+    text-align: start;
+  }
+}
+
+.input {
+  width: 100%;
+  max-width: 520px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  max-width: 520px;
+}
+
+.full-row {
+  display: flex;
+  width: 100%;
+  max-width: 520px;
+
+  .input {
+    width: 100%;
+  }
+}
+
+.half-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 520px;
+
+  @media (min-width: 1024px) {
+    flex-wrap: nowrap;
+  }
+
+  .input {
+    width: 100%;
+
+    @media (min-width: 1024px) {
+      width: 50%;
+    }
+  }
+}
+
+.third-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 520px;
+
+  @media (min-width: 1024px) {
+    flex-wrap: nowrap;
+  }
+
+  .input {
+    width: 100%;
+
+    @media (min-width: 1024px) {
+      width: 33%;
+    }
+  }
+}
+
+.button {
+  width: 100%;
+  max-width: 520px;
+
+  @media (min-width: 768px) {
+    max-width: 250px;
+  }
+}
+
+.response-message {
+  height: 20px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 520px;
+  text-align: start;
+  opacity: 0;
+
+  &.error {
+    color: red;
+  }
+
+  &.visible {
+    opacity: 1;
+  }
+}

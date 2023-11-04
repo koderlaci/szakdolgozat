@@ -1,1 +1,258 @@
-<button mat-raised-button (click)="logout()">Kijelentkezés</button>
+<div class="main-container">
+  <div class="details">
+    <ng-container [formGroup]="profileForm">
+      <div class="title">Profil</div>
+      <mat-form-field class="input">
+        <mat-label>Név</mat-label>
+        <input matInput placeholder="Minta János" formControlName="name" />
+        <mat-error>
+          {{
+            errorMessageService.getErrorMessage(
+              this.profileForm.controls.name.errors
+            )
+          }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+        <mat-label>Neptun kód</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="NEP123"
+          formControlName="neptun"
+        />
+        <mat-error>
+          {{
+            errorMessageService.getErrorMessage(
+              this.profileForm.controls.neptun.errors
+            )
+          }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="input">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="email@mail.com"
+          formControlName="email"
+        />
+        <mat-error>
+          {{
+            errorMessageService.getErrorMessage(
+              this.profileForm.controls.email.errors
+            )
+          }}
+        </mat-error>
+      </mat-form-field>
+      <div class="button-container">
+        <button
+          mat-raised-button
+          class="button"
+          [disabled]="isProfileButtonDisabled()"
+          (click)="editProfile()"
+        >
+          Módosítások mentése
+        </button>
+      </div>
+      <div
+        class="response-message"
+        *ngIf="profileResponse"
+        [ngClass]="{
+          error: profileResponse.error,
+          visible: profileResponse.message
+        }"
+      >
+        {{ profileResponse.message }}
+      </div>
+    </ng-container>
+
+    <ng-container [formGroup]="addressForm">
+      <div class="title largerg-mt">Lakcím</div>
+      <div class="full-row">
+        <mat-form-field class="input">
+          <mat-label>Ország</mat-label>
+          <input matInput type="text" formControlName="country" />
+          <mat-error>
+            {{
+              errorMessageService.getErrorMessage(
+                this.addressForm.controls.country.errors
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="half-row">
+        <mat-form-field class="input">
+          <mat-label>Irányítószám</mat-label>
+          <input matInput type="text" formControlName="zipCode" />
+          <mat-error>
+            {{
+              errorMessageService.getErrorMessage(
+                this.addressForm.controls.zipCode.errors
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input">
+          <mat-label>Város</mat-label>
+          <input matInput type="text" formControlName="city" />
+          <mat-error>
+            {{
+              errorMessageService.getErrorMessage(
+                this.addressForm.controls.city.errors
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="third-row">
+        <mat-form-field class="input">
+          <mat-label>Közterület neve</mat-label>
+          <input matInput type="text" formControlName="streetName" />
+          <mat-error>
+            {{
+              errorMessageService.getErrorMessage(
+                this.addressForm.controls.streetName.errors
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input">
+          <mat-label>Közterület jellege</mat-label>
+          <input matInput type="text" formControlName="streetType" />
+          <mat-error>
+            {{
+              errorMessageService.getErrorMessage(
+                this.addressForm.controls.streetType.errors
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input">
+          <mat-label>Házszám</mat-label>
+          <input matInput type="text" formControlName="houseNumber" />
+          <mat-error>
+            {{
+              errorMessageService.getErrorMessage(
+                this.addressForm.controls.houseNumber.errors
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="third-row">
+        <mat-form-field class="input">
+          <mat-label>Lakás</mat-label>
+          <input matInput type="text" formControlName="apartment" />
+          <mat-error>
+            {{
+              errorMessageService.getErrorMessage(
+                this.addressForm.controls.apartment.errors
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input">
+          <mat-label>Emelet</mat-label>
+          <input matInput type="text" formControlName="floor" />
+          <mat-error>
+            {{
+              errorMessageService.getErrorMessage(
+                this.addressForm.controls.floor.errors
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input">
+          <mat-label>Ajtó</mat-label>
+          <input matInput type="text" formControlName="door" />
+          <mat-error>
+            {{
+              errorMessageService.getErrorMessage(
+                this.addressForm.controls.door.errors
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="button-container">
+        <button mat-raised-button class="button">Módosítások mentése</button>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="password" [formGroup]="profileForm">
+    <div class="title">Jelszó</div>
+    <mat-form-field class="input">
+      <mat-label>Jelenlegi jelszó</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.profileForm.controls.password.errors,
+            "password"
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="input">
+      <mat-label>Új jelszó</mat-label>
+      <input matInput type="password" formControlName="newPassword" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.profileForm.controls.password.errors,
+            "password"
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="input">
+      <mat-label>Új jelszó megerősítése</mat-label>
+      <input
+        matInput
+        type="password"
+        formControlName="newPasswordConfirmation"
+      />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.profileForm.controls.password.errors,
+            "password"
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+    <div class="button-container">
+      <button
+        mat-raised-button
+        class="button"
+        [disabled]="isPasswordButtonDisabled()"
+        (click)="editPassword()"
+      >
+        Jelszó módosítása
+      </button>
+    </div>
+    <div
+      class="response-message"
+      *ngIf="passwordResponse"
+      [ngClass]="{
+        error: passwordResponse.error,
+        visible: passwordResponse.message
+      }"
+    >
+      {{ passwordResponse.message }}
+    </div>
+  </div>
+</div>

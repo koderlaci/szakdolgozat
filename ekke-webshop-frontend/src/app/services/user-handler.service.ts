@@ -1,5 +1,11 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { AddUserRequest, LoginRequest, UserApiService } from 'api-generated';
+import {
+  AddUserRequest,
+  EditPasswordRequest,
+  EditUserRequest,
+  LoginRequest,
+  UserApiService,
+} from 'api-generated';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -26,6 +32,18 @@ export class UserHandlerService {
 
   getAllUsers() {
     return this.userService.getAllUsers();
+  }
+
+  getUserById(id: number) {
+    return this.userService.getUserById(id);
+  }
+
+  editUser(formData: EditUserRequest) {
+    return this.userService.editUser(formData);
+  }
+
+  editPassword(formData: EditPasswordRequest) {
+    return this.userService.editPassword(formData);
   }
 
   setUserLoggedIn(value: number | null) {
