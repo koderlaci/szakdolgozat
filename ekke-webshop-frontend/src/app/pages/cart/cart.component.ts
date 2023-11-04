@@ -42,15 +42,33 @@ export class CartComponent {
   protected errorMessage = '';
 
   protected addressForm = new FormGroup({
-    country: new FormControl<string>('', [Validators.required]),
-    zipCode: new FormControl<string>('', [Validators.required]),
-    city: new FormControl<string>('', [Validators.required]),
-    streetName: new FormControl<string>('', [Validators.required]),
-    streetType: new FormControl<string>('', [Validators.required]),
-    houseNumber: new FormControl<string>('', [Validators.required]),
-    apartment: new FormControl<string>(''),
-    floor: new FormControl<string>(''),
-    door: new FormControl<string>(''),
+    country: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
+    zipCode: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
+    city: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
+    streetName: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
+    streetType: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
+    houseNumber: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
+    apartment: new FormControl<string>('', Validators.maxLength(20)),
+    floor: new FormControl<string>('', Validators.maxLength(20)),
+    door: new FormControl<string>('', Validators.maxLength(20)),
   });
   protected deliveryMode = '';
 
