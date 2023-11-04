@@ -9,6 +9,7 @@ export * from './disableCurrentCreateNewCartRequest';
 export * from './editCartItemRequest';
 export * from './editCartRequest';
 export * from './editOrderRequest';
+export * from './editPasswordRequest';
 export * from './editProductRequest';
 export * from './editUserAddressRequest';
 export * from './editUserRequest';

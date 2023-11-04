@@ -22,6 +22,7 @@ model/disableCurrentCreateNewCartRequest.ts
 model/editCartItemRequest.ts
 model/editCartRequest.ts
 model/editOrderRequest.ts
+model/editPasswordRequest.ts
 model/editProductRequest.ts
 model/editUserAddressRequest.ts
 model/editUserRequest.ts

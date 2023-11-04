@@ -11,11 +11,8 @@
  */
 
 
-export interface EditUserRequest { 
+export interface EditPasswordRequest { 
     id: number;
-    name?: string;
-    neptun?: string;
-    email?: string;
-    password?: string;
+    password: string;
 }
 
