@@ -1,6 +1,7 @@
 import { User } from "../models/user.model.js";
 import asyncHandler from "express-async-handler";
 import CartController from "../controllers/cart.controller.js";
+import { Op } from "sequelize";
 import sha1 from "sha1";
 
 const cartController = new CartController();
@@ -87,22 +88,93 @@ export default class UserController {
       message: null,
     };
 
+    const neptunAlreadyExists = await User.findOne({
+      where: {
+        id: {
+          [Op.not]: req.body.id,
+        },
+        neptun: req.body.neptun,
+      },
+    });
+    if (neptunAlreadyExists) {
+      responseDto.error = true;
+      responseDto.message = "A megadott neptun kóddal már létezik felhasználó.";
+      res.send(responseDto);
+      return;
+    }
+
+    const emailAlreadyExists = await User.findOne({
+      where: {
+        id: {
+          [Op.not]: req.body.id,
+        },
+        email: req.body.email,
+      },
+    });
+    if (emailAlreadyExists) {
+      responseDto.error = true;
+      responseDto.message = "A megadott email címmel már létezik felhasználó.";
+      res.send(responseDto);
+      return;
+    }
+
     await User.update(
       {
         name: req.body.name,
         neptun: req.body.neptun,
         email: req.body.email,
         password: req.body.password,
-        permission: 0,
       },
       {
         where: {
-          id: req.params.id,
+          id: req.body.id,
         },
       }
     )
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        responseDto.message = "Sikeres módosítás!";
+      })
+      .catch((error) => {
+        console.log(error);
+        responseDto.error = true;
+        responseDto.message = "Hiba történt, kérjük próbáld újra.";
+      })
+      .finally(() => {
+        res.send(responseDto);
+      });
+  });
+
+  editPassword = asyncHandler(async (req, res) => {
+    let responseDto = {
+      error: false,
+      message: null,
+    };
+
+    const passwordValid = await User.findOne({
+      where: {
+        id: req.body.id,
+        password: sha1(req.body.password),
+      },
+    });
+    if (!passwordValid) {
+      responseDto.error = true;
+      responseDto.message = "Helytelen jelszó!";
+      res.send(responseDto);
+      return;
+    }
+
+    await User.update(
+      {
+        password: sha1(req.body.password),
+      },
+      {
+        where: {
+          id: req.body.id,
+        },
+      }
+    )
+      .then(() => {
+        responseDto.message = "Sikeres módosítás!";
       })
       .catch((error) => {
         console.log(error);

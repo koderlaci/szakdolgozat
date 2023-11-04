@@ -53,19 +53,12 @@ paths:
                 - email
                 - password
 
-  /user/edit-user/{id}:
+  /user/edit-user/:
     post:
       summary: Edits a user by id.
       tags:
         - userApi
       operationId: editUser
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
       requestBody:
         required: true
         content:
@@ -73,6 +66,8 @@ paths:
             schema:
               type: object
               properties:
+                id:
+                  type: number
                 name:
                   type: string
                 neptun:
@@ -81,6 +76,29 @@ paths:
                   type: string
                 password:
                   type: string
+              required:
+                - id
+
+  /user/edit-password/:
+    post:
+      summary: Edits a user's password by id.
+      tags:
+        - userApi
+      operationId: editPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                password:
+                  type: string
+              required:
+                - id
+                - password
 
   /user/delete-user/{id}:
     delete:

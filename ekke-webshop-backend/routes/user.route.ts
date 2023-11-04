@@ -11,7 +11,9 @@ router.get("/get-user-by-id", userController.getUserById);
 
 router.post("/add-user", userController.createUser);
 
-router.post("/edit-user/:id", userController.editUser);
+router.post("/edit-user", userController.editUser);
+
+router.post("/edit-password", userController.editPassword);
 
 router.delete("/delete-user/:id", userController.deleteUser);
 
