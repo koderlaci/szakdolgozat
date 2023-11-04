@@ -13,6 +13,19 @@ paths:
         - userApi
       operationId: getAllUsers
 
+  /user/get-user-by-id:
+    get:
+      summary: Returns a user by id.
+      tags:
+        - userApi
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: number
+
   /user/add-user:
     post:
       summary: Creates a user.

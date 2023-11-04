@@ -11,6 +11,15 @@ export default class UserController {
     res.send(data);
   });
 
+  getUserById = asyncHandler(async (req, res) => {
+    const data = await User.findOne({
+      where: {
+        id: req.query.id,
+      },
+    });
+    res.send(data);
+  });
+
   createUser = asyncHandler(async (req, res) => {
     let responseDto = {
       userId: null,

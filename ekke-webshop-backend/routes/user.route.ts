@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.get("/get-all-users", userController.getAllUsers);
 
+router.get("/get-user-by-id", userController.getUserById);
+
 router.post("/add-user", userController.createUser);
 
 router.post("/edit-user/:id", userController.editUser);
