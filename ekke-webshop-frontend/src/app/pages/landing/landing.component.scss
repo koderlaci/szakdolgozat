@@ -170,7 +170,7 @@ $main-title-max-width: 1920px;
 
           .icon {
             position: absolute;
-            width: 200px;
+            max-width: 300px;
             height: 200px;
             top: -40%;
 
@@ -324,6 +324,10 @@ $main-title-max-width: 1920px;
       text-align: center;
     }
   }
+}
+
+a {
+  color: #329dff;
 }
 
 .section-title {
