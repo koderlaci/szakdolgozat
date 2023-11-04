@@ -12,6 +12,7 @@
 
 
 export interface EditUserAddressRequest { 
+    id: number;
     userId?: number;
     country?: string;
     zipCode?: string;
