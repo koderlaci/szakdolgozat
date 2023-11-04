@@ -109,6 +109,7 @@ export class ProfileComponent implements OnInit {
     if (
       this.user.id &&
       formData.password &&
+      formData.newPassword &&
       this.profileForm.controls.password.valid &&
       this.profileForm.controls.newPassword.valid &&
       this.profileForm.controls.newPasswordConfirmation.valid &&
@@ -118,6 +119,7 @@ export class ProfileComponent implements OnInit {
         this.userHandlerService.editPassword({
           id: this.user.id,
           password: formData.password,
+          newPassword: formData.newPassword,
         })
       );
       this.passwordResponse = response;
