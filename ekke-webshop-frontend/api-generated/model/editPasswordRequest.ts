@@ -14,5 +14,6 @@
 export interface EditPasswordRequest { 
     id: number;
     password: string;
+    newPassword: string;
 }
 
