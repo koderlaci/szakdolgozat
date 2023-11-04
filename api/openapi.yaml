@@ -145,6 +145,19 @@ paths:
         - addressApi
       operationId: getAllUserAddresses
 
+  /user-address/get-user-address-by-user-id:
+    get:
+      summary: Returns an address by user id.
+      tags:
+        - addressApi
+      operationId: getUserAddressByUserId
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: number
+
   /user-address/add-user-address:
     post:
       summary: Creates a user address associated with a user.
@@ -187,19 +200,12 @@ paths:
                 - streetType
                 - houseNumber
 
-  /user-address/edit-user-address/{id}:
+  /user-address/edit-user-address:
     post:
       summary: Edits a user address by id.
       tags:
         - addressApi
       operationId: editUserAddress
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
       requestBody:
         required: true
         content:
@@ -207,6 +213,8 @@ paths:
             schema:
               type: object
               properties:
+                id:
+                  type: number
                 userId:
                   type: number
                 country:
@@ -227,6 +235,8 @@ paths:
                   type: string
                 door:
                   type: string
+              required:
+                - id
 
   /user-address/delete-user-address/{id}:
     delete:

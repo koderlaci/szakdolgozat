@@ -7,6 +7,15 @@ export default class AddressController {
     res.send(data);
   });
 
+  getUserAddressByUserId = asyncHandler(async (req, res) => {
+    const data = await UserAddress.findOne({
+      where: {
+        userId: req.query.userId,
+      },
+    });
+    res.send(data);
+  });
+
   createUserAddress = asyncHandler(async (req, res) => {
     let responseDto = {
       error: false,
@@ -38,12 +47,14 @@ export default class AddressController {
         floor: req.body.floor,
         door: req.body.door,
       })
+        .then(() => {
+          responseDto.message = "Sikeres módosítás!";
+          res.send(responseDto);
+        })
         .catch((error) => {
           console.log(error);
           responseDto.error = true;
           responseDto.message = "Hiba történt, kérjük próbáld újra.";
-        })
-        .finally(() => {
           res.send(responseDto);
         });
     }
@@ -70,19 +81,18 @@ export default class AddressController {
       },
       {
         where: {
-          id: req.params.id,
+          id: req.body.id,
         },
       }
     )
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        responseDto.message = "Sikeres módosítás!";
+        res.send(responseDto);
       })
       .catch((error) => {
         console.log(error);
         responseDto.error = true;
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
-      })
-      .finally(() => {
         res.send(responseDto);
       });
   });
