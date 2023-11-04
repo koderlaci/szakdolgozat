@@ -47,10 +47,12 @@ const routes: Routes = [
       {
         path: 'details',
         component: ProfileComponent,
+        canActivate: [IsUserLoggedInGuard],
       },
       {
         path: 'orders',
         component: UserOrdersComponent,
+        canActivate: [IsUserLoggedInGuard],
       },
     ],
   },
