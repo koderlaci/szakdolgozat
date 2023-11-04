@@ -187,7 +187,24 @@
         </mat-form-field>
       </div>
       <div class="button-container">
-        <button mat-raised-button class="button">Módosítások mentése</button>
+        <button
+          mat-raised-button
+          class="button"
+          [disabled]="isAddressButtonDisabled()"
+          (click)="editAddress()"
+        >
+          Módosítások mentése
+        </button>
+      </div>
+      <div
+        class="response-message"
+        *ngIf="addressResponse"
+        [ngClass]="{
+          error: addressResponse.error,
+          visible: addressResponse.message
+        }"
+      >
+        {{ addressResponse.message }}
       </div>
     </ng-container>
   </div>

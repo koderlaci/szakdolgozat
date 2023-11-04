@@ -3,7 +3,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessageService } from 'src/app/services/error-messages.service';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 import { firstValueFrom } from 'rxjs';
-import { EditUserRequest } from 'api-generated';
+import {
+  AddUserAddressRequest,
+  EditUserAddressRequest,
+  EditUserRequest,
+} from 'api-generated';
+import { AddressService } from 'src/app/services/address.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +17,7 @@ import { EditUserRequest } from 'api-generated';
 })
 export class ProfileComponent implements OnInit {
   private userHandlerService = inject(UserHandlerService);
+  private addressService = inject(AddressService);
   protected errorMessageService = inject(ErrorMessageService);
 
   protected user = {
@@ -21,11 +27,27 @@ export class ProfileComponent implements OnInit {
     email: null,
     password: null,
   };
+  protected address = {
+    id: null,
+    country: null,
+    zipCode: null,
+    city: null,
+    streetName: null,
+    streetType: null,
+    houseNumber: null,
+    apartment: null,
+    floor: null,
+    door: null,
+  };
   protected profileResponse = {
     error: false,
     message: null,
   };
   protected passwordResponse = {
+    error: false,
+    message: null,
+  };
+  protected addressResponse = {
     error: false,
     message: null,
   };
@@ -60,15 +82,33 @@ export class ProfileComponent implements OnInit {
   });
 
   protected addressForm = new FormGroup({
-    country: new FormControl<string>('', Validators.maxLength(20)),
-    zipCode: new FormControl<string>('', Validators.maxLength(20)),
-    city: new FormControl<string>('', Validators.maxLength(20)),
-    streetName: new FormControl<string>('', Validators.maxLength(20)),
-    streetType: new FormControl<string>('', Validators.maxLength(20)),
-    houseNumber: new FormControl<string>('', Validators.maxLength(20)),
-    apartment: new FormControl<string>('', Validators.maxLength(20)),
-    floor: new FormControl<string>('', Validators.maxLength(20)),
-    door: new FormControl<string>('', Validators.maxLength(20)),
+    country: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
+    zipCode: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
+    city: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
+    streetName: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
+    streetType: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
+    houseNumber: new FormControl<string>('', [
+      Validators.required,
+      Validators.maxLength(20),
+    ]),
+    apartment: new FormControl<string>('', [Validators.maxLength(20)]),
+    floor: new FormControl<string>('', [Validators.maxLength(20)]),
+    door: new FormControl<string>('', [Validators.maxLength(20)]),
   });
 
   async ngOnInit() {
@@ -130,7 +170,73 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  async editAddress() {}
+  async editAddress() {
+    const formData = this.addressForm.getRawValue();
+
+    if (
+      this.address &&
+      this.address.id &&
+      this.user.id &&
+      formData.country &&
+      formData.zipCode &&
+      formData.city &&
+      formData.streetName &&
+      formData.streetType &&
+      formData.houseNumber
+    ) {
+      const dto: EditUserAddressRequest = {
+        id: this.address.id,
+        userId: this.user.id,
+        country: formData.country,
+        zipCode: formData.zipCode,
+        city: formData.city,
+        streetName: formData.streetName,
+        streetType: formData.streetType,
+        houseNumber: formData.houseNumber,
+        apartment: formData.apartment ?? '',
+        floor: formData.floor ?? '',
+        door: formData.door ?? '',
+      };
+
+      const response = await firstValueFrom(
+        this.addressService.editUserAddress(dto)
+      );
+      this.addressResponse = response;
+      setTimeout(() => {
+        this.addressResponse.message = null;
+      }, 5000);
+    } else if (
+      this.user.id &&
+      formData.country &&
+      formData.zipCode &&
+      formData.city &&
+      formData.streetName &&
+      formData.streetType &&
+      formData.houseNumber
+    ) {
+      const dto: AddUserAddressRequest = {
+        userId: this.user.id,
+        country: formData.country,
+        zipCode: formData.zipCode,
+        city: formData.city,
+        streetName: formData.streetName,
+        streetType: formData.streetType,
+        houseNumber: formData.houseNumber,
+        apartment: formData.apartment ?? '',
+        floor: formData.floor ?? '',
+        door: formData.door ?? '',
+      };
+
+      const response = await firstValueFrom(
+        this.addressService.createUserAddress(dto)
+      );
+      this.addressResponse = response;
+      setTimeout(() => {
+        this.addressResponse.message = null;
+      }, 5000);
+    }
+    await this.getUserInformation();
+  }
 
   async getUserInformation() {
     const userId = this.userHandlerService.userLoggedIn();
@@ -141,6 +247,23 @@ export class ProfileComponent implements OnInit {
       this.profileForm.controls.name.setValue(this.user.name);
       this.profileForm.controls.neptun.setValue(this.user.neptun);
       this.profileForm.controls.email.setValue(this.user.email);
+
+      this.address = await firstValueFrom(
+        this.addressService.getUserAddressByUserId(userId)
+      );
+      if (this.address) {
+        this.addressForm.controls.country.setValue(this.address.country);
+        this.addressForm.controls.zipCode.setValue(this.address.zipCode);
+        this.addressForm.controls.city.setValue(this.address.city);
+        this.addressForm.controls.streetName.setValue(this.address.streetName);
+        this.addressForm.controls.streetType.setValue(this.address.streetType);
+        this.addressForm.controls.houseNumber.setValue(
+          this.address.houseNumber
+        );
+        this.addressForm.controls.apartment.setValue(this.address.apartment);
+        this.addressForm.controls.floor.setValue(this.address.floor);
+        this.addressForm.controls.door.setValue(this.address.door);
+      }
     }
   }
 
@@ -169,6 +292,13 @@ export class ProfileComponent implements OnInit {
       this.profileForm.controls.newPasswordConfirmation.valid &&
       formData.newPassword === formData.newPasswordConfirmation
     ) {
+      return false;
+    }
+    return true;
+  }
+
+  isAddressButtonDisabled() {
+    if (this.addressForm.valid) {
       return false;
     }
     return true;
