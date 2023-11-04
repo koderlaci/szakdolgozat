@@ -2,13 +2,13 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: calc(100vh - 100px);
   background-image: unset;
   background-size: cover;
   padding: 0px 20px;
 
-  @media (min-width: 900px) {
+  @media (min-width: 1024px) {
     background-image: url("../../../assets/images/login_background.jpg");
+    min-height: calc(100vh - 100px);
   }
 }
 
@@ -23,13 +23,13 @@
   border-radius: 0 30% 30% 0;
   margin-bottom: 100px;
 
-  @media (min-width: 900px) {
+  @media (min-width: 1024px) {
     width: 60%;
   }
 
   .logo {
     width: 250px;
-    margin-bottom: -40px;
+    margin-bottom: -20px;
   }
 
   .subtitle {
@@ -69,10 +69,10 @@
 
 .tokens {
   display: none;
-  height: 70%;
+  max-height: 700px;
   margin: auto;
 
-  @media (min-width: 900px) {
+  @media (min-width: 1024px) {
     display: initial;
   }
 }
