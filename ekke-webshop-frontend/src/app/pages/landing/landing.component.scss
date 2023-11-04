@@ -11,6 +11,13 @@ $main-title-max-width: 1920px;
     flex-direction: column;
     min-height: calc(100vh - 100px);
     padding: 0px 20px;
+    background: linear-gradient(
+      0deg,
+      rgba(0, 17, 72, 1) 0%,
+      rgba(1, 57, 142, 1) 50%,
+      rgba(0, 17, 72, 1) 90%
+    );
+    max-width: unset;
 
     .title-container {
       position: relative;
@@ -83,19 +90,6 @@ $main-title-max-width: 1920px;
             transform: translateY(-60%) translateX(60%);
           }
         }
-      }
-    }
-
-    .flare {
-      position: absolute;
-      z-index: -1;
-
-      &.left {
-        left: 0;
-      }
-
-      &.right {
-        right: 0;
       }
     }
   }
