@@ -165,7 +165,7 @@ export default class UserController {
 
     await User.update(
       {
-        password: sha1(req.body.password),
+        password: req.body.newPassword,
       },
       {
         where: {
