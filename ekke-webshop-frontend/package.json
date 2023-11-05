@@ -1,7 +1,7 @@
 {
   "name": "ekke-webshop",
   "version": "0.0.0",
-  "homepage": "https://koderlaci.github.io/szakdolgozat/",
+  "homepage": "/docs",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
