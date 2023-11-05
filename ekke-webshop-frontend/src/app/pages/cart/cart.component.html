@@ -15,7 +15,9 @@
         <div class="product-details">
           <div class="product-title">{{ product.name }}</div>
           <div>Ár: {{ product.price }} UniToken</div>
-          <div>Szín: {{ product.color }}</div>
+          <div>
+            Szín: {{ mapperService.mapProductColorName(product.color) }}
+          </div>
           <div>Méret: {{ product.size }}</div>
           <div>Mennyiség: {{ product.selectedQuantity }} db</div>
         </div>

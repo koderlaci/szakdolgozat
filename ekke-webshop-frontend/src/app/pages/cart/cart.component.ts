@@ -13,6 +13,7 @@ import { PaymentService } from 'src/app/services/payment.service';
 import { UserHandlerService } from 'src/app/services/user-handler.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PaymentWarningDialog } from 'src/app/dialogs/payment-warning.dialog';
+import { MapperService } from 'src/app/services/mapper.service';
 
 @Component({
   selector: 'app-cart',
@@ -23,6 +24,7 @@ export class CartComponent {
   private addressService = inject(AddressService);
   private orderService = inject(OrderService);
   private router = inject(Router);
+  protected mapperService = inject(MapperService);
 
   protected cartService = inject(CartService);
   protected paymentService = inject(PaymentService);

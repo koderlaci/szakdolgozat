@@ -27,7 +27,8 @@
           <span
             >{{ product.name }} ({{
               mapperService.mapProductTypeName(product.type)
-            }}, {{ product.size }}, {{ product.color }})</span
+            }}, {{ product.size }},
+            {{ mapperService.mapProductColorName(product.color) }})</span
           >
           <span>{{ product.price }} UniToken</span>
         </div>

@@ -18,7 +18,7 @@
             (valueChange)="onColorChange($event)"
           >
             <mat-option *ngFor="let color of product.colors" [value]="color">{{
-              color
+              mapperService.mapProductColorName(color)
             }}</mat-option>
           </mat-select>
         </mat-form-field>

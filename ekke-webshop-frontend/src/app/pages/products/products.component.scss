@@ -46,20 +46,24 @@
       height: 20px;
       border-radius: 50%;
 
-      &.fekete {
+      &.black {
         background-color: black;
       }
 
-      &.fehér {
+      &.white {
         background-color: white;
       }
 
-      &.kék {
+      &.blue {
         background-color: #000e8f;
       }
 
-      &.rózsaszín {
+      &.pink {
         background-color: #f072cd;
+      }
+
+      &.gray {
+        background-color: gray;
       }
     }
   }

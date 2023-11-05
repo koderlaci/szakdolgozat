@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { CartService } from 'src/app/services/cart.service';
+import { MapperService } from 'src/app/services/mapper.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 export type Product = {
@@ -22,6 +23,7 @@ export class ProductComponent {
   private cartService = inject(CartService);
   private productsService = inject(ProductsService);
   private route = inject(ActivatedRoute);
+  protected mapperService = inject(MapperService);
 
   protected productDetailsForm = new FormGroup({
     color: new FormControl('', Validators.required),

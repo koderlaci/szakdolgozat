@@ -51,4 +51,21 @@ export class MapperService {
         return 'Férfi';
     }
   }
+
+  mapProductColorName(color: string) {
+    switch (color) {
+      case 'black':
+        return 'fekete';
+      case 'blue':
+        return 'kék';
+      case 'white':
+        return 'fehér';
+      case 'gray':
+        return 'szürke';
+      case 'pink':
+        return 'rózsaszín';
+      default:
+        return 'fekete';
+    }
+  }
 }
