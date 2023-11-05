@@ -29,4 +29,19 @@ router.get("/get-product-colors", productController.getProductColors);
 
 router.get("/get-final-product", productController.getFinalProduct);
 
+router.get(
+  "/check-product-availability-by-quantity",
+  productController.checkProductAvailabilityByQuantity
+);
+
+router.post(
+  "/subtract-product-quantity-by-id",
+  productController.subtractProductQuantityById
+);
+
+router.post(
+  "/add-product-quantity-by-id",
+  productController.addProductQuantityById
+);
+
 export default router;

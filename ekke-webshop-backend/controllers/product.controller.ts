@@ -108,6 +108,87 @@ export default class ProductController {
       });
   });
 
+  checkProductAvailabilityByQuantity = asyncHandler(async (req, res) => {
+    let responseDto = {
+      error: false,
+      message: null,
+    };
+
+    const product = await Product.findOne({
+      where: {
+        id: req.query.id,
+      },
+    });
+
+    if (product.getDataValue("quantity") < req.query.quantity) {
+      responseDto.error = true;
+      responseDto.message = "Nincs elegendő termék raktáron.";
+    }
+
+    res.send(responseDto);
+  });
+
+  subtractProductQuantityById = asyncHandler(async (req, res) => {
+    let responseDto = {
+      error: false,
+      message: null,
+    };
+
+    const product = await Product.findOne({
+      where: {
+        id: req.body.id,
+      },
+    });
+
+    if (product.getDataValue("quantity") < req.body.quantity) {
+      responseDto.error = true;
+      responseDto.message = "Nincs elegendő termék raktáron.";
+      res.send(responseDto);
+      return;
+    }
+
+    await product
+      .update({
+        quantity: product.getDataValue("quantity") - req.body.quantity,
+      })
+      .then(() => {
+        res.send(responseDto);
+      })
+      .catch((error) => {
+        console.log(error);
+        responseDto.error = true;
+        responseDto.message =
+          "Sikertelen fizetés, kérjük vedd fel a kapcsolatot az ügyfélszolgálattal.";
+        res.send(responseDto);
+      });
+  });
+
+  addProductQuantityById = asyncHandler(async (req, res) => {
+    let responseDto = {
+      error: false,
+      message: null,
+    };
+
+    const product = await Product.findOne({
+      where: {
+        id: req.body.id,
+      },
+    });
+
+    await product
+      .update({
+        quantity: product.getDataValue("quantity") + req.body.quantity,
+      })
+      .then(() => {
+        res.send(responseDto);
+      })
+      .catch(() => {
+        responseDto.error = true;
+        responseDto.message = "Hiba történt, kérjük próbáld újra.";
+        res.send(responseDto);
+      });
+  });
+
   getMenProducts = asyncHandler(async (req, res) => {
     await Product.findAll({
       where: {

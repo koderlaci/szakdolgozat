@@ -478,6 +478,66 @@ paths:
                 quantity:
                   type: number
 
+  /product/check-product-availability-by-quantity:
+    get:
+      summary: Returns whether a provided quantity is available of a product or not.
+      tags:
+        - productApi
+      operationId: checkProductAvailabilityByQuantity
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: quantity
+          in: query
+          required: true
+          schema:
+            type: number
+
+  /product/subtract-product-quantity-by-id:
+    post:
+      summary: Substracts a value from a product's quantity by id.
+      tags:
+        - productApi
+      operationId: subtractProductQuantityById
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                quantity:
+                  type: number
+              required:
+                - id
+                - quantity
+
+  /product/add-product-quantity-by-id:
+    post:
+      summary: Adds a value to a product's quantity by id.
+      tags:
+        - productApi
+      operationId: addProductQuantityById
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                quantity:
+                  type: number
+              required:
+                - id
+                - quantity
+
   /product/delete-product/{id}:
     delete:
       summary: Deletes a product by id.
