@@ -16,7 +16,6 @@ export type EndProduct = {
   variantId: string;
   name: string;
   type: ProductType;
-  style: string;
   color: string;
   size: string;
   price: number;
@@ -28,7 +27,6 @@ export type CartProduct = {
   variantId: string;
   name: string;
   type: ProductType;
-  style: string;
   color: string;
   size: string;
   price: number;
