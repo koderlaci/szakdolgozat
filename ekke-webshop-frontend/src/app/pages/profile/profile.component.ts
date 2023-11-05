@@ -298,7 +298,20 @@ export class ProfileComponent implements OnInit {
   }
 
   isAddressButtonDisabled() {
-    if (this.addressForm.valid) {
+    const formData = this.addressForm.getRawValue();
+
+    if (
+      this.addressForm.valid &&
+      (this.address.country !== formData.country ||
+        this.address.zipCode !== formData.zipCode ||
+        this.address.city !== formData.city ||
+        this.address.streetName !== formData.streetName ||
+        this.address.streetType !== formData.streetType ||
+        this.address.houseNumber !== formData.houseNumber ||
+        this.address.apartment !== formData.apartment ||
+        this.address.floor !== formData.floor ||
+        this.address.door !== formData.door)
+    ) {
       return false;
     }
     return true;
