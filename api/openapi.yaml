@@ -298,12 +298,25 @@ paths:
                 - streetType
                 - houseNumber
 
-    /order/get-all-orders:
+  /order/get-all-orders:
     get:
       summary: Returns all orders.
       tags:
         - orderApi
       operationId: getAllOrders
+
+  /order/get-all-user-readable-orders-by-user-id:
+    get:
+      summary: Returns a user friendly order list by user id.
+      tags:
+        - orderApi
+      operationId: getAllUserReadableOrdersByUserId
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: number
 
   /order/add-order:
     post:

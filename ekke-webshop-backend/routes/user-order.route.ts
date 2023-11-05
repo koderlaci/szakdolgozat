@@ -7,6 +7,11 @@ const router = express.Router();
 
 router.get("/get-all-orders", userOrderController.getAllOrders);
 
+router.get(
+  "/get-all-user-readable-orders-by-user-id",
+  userOrderController.getAllUserReadableOrdersByUserId
+);
+
 router.post("/add-order", userOrderController.createOrder);
 
 router.post("/edit-order/:id", userOrderController.editOrder);
