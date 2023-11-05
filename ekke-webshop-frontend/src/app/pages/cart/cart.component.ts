@@ -128,6 +128,8 @@ export class CartComponent {
         this.closeDialogs();
       }
     });
+
+    this.preloadUserAddress();
   }
 
   async pay() {
@@ -210,6 +212,26 @@ export class CartComponent {
       this.deliveryFee.set(100);
     } else {
       this.deliveryFee.set(0);
+    }
+  }
+
+  async preloadUserAddress() {
+    const userId = this.userHandlerService.userLoggedIn();
+    if (userId) {
+      const address = await firstValueFrom(
+        this.addressService.getUserAddressByUserId(userId)
+      );
+      if (address) {
+        this.addressForm.controls.country.setValue(address.country);
+        this.addressForm.controls.zipCode.setValue(address.zipCode);
+        this.addressForm.controls.city.setValue(address.city);
+        this.addressForm.controls.streetName.setValue(address.streetName);
+        this.addressForm.controls.streetType.setValue(address.streetType);
+        this.addressForm.controls.houseNumber.setValue(address.houseNumber);
+        this.addressForm.controls.apartment.setValue(address.apartment);
+        this.addressForm.controls.floor.setValue(address.floor);
+        this.addressForm.controls.door.setValue(address.door);
+      }
     }
   }
 }
