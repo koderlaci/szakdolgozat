@@ -195,6 +195,9 @@
     >
       Fizetés
     </button>
+    <div *ngIf="!userHandlerService.userLoggedIn()">
+      (A fizetéshez bejelentkezés szükséges.)
+    </div>
     <div
       *ngIf="errorMessage"
       class="error-message"
