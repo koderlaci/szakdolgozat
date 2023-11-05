@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { Product } from "../models/product.model.js";
 import asyncHandler from "express-async-handler";
 
@@ -193,6 +194,9 @@ export default class ProductController {
     await Product.findAll({
       where: {
         type: "men",
+        quantity: {
+          [Op.not]: 0,
+        },
       },
     })
       .then((result) => {
@@ -222,6 +226,9 @@ export default class ProductController {
     await Product.findAll({
       where: {
         type: "women",
+        quantity: {
+          [Op.not]: 0,
+        },
       },
     })
       .then((result) => {
@@ -251,6 +258,9 @@ export default class ProductController {
     await Product.findAll({
       where: {
         type: "accessary",
+        quantity: {
+          [Op.not]: 0,
+        },
       },
     })
       .then((result) => {
@@ -277,7 +287,13 @@ export default class ProductController {
   });
 
   getProductSliderAll = asyncHandler(async (req, res) => {
-    await Product.findAll()
+    await Product.findAll({
+      where: {
+        quantity: {
+          [Op.not]: 0,
+        },
+      },
+    })
       .then((result) => {
         let products = [];
         let productVariants = [];
@@ -305,6 +321,9 @@ export default class ProductController {
     await Product.findAll({
       where: {
         variantId: req.query.variantId,
+        quantity: {
+          [Op.not]: 0,
+        },
       },
     })
       .then((result) => {
@@ -336,6 +355,9 @@ export default class ProductController {
       where: {
         variantId: req.query.variantId,
         color: req.query.color,
+        quantity: {
+          [Op.not]: 0,
+        },
       },
     })
       .then((result) => {
@@ -357,6 +379,9 @@ export default class ProductController {
       where: {
         variantId: req.query.variantId,
         size: req.query.size,
+        quantity: {
+          [Op.not]: 0,
+        },
       },
     })
       .then((result) => {
