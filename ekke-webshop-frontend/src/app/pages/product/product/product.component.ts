@@ -86,4 +86,18 @@ export class ProductComponent {
       }
     }
   }
+
+  getProductImageUrl() {
+    if (this.productDetailsForm.controls.color.value) {
+      return (
+        'assets/products/' +
+        this.product.variantId +
+        '_' +
+        this.productDetailsForm.controls.color.value +
+        '.jpg'
+      );
+    } else {
+      return 'assets/products/' + this.product.variantId + '.jpg';
+    }
+  }
 }

@@ -10,7 +10,9 @@
         />
         <img
           class="product-image"
-          src="../../../assets/products/{{ product.variantId }}.jpg"
+          src="../../../assets/products/{{
+            product.variantId + '_' + product.color
+          }}.jpg"
         />
         <div class="product-details">
           <div class="product-title">{{ product.name }}</div>
