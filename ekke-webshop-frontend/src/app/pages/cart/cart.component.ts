@@ -14,6 +14,7 @@ import { UserHandlerService } from 'src/app/services/user-handler.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PaymentWarningDialog } from 'src/app/dialogs/payment-warning.dialog';
 import { MapperService } from 'src/app/services/mapper.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-cart',
@@ -23,6 +24,7 @@ import { MapperService } from 'src/app/services/mapper.service';
 export class CartComponent {
   private addressService = inject(AddressService);
   private orderService = inject(OrderService);
+  private productService = inject(ProductsService);
   private router = inject(Router);
   protected mapperService = inject(MapperService);
 
@@ -136,6 +138,14 @@ export class CartComponent {
 
   async pay() {
     this.pendingPayment.set(true);
+    this.errorMessage = '';
+    try {
+      await this.checkProductAvailabilityByQuantity();
+    } catch (error) {
+      this.errorMessage = (error as Error).message;
+      this.pendingPayment.set(false);
+      return;
+    }
     await this.paymentService
       .connect()
       .then(async () => {
@@ -145,8 +155,17 @@ export class CartComponent {
             .purchase(this.totalPrice())
             .then((isTransactionValid) => {
               if (!isTransactionValid) {
-                this.errorMessage = 'Sikertelen fizetés, kérjük próbáld újra.';
+                this.errorMessage =
+                  'Sikertelen fizetés, kérjük vedd fel a kapcsolatot az ügyfélszolgálattal.';
                 this.pendingPayment.set(false);
+              } else {
+                try {
+                  this.subtractProductQuantities();
+                } catch (error) {
+                  this.errorMessage = (error as Error).message;
+                  this.pendingPayment.set(false);
+                  return;
+                }
               }
             })
             .catch(() => {
@@ -154,6 +173,7 @@ export class CartComponent {
               this.pendingPayment.set(false);
             });
         } else {
+          this.errorMessage = 'Sikertelen fizetés, kérjük próbáld újra.';
           this.pendingPayment.set(false);
         }
       })
@@ -234,6 +254,63 @@ export class CartComponent {
         this.addressForm.controls.floor.setValue(address.floor);
         this.addressForm.controls.door.setValue(address.door);
       }
+    }
+  }
+
+  async checkProductAvailabilityByQuantity() {
+    const products = this.cartService.cart();
+    for (const product of products) {
+      await firstValueFrom(
+        this.productService.checkProductAvailabilityByQuantity(
+          product.id,
+          product.selectedQuantity
+        )
+      )
+        .then((response) => {
+          if (response.message === 'Nincs elegendő termék raktáron.') {
+            throw new Error(
+              response.message +
+                ' (' +
+                product.name +
+                ', ' +
+                this.mapperService.mapProductTypeName(product.type) +
+                ', ' +
+                product.size +
+                ', ' +
+                this.mapperService.mapProductColorName(product.color) +
+                ')'
+            );
+          } else if (response.error) {
+            throw new Error(response.message);
+          }
+        })
+        .catch((response) => {
+          throw new Error(response.message);
+        });
+    }
+  }
+
+  async subtractProductQuantities() {
+    const products = this.cartService.cart();
+    for (const product of products) {
+      await firstValueFrom(
+        this.productService.subtractProductQuantityById({
+          id: product.id,
+          quantity: product.selectedQuantity,
+        })
+      )
+        .then((response) => {
+          if (response.message === 'Nincs elegendő termék raktáron.') {
+            throw new Error(
+              'Sikertelen fizetés, kérjük vedd fel a kapcsolatot az ügyfélszolgálattal.'
+            );
+          } else if (response.error) {
+            throw new Error(response.message);
+          }
+        })
+        .catch((response) => {
+          throw new Error(response.message);
+        });
     }
   }
 }

@@ -1,6 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { ProductType } from '../types/types';
-import { ProductApiService } from 'api-generated';
+import {
+  ProductApiService,
+  SubtractProductQuantityByIdRequest,
+} from 'api-generated';
 
 @Injectable({
   providedIn: 'root',
@@ -45,5 +48,20 @@ export class ProductsService {
 
   getProductByDetails(variantId: string, color: string, size: string) {
     return this.productApiService.getProductByDetails(variantId, color, size);
+  }
+
+  checkProductAvailabilityByQuantity(id: number, quantity: number) {
+    return this.productApiService.checkProductAvailabilityByQuantity(
+      id,
+      quantity
+    );
+  }
+
+  subtractProductQuantityById(formData: SubtractProductQuantityByIdRequest) {
+    return this.productApiService.subtractProductQuantityById(formData);
+  }
+
+  addProductQuantityById(formData: SubtractProductQuantityByIdRequest) {
+    return this.productApiService.addProductQuantityById(formData);
   }
 }
