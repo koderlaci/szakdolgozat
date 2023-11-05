@@ -204,9 +204,9 @@ export class CartComponent {
     this.dialog.closeAll();
   }
 
-  goBackToLanding() {
+  goToOrders() {
     this.succesfulPayment.set(false);
-    this.router.navigateByUrl('/landing');
+    this.router.navigateByUrl('/profile/orders');
   }
 
   onDeliveryModeChanged() {
