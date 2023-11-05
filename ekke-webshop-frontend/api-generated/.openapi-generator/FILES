@@ -28,5 +28,6 @@ model/editUserAddressRequest.ts
 model/editUserRequest.ts
 model/loginRequest.ts
 model/models.ts
+model/subtractProductQuantityByIdRequest.ts
 param.ts
 variables.ts

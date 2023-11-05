@@ -14,3 +14,4 @@ export * from './editProductRequest';
 export * from './editUserAddressRequest';
 export * from './editUserRequest';
 export * from './loginRequest';
+export * from './subtractProductQuantityByIdRequest';
