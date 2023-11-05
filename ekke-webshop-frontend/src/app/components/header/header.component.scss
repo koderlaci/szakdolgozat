@@ -38,6 +38,10 @@
   display: flex;
   gap: 10px;
   width: 200px;
+
+  &.centered {
+    justify-content: center;
+  }
 }
 
 .icon-item {
