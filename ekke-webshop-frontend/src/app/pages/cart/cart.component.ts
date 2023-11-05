@@ -71,6 +71,7 @@ export class CartComponent {
     door: new FormControl<string>('', Validators.maxLength(20)),
   });
   protected deliveryMode = '';
+  protected dataHandlingStatement = false;
 
   constructor() {
     this.paymentService.transactionMined
@@ -167,6 +168,9 @@ export class CartComponent {
       return true;
     }
     if (this.addressForm.invalid || this.deliveryMode === '') {
+      return true;
+    }
+    if (!this.dataHandlingStatement) {
       return true;
     }
     if (this.pendingPayment()) {
