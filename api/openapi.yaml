@@ -318,6 +318,19 @@ paths:
           schema:
             type: number
 
+  /order/check-if-transaction-hash-has-been-used:
+    get:
+      summary: Returns true if the hash has not been used, false otherwise.
+      tags:
+        - orderApi
+      operationId: checkIfTransactionHashHasBeenUsed
+      parameters:
+        - name: txhash
+          in: query
+          required: true
+          schema:
+            type: string
+
   /order/add-order:
     post:
       summary: Creates an order.
@@ -343,6 +356,8 @@ paths:
                   type: string
                 date:
                   type: string
+                txhash:
+                  type: string
               required:
                 - userId
                 - addressId
@@ -350,6 +365,7 @@ paths:
                 - price
                 - deliveryMode
                 - date
+                - txhash
 
   /order/edit-order/{id}:
     post:

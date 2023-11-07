@@ -12,6 +12,11 @@ router.get(
   userOrderController.getAllUserReadableOrdersByUserId
 );
 
+router.get(
+  "/check-if-transaction-hash-has-been-used",
+  userOrderController.checkIfTransactionHashHasBeenUsed
+);
+
 router.post("/add-order", userOrderController.createOrder);
 
 router.post("/edit-order/:id", userOrderController.editOrder);

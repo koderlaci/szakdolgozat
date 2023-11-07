@@ -68,6 +68,20 @@ export default class UserOrderController {
     res.send(mappedOrders);
   });
 
+  checkIfTransactionHashHasBeenUsed = asyncHandler(async (req, res) => {
+    const order = await UserOrder.findOne({
+      where: {
+        txhash: req.query.txhash,
+      },
+    });
+
+    if (order) {
+      res.send(true);
+    } else {
+      res.send(false);
+    }
+  });
+
   createOrder = asyncHandler(async (req, res) => {
     let responseDto = {
       created: false,
@@ -82,6 +96,7 @@ export default class UserOrderController {
       price: req.body.price,
       deliveryMode: req.body.deliveryMode,
       date: req.body.date,
+      txhash: req.body.txhash,
     })
       .then(() => {
         responseDto.created = true;
