@@ -7,6 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node-esm index.ts",
+    "start:prod": "NODE_ENV=prod ts-node-esm index.ts",
     "build": "tsc"
   },
   "keywords": [],
@@ -15,6 +16,7 @@
   "dependencies": {
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "mysql": "^2.18.1",
