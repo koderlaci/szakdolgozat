@@ -34,6 +34,7 @@ export class UserOrdersComponent implements OnInit {
       this.orders = await firstValueFrom(
         this.orderService.getUserFriendlyOrdersByUserId(userId)
       );
+      this.orders = this.orders.reverse();
     }
   }
 }

@@ -1,10 +1,7 @@
 <div class="main-container">
   <div class="title">Rendeléseim</div>
   <div class="orders" *ngIf="this.orders">
-    <mat-accordion
-      class="accordion"
-      *ngFor="let order of this.orders.reverse()"
-    >
+    <mat-accordion class="accordion" *ngFor="let order of this.orders">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title
