@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "generate-api": "openapi-generator-cli generate -g typescript-angular -i ../api/openapi.yaml -o ./api-generated --skip-validate-spec",
+    "generate-api:prod": "openapi-generator-cli generate -g typescript-angular -i ../api/openapi.yaml -o ./api-generated --skip-validate-spec --additional-properties=basePath=https://ekke-webshop-backend.onrender.com",
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
