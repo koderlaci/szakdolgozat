@@ -54,6 +54,10 @@ export const UserOrder = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    txhash: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,
