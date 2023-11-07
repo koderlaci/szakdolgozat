@@ -208,6 +208,14 @@
     <div *ngIf="!userHandlerService.userLoggedIn()">
       (A fizetéshez bejelentkezés szükséges.)
     </div>
+    <button
+      mat-raised-button
+      class="button"
+      (click)="payWithApp()"
+      [disabled]="isPayButtonDisabled()"
+    >
+      Fizetés applikációval
+    </button>
     <div
       *ngIf="errorMessage"
       class="error-message"

@@ -15,6 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PaymentWarningDialog } from 'src/app/dialogs/payment-warning.dialog';
 import { MapperService } from 'src/app/services/mapper.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { MobilePayDialog } from 'src/app/dialogs/mobile-pay.dialog';
 
 @Component({
   selector: 'app-cart',
@@ -106,6 +107,7 @@ export class CartComponent {
                 price: this.totalPrice(),
                 deliveryMode: this.deliveryMode,
                 date: new Date().toString(),
+                txhash: this.paymentService.transactionHash(),
               })
             )
               .then(() => {
@@ -184,6 +186,44 @@ export class CartComponent {
       });
   }
 
+  async payWithApp() {
+    this.pendingPayment.set(true);
+    this.errorMessage = '';
+    try {
+      await this.checkProductAvailabilityByQuantity();
+    } catch (error) {
+      this.errorMessage = (error as Error).message;
+      this.pendingPayment.set(false);
+      return;
+    }
+    if (await this.openAppDialog(this.totalPrice())) {
+      this.openWarningDialog();
+      this.paymentService
+        .purchaseInApp(this.totalPrice())
+        .then((isTransactionValid) => {
+          if (!isTransactionValid) {
+            this.errorMessage =
+              'Sikertelen fizetés, kérjük vedd fel a kapcsolatot az ügyfélszolgálattal.';
+            this.pendingPayment.set(false);
+          } else {
+            try {
+              this.subtractProductQuantities();
+            } catch (error) {
+              this.errorMessage = (error as Error).message;
+              this.pendingPayment.set(false);
+              return;
+            }
+          }
+        })
+        .catch(() => {
+          this.errorMessage = 'Sikertelen fizetés, kérjük próbáld újra.';
+          this.pendingPayment.set(false);
+        });
+    } else {
+      this.pendingPayment.set(false);
+    }
+  }
+
   isPayButtonDisabled(): boolean {
     if (this.productsPrice() === 0) {
       return true;
@@ -218,6 +258,14 @@ export class CartComponent {
 
   openWarningDialog() {
     this.dialog.open(PaymentWarningDialog);
+  }
+
+  async openAppDialog(dialogData: any) {
+    const dialogRef = this.dialog.open(MobilePayDialog, {
+      data: dialogData,
+    });
+
+    return await firstValueFrom(dialogRef.afterClosed());
   }
 
   closeDialogs() {

@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
 // dialogs
 import { AccountChooserDialog } from './dialogs/account-chooser.dialog';
 import { PaymentWarningDialog } from './dialogs/payment-warning.dialog';
+import { MobilePayDialog } from './dialogs/mobile-pay.dialog';
 
 // pages
 import { LandingComponent } from './pages/landing/landing.component';
@@ -61,6 +62,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     SandboxComponent,
     AccountChooserDialog,
     PaymentWarningDialog,
+    MobilePayDialog,
     UserOrdersComponent,
   ],
   imports: [

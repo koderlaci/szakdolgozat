@@ -1,6 +1,5 @@
 import { Injectable, inject } from '@angular/core';
 import { AddOrderRequest, OrderApiService } from 'api-generated';
-import { ProductType } from '../types/types';
 
 @Injectable({
   providedIn: 'root',
@@ -18,5 +17,9 @@ export class OrderService {
 
   createOrder(formData: AddOrderRequest) {
     return this.orderApiService.addOrder(formData);
+  }
+
+  checkIfTransactionHashHasBeenUsed(txhash: string) {
+    return this.orderApiService.checkIfTransactionHashHasBeenUsed(txhash);
   }
 }

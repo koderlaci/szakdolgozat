@@ -6,7 +6,11 @@ import { Component } from '@angular/core';
     <div class="main-container">
       <h1 class="title">Fizetés folyamatban, kérjük ne hagyd el az oldalt!</h1>
       <h1 class="title">
-        Erősítsd meg a tranzakciót a felugró MetaMask ablakban.
+        Webes fizetés esetén erősítsd meg a tranzakciót a felugró MetaMask
+        ablakban.
+      </h1>
+      <h1 class="title">
+        Applikációs fizetés esetén kérjük várj, amíg feldolgozzuk a tranzakciót.
       </h1>
       <mat-progress-spinner
         class="spinner"

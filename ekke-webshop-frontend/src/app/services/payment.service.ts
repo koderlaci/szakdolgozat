@@ -13,6 +13,7 @@ export class PaymentService {
 
   public accounts: string[] = [];
   public paymentAddress = signal<string>('');
+  public transactionHash = signal<string>('');
   public transactionMined = new BehaviorSubject<any>(null);
 
   constructor() {
@@ -43,12 +44,27 @@ export class PaymentService {
           },
         ],
       });
-
+      this.transactionHash.set(txHash);
       const transaction = await this.web3.eth.getTransaction(txHash);
       if (!this.validateTransaction(transaction, price)) {
         return false;
       }
       this.startChekingIfTransactionIsMined(txHash);
+      return true;
+    } catch (e) {
+      throw new Error(e as string);
+    }
+  }
+
+  async purchaseInApp(price: number) {
+    try {
+      const transaction = await this.web3.eth.getTransaction(
+        this.transactionHash()
+      );
+      if (!this.validateAppTransaction(transaction, price)) {
+        return false;
+      }
+      this.startChekingIfTransactionIsMined(this.transactionHash());
       return true;
     } catch (e) {
       throw new Error(e as string);
@@ -94,6 +110,32 @@ export class PaymentService {
 
     if (
       transaction.from === this.paymentAddress() &&
+      transaction.to === this.tokenContractAddress &&
+      Number(parameters.amount) === convertedPrice
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  validateAppTransaction(transaction: any, price: number) {
+    const erc20TransferABI = [
+      {
+        type: 'address',
+        name: 'receiver',
+      },
+      {
+        type: 'uint256',
+        name: 'amount',
+      },
+    ];
+    const parameters = this.web3.eth.abi.decodeParameters(
+      erc20TransferABI,
+      transaction.input.slice(10)
+    );
+    const convertedPrice = price * 10;
+
+    if (
       transaction.to === this.tokenContractAddress &&
       Number(parameters.amount) === convertedPrice
     ) {
