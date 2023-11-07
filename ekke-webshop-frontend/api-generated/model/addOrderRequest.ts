@@ -18,5 +18,6 @@ export interface AddOrderRequest {
     price: number;
     deliveryMode: string;
     date: string;
+    txhash: string;
 }
 
