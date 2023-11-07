@@ -40,7 +40,7 @@ import { Configuration }                                     from '../configurat
 })
 export class CartApiService {
 
-    protected basePath = 'https://ekke-webshop-backend.onrender.com';
+    protected basePath = 'http://localhost:4201';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
