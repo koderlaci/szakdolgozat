@@ -48,6 +48,7 @@ export class ProductComponent {
         )
       );
       this.product = product;
+      this.productDetailsForm.reset();
     });
   }
 

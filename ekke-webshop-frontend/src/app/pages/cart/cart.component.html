@@ -3,17 +3,23 @@
     <div class="title">Kosár</div>
     <div class="products" [ngClass]="{ disabled: this.pendingPayment() }">
       <div class="product" *ngFor="let product of cartService.cart()">
-        <img
+        <div
           class="bin"
-          src="../../../assets/icons/bin.svg"
+          [ngStyle]="{ 'background-image': 'url(assets/icons/bin.svg)' }"
           (click)="removeProduct(product.id)"
-        />
-        <img
+        ></div>
+        <div
           class="product-image"
-          src="../../../assets/products/{{
-            product.variantId + '_' + product.color
-          }}.jpg"
-        />
+          [ngStyle]="{
+            'background-image':
+              'url(assets/products/' +
+              product.variantId +
+              '_' +
+              product.color +
+              '.jpg' +
+              ')'
+          }"
+        ></div>
         <div class="product-details">
           <div class="product-title">{{ product.name }}</div>
           <div>Ár: {{ product.price }} UniToken</div>
