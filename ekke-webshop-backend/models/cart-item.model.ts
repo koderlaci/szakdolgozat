@@ -22,21 +22,6 @@ export const CartItem = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    userId: {
-      field: "user_id",
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    cartId: {
-      field: "cart_id",
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    productId: {
-      field: "product_id",
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     date: {
       type: DataTypes.STRING,
       allowNull: false,

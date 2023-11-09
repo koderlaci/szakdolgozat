@@ -22,11 +22,6 @@ export const Cart = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    userId: {
-      field: "user_id",
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     active: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

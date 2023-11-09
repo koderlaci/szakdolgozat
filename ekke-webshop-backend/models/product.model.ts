@@ -1,5 +1,4 @@
 import { Sequelize, DataTypes } from "sequelize";
-// import { ColumnName } from 'sequelize';
 
 const sequelize = new Sequelize(
   process.env.NODE_ENV ? process.env.DATABASE_USERNAME : "ekke-webshop",

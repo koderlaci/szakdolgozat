@@ -26,21 +26,6 @@ export const UserOrder = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    userId: {
-      field: "user_id",
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    addressId: {
-      field: "address_id",
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    cartId: {
-      field: "cart_id",
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,

@@ -22,11 +22,6 @@ export const UserAddress = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    userId: {
-      field: "user_id",
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     country: {
       type: DataTypes.STRING,
       allowNull: false,
