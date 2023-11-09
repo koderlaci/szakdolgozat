@@ -302,6 +302,7 @@ export class ProfileComponent implements OnInit {
 
     if (
       this.addressForm.valid &&
+      this.address &&
       (this.address.country !== formData.country ||
         this.address.zipCode !== formData.zipCode ||
         this.address.city !== formData.city ||
@@ -314,6 +315,11 @@ export class ProfileComponent implements OnInit {
     ) {
       return false;
     }
+
+    if (!this.address && this.addressForm.valid) {
+      return false;
+    }
+
     return true;
   }
 }
