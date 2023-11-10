@@ -340,7 +340,7 @@ export class AddressApiService {
         }
 
         let localVarPath = `/user-address/edit-user-address`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: editUserAddressRequest,

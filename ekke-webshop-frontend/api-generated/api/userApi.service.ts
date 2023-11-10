@@ -275,7 +275,7 @@ export class UserApiService {
         }
 
         let localVarPath = `/user/edit-password/`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: editPasswordRequest,
@@ -342,7 +342,7 @@ export class UserApiService {
         }
 
         let localVarPath = `/user/edit-user/`;
-        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: editUserRequest,
