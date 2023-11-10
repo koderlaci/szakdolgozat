@@ -205,9 +205,6 @@
     >
       Fizetés
     </button>
-    <div *ngIf="!userHandlerService.userLoggedIn()">
-      (A fizetéshez bejelentkezés szükséges.)
-    </div>
     <button
       mat-raised-button
       class="button"
@@ -221,6 +218,9 @@
       class="error-message"
       [innerHTML]="errorMessage"
     ></div>
+    <div *ngIf="!userHandlerService.userLoggedIn()">
+      (A fizetéshez bejelentkezés szükséges.)
+    </div>
   </div>
 </section>
 <section class="secondary-container" *ngIf="succesfulPayment()">
