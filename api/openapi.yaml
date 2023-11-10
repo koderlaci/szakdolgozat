@@ -533,27 +533,6 @@ paths:
                 - id
                 - quantity
 
-  /product/add-product-quantity-by-id:
-    post:
-      summary: Adds a value to a product's quantity by id.
-      tags:
-        - productApi
-      operationId: addProductQuantityById
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: number
-                quantity:
-                  type: number
-              required:
-                - id
-                - quantity
-
   /product/delete-product/{id}:
     delete:
       summary: Deletes a product by id.
@@ -733,20 +712,6 @@ paths:
                   type: number
                 active:
                   type: number
-
-  /cart/delete-cart/{id}:
-    delete:
-      summary: Deletes a cart by id.
-      tags:
-        - cartApi
-      operationId: deleteCart
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
 
   /cart/disable-current-create-new-cart:
     post:
