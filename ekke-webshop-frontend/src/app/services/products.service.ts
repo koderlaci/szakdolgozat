@@ -60,8 +60,4 @@ export class ProductsService {
   subtractProductQuantityById(formData: SubtractProductQuantityByIdRequest) {
     return this.productApiService.subtractProductQuantityById(formData);
   }
-
-  addProductQuantityById(formData: SubtractProductQuantityByIdRequest) {
-    return this.productApiService.addProductQuantityById(formData);
-  }
 }
