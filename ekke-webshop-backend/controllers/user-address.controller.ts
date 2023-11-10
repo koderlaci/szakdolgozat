@@ -103,21 +103,31 @@ export default class AddressController {
       message: null,
     };
 
-    await UserAddress.destroy({
-      where: {
-        id: req.params.id,
+    await UserAddress.update(
+      {
+        country: null,
+        zipCode: null,
+        city: null,
+        streetName: null,
+        streetType: null,
+        houseNumber: null,
+        apartment: null,
+        floor: null,
+        door: null,
       },
-    })
-      .then((result) => {
-        console.log(result);
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    )
+      .then(() => {
+        res.send(responseDto);
       })
       .catch((error) => {
         console.log(error);
         responseDto.error = true;
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
-      })
-      .finally(() => {
-        res.send(responseDto);
       });
   });
 }

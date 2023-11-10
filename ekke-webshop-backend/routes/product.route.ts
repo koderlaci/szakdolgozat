@@ -39,9 +39,4 @@ router.post(
   productController.subtractProductQuantityById
 );
 
-router.post(
-  "/add-product-quantity-by-id",
-  productController.addProductQuantityById
-);
-
 export default router;

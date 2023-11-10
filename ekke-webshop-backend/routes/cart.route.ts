@@ -18,6 +18,4 @@ router.post(
   cartController.DisableCurrentCreateNewCart
 );
 
-router.delete("/delete-cart/:id", cartController.deleteCart);
-
 export default router;

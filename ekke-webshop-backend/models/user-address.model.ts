@@ -24,43 +24,34 @@ export const UserAddress = sequelize.define(
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     zipCode: {
       field: "zip_code",
       type: DataTypes.STRING,
-      allowNull: false,
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     streetName: {
       field: "street_name",
       type: DataTypes.STRING,
-      allowNull: false,
     },
     streetType: {
       field: "street_type",
       type: DataTypes.STRING,
-      allowNull: false,
     },
     houseNumber: {
       field: "house_number",
       type: DataTypes.STRING,
-      allowNull: false,
     },
     apartment: {
       type: DataTypes.STRING,
-      allowNull: true,
     },
     floor: {
       type: DataTypes.STRING,
-      allowNull: true,
     },
     door: {
       type: DataTypes.STRING,
-      allowNull: true,
     },
   },
   {

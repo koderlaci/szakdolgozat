@@ -105,30 +105,6 @@ export default class CartController {
       });
   });
 
-  deleteCart = asyncHandler(async (req, res) => {
-    let responseDto = {
-      error: false,
-      message: null,
-    };
-
-    await Cart.destroy({
-      where: {
-        id: req.params.id,
-      },
-    })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-        responseDto.error = true;
-        responseDto.message = "Hiba történt, kérjük próbáld újra.";
-      })
-      .finally(() => {
-        res.send(responseDto);
-      });
-  });
-
   createCartForUser = async (id) => {
     await Cart.create({
       userId: id,

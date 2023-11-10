@@ -24,7 +24,6 @@ export const Cart = sequelize.define(
     },
     active: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
     },
   },
   {

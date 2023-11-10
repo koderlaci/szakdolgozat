@@ -91,21 +91,29 @@ export default class ProductController {
       message: null,
     };
 
-    await Product.destroy({
-      where: {
-        id: req.params.id,
+    await Product.update(
+      {
+        variantId: null,
+        name: null,
+        type: null,
+        color: null,
+        size: null,
+        price: null,
+        quantity: null,
       },
-    })
-      .then((result) => {
-        console.log(result);
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    )
+      .then(() => {
+        res.send(responseDto);
       })
       .catch((error) => {
         console.log(error);
         responseDto.error = true;
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
-      })
-      .finally(() => {
-        res.send(responseDto);
       });
   });
 
@@ -160,32 +168,6 @@ export default class ProductController {
         responseDto.error = true;
         responseDto.message =
           "Sikertelen fizetés, kérjük vedd fel a kapcsolatot az ügyfélszolgálattal.";
-        res.send(responseDto);
-      });
-  });
-
-  addProductQuantityById = asyncHandler(async (req, res) => {
-    let responseDto = {
-      error: false,
-      message: null,
-    };
-
-    const product = await Product.findOne({
-      where: {
-        id: req.body.id,
-      },
-    });
-
-    await product
-      .update({
-        quantity: product.getDataValue("quantity") + req.body.quantity,
-      })
-      .then(() => {
-        res.send(responseDto);
-      })
-      .catch(() => {
-        responseDto.error = true;
-        responseDto.message = "Hiba történt, kérjük próbáld újra.";
         res.send(responseDto);
       });
   });

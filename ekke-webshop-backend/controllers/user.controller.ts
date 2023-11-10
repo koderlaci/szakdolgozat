@@ -192,11 +192,20 @@ export default class UserController {
       message: null,
     };
 
-    await User.destroy({
-      where: {
-        id: req.params.id,
+    await User.update(
+      {
+        name: null,
+        neptun: null,
+        email: null,
+        password: null,
+        permission: null,
       },
-    })
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    )
       .then((result) => {
         console.log(result);
       })

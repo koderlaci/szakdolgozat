@@ -25,31 +25,24 @@ export const Product = sequelize.define(
     variantId: {
       field: "variant_id",
       type: DataTypes.STRING,
-      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     type: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     color: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     size: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     price: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
     quantity: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
   },
   {
