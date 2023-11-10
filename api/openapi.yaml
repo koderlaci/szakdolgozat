@@ -54,7 +54,7 @@ paths:
                 - password
 
   /user/edit-user/:
-    post:
+    put:
       summary: Edits a user by id.
       tags:
         - userApi
@@ -80,7 +80,7 @@ paths:
                 - id
 
   /user/edit-password/:
-    post:
+    put:
       summary: Edits a user's password by id.
       tags:
         - userApi
@@ -201,7 +201,7 @@ paths:
                 - houseNumber
 
   /user-address/edit-user-address:
-    post:
+    put:
       summary: Edits a user address by id.
       tags:
         - addressApi
@@ -368,7 +368,7 @@ paths:
                 - txhash
 
   /order/edit-order/{id}:
-    post:
+    put:
       summary: Edits an order by id.
       tags:
         - orderApi
@@ -460,7 +460,7 @@ paths:
                 - quantity
 
   /product/edit-product/{id}:
-    post:
+    put:
       summary: Edits a product by id.
       tags:
         - productApi
@@ -689,7 +689,7 @@ paths:
                 - active
 
   /cart/edit-cart/{id}:
-    post:
+    put:
       summary: Edits a cart by id.
       tags:
         - cartApi
@@ -765,7 +765,7 @@ paths:
                 - date
 
   /cart/edit-cart-item/{id}:
-    post:
+    put:
       summary: Edits a cart item by id.
       tags:
         - cartApi

@@ -9,7 +9,7 @@ router.get("/get-all-cart-items", cartItemController.getAllCartItems);
 
 router.post("/add-cart-item", cartItemController.createCartItem);
 
-router.post("/edit-cart-item/:id", cartItemController.editCartItem);
+router.put("/edit-cart-item/:id", cartItemController.editCartItem);
 
 router.delete("/delete-cart-item/:id", cartItemController.deleteCartItem);
 

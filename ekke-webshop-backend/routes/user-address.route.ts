@@ -14,7 +14,7 @@ router.get(
 
 router.post("/add-user-address", addressController.createUserAddress);
 
-router.post("/edit-user-address", addressController.editUserAddress);
+router.put("/edit-user-address", addressController.editUserAddress);
 
 router.delete("/delete-user-address/:id", addressController.deleteUserAddress);
 
