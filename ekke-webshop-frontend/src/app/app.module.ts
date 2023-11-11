@@ -30,6 +30,12 @@ import { ProductSliderComponent } from './components/product-slider/product-slid
 import { ProductComponent } from './pages/product/product/product.component';
 import { SandboxComponent } from './pages/sandbox/sandbox.component';
 import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
+import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
+import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
+import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.component';
+import { AdminProductComponent } from './pages/admin-product/admin-product.component';
+import { AdminUserComponent } from './pages/admin-user/admin-user.component';
+import { AdminOrderComponent } from './pages/admin-order/admin-order.component';
 
 // material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -64,6 +70,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     PaymentWarningDialog,
     MobilePayDialog,
     UserOrdersComponent,
+    AdminOrdersComponent,
+    AdminProductsComponent,
+    AdminUsersComponent,
+    AdminProductComponent,
+    AdminUserComponent,
+    AdminOrderComponent,
   ],
   imports: [
     BrowserModule,
