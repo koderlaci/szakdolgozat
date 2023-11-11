@@ -45,15 +45,14 @@ export default class ProductController {
         price: req.body.price,
         quantity: req.body.quantity,
       })
-        .then((result) => {
-          console.log(result);
+        .then(() => {
+          responseDto.message = "Termék sikeresen létrehozva!";
+          res.send(responseDto);
         })
         .catch((error) => {
           console.log(error);
           responseDto.error = true;
           responseDto.message = "Hiba történt, kérjük próbáld újra.";
-        })
-        .finally(() => {
           res.send(responseDto);
         });
     }
@@ -82,6 +81,7 @@ export default class ProductController {
       }
     )
       .then(() => {
+        responseDto.message = "Sikeres módosítás!";
         res.send(responseDto);
       })
       .catch((error) => {
@@ -115,6 +115,7 @@ export default class ProductController {
       }
     )
       .then(() => {
+        responseDto.message = "Sikeres törlés!";
         res.send(responseDto);
       })
       .catch((error) => {
