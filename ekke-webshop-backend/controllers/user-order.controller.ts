@@ -62,7 +62,9 @@ export default class UserOrderController {
     const mappedOrder = {
       id: order.getDataValue("id"),
       status: order.getDataValue("status"),
-      userEmail: userEmail.getDataValue("email") ?? "Törölt felhasználó",
+      userEmail: userEmail.getDataValue("email")
+        ? userEmail.getDataValue("email")
+        : "Törölt felhasználó",
       address: orderAddress,
       cartId: order.getDataValue("cartId"),
       products: products,
