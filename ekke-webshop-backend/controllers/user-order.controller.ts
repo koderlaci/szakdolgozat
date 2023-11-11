@@ -193,6 +193,9 @@ export default class UserOrderController {
         },
       }
     )
+      .then(() => {
+        responseDto.message = "Sikeres módosítás!";
+      })
       .catch(() => {
         responseDto.error = true;
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
@@ -213,6 +216,9 @@ export default class UserOrderController {
         id: req.params.id,
       },
     })
+      .then(() => {
+        responseDto.message = "Sikeres törlés!";
+      })
       .catch(() => {
         responseDto.error = true;
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
