@@ -1,6 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { ProductType } from '../types/types';
 import {
+  AddProductRequest,
+  EditProductRequest,
   ProductApiService,
   SubtractProductQuantityByIdRequest,
 } from 'api-generated';
@@ -10,6 +12,14 @@ import {
 })
 export class ProductsService {
   private productApiService = inject(ProductApiService);
+
+  getAllProducts() {
+    return this.productApiService.getAllProducts();
+  }
+
+  getProductById(id: number) {
+    return this.productApiService.getProductById(id);
+  }
 
   getProducts(type: ProductType) {
     switch (type) {
@@ -59,5 +69,17 @@ export class ProductsService {
 
   subtractProductQuantityById(formData: SubtractProductQuantityByIdRequest) {
     return this.productApiService.subtractProductQuantityById(formData);
+  }
+
+  addProduct(formData: AddProductRequest) {
+    return this.productApiService.addProduct(formData);
+  }
+
+  editProduct(formData: EditProductRequest) {
+    return this.productApiService.editProduct(formData);
+  }
+
+  deleteProductById(id: number) {
+    return this.productApiService.deleteProduct(id);
   }
 }

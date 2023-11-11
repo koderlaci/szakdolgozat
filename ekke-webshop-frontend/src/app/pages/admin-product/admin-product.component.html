@@ -1,0 +1,147 @@
+<div class="main-container">
+  <div class="title">Termék módosítása</div>
+  <ng-container [formGroup]="productForm">
+    <mat-form-field class="input">
+      <mat-label>Id</mat-label>
+      <input matInput type="text" formControlName="id" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.productForm.controls.id.errors
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Variáns</mat-label>
+      <input matInput type="text" formControlName="variantId" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.productForm.controls.variantId.errors
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Név</mat-label>
+      <input matInput type="text" formControlName="name" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.productForm.controls.name.errors
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Típus</mat-label>
+      <mat-select panelClass="custom-panel" formControlName="type">
+        <mat-option *ngFor="let type of types" [value]="type">{{
+          mapperService.mapProductTypeName(type)
+        }}</mat-option>
+      </mat-select>
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.productForm.controls.type.errors
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Szín</mat-label>
+      <mat-select panelClass="custom-panel" formControlName="color">
+        <mat-option *ngFor="let color of colors" [value]="color">{{
+          mapperService.mapProductColorName(color)
+        }}</mat-option>
+      </mat-select>
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.productForm.controls.color.errors
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Méret</mat-label>
+      <input matInput type="text" formControlName="size" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.productForm.controls.size.errors
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Ár</mat-label>
+      <input matInput type="text" formControlName="price" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.productForm.controls.price.errors
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Darabszám</mat-label>
+      <input matInput type="text" formControlName="quantity" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.productForm.controls.quantity.errors
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+  </ng-container>
+  <div class="button-container">
+    <button
+      mat-raised-button
+      class="button"
+      [disabled]="productForm.invalid"
+      (click)="onCreate()"
+      *ngIf="productId() === 0"
+    >
+      Létrehozás
+    </button>
+    <button
+      mat-raised-button
+      class="button"
+      [disabled]="productForm.invalid"
+      (click)="onEdit()"
+      *ngIf="productId() > 0"
+    >
+      Módosítás
+    </button>
+    <button
+      mat-raised-button
+      class="button"
+      [disabled]="productForm.invalid"
+      (click)="onDelete()"
+      *ngIf="productId() > 0"
+    >
+      Törlés
+    </button>
+  </div>
+  <div
+    class="response-message"
+    *ngIf="response"
+    [ngClass]="{
+      error: response.error,
+      visible: response.message
+    }"
+  >
+    {{ response.message }}
+  </div>
+</div>
