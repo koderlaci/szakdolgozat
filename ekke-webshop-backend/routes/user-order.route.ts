@@ -8,6 +8,11 @@ const router = express.Router();
 router.get("/get-all-orders", userOrderController.getAllOrders);
 
 router.get(
+  "/get-user-readable-order-by-order-id",
+  userOrderController.getUserReadableOrderByOrderId
+);
+
+router.get(
   "/get-all-user-readable-orders-by-user-id",
   userOrderController.getAllUserReadableOrdersByUserId
 );

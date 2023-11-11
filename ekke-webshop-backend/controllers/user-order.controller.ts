@@ -3,6 +3,7 @@ import { CartItem } from "../models/cart-item.model.js";
 import { Product } from "../models/product.model.js";
 import { OrderAddress } from "../models/order-address.model.js";
 import asyncHandler from "express-async-handler";
+import { User } from "../models/user.model.js";
 
 export default class UserOrderController {
   getAllOrders = asyncHandler(async (req, res) => {
@@ -13,6 +14,65 @@ export default class UserOrderController {
       .catch((error) => {
         console.log(error);
       });
+  });
+
+  getUserReadableOrderByOrderId = asyncHandler(async (req, res) => {
+    const order = await UserOrder.findOne({
+      where: {
+        id: req.query.orderId,
+      },
+    });
+
+    if (!order) {
+      res.send(null);
+      return;
+    }
+
+    const carItems = await CartItem.findAll({
+      where: {
+        cartId: order.getDataValue("cartId"),
+      },
+    });
+
+    const products = [];
+
+    for (const item of carItems) {
+      const product = await Product.findOne({
+        where: {
+          id: item.getDataValue("productId"),
+        },
+      });
+
+      products.push(product);
+    }
+
+    const orderAddress = await OrderAddress.findOne({
+      where: {
+        id: order.getDataValue("addressId"),
+      },
+    });
+
+    const userEmail = await User.findOne({
+      attributes: ["email"],
+      where: {
+        id: order.getDataValue("userId"),
+      },
+    });
+
+    const mappedOrder = {
+      id: order.getDataValue("id"),
+      status: order.getDataValue("status"),
+      userEmail: userEmail.getDataValue("email") ?? "Törölt felhasználó",
+      address: orderAddress,
+      cartId: order.getDataValue("cartId"),
+      products: products,
+      deliveryMode: order.getDataValue("deliveryMode"),
+      totalPrice: order.getDataValue("price"),
+      date: order.getDataValue("date"),
+      txhash: order.getDataValue("txhash"),
+    };
+
+    res.send(mappedOrder);
   });
 
   getAllUserReadableOrdersByUserId = asyncHandler(async (req, res) => {

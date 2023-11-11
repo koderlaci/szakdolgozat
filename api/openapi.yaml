@@ -305,6 +305,19 @@ paths:
         - orderApi
       operationId: getAllOrders
 
+  /order/get-user-readable-order-by-order-id:
+    get:
+      summary: Returns a user friendly order by order id.
+      tags:
+        - orderApi
+      operationId: getUserReadableOrderByOrderId
+      parameters:
+        - name: orderId
+          in: query
+          required: true
+          schema:
+            type: number
+
   /order/get-all-user-readable-orders-by-user-id:
     get:
       summary: Returns a user friendly order list by user id.
