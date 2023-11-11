@@ -30,6 +30,7 @@ export class HeaderComponent {
 
   logout() {
     this.userHandlerService.setUserLoggedIn(null);
+    this.userHandlerService.setIsUserAdmin(false);
     this.router.navigateByUrl('/login');
   }
 }

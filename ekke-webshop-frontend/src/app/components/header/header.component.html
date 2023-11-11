@@ -1,4 +1,4 @@
-<div class="navbar mobile">
+<div class="navbar mobile" *ngIf="!userHandlerService.isUserAdmin()">
   <div class="logo-container">
     <a routerLink="/landing">
       <img class="logo" src="assets/icons/logo.svg" alt="Egyetem logo" />
@@ -55,7 +55,7 @@
   </mat-menu>
 </div>
 
-<div class="navbar desktop">
+<div class="navbar desktop" *ngIf="!userHandlerService.isUserAdmin()">
   <div class="logo-container">
     <a routerLink="/landing">
       <img class="logo" src="assets/icons/logo.svg" alt="Egyetem logo" />
@@ -103,5 +103,33 @@
       <a mat-menu-item routerLink="/profile/orders">Rendeléseim</a>
       <span mat-menu-item (click)="logout()">Kijelentkezés</span>
     </mat-menu>
+  </div>
+</div>
+
+<div class="navbar desktop" *ngIf="userHandlerService.isUserAdmin()">
+  <div class="logo-container">
+    <a routerLink="/admin/landing">
+      <img class="logo" src="assets/icons/logo.svg" alt="Egyetem logo"
+    /></a>
+  </div>
+  <div class="item-group centered">
+    <a class="item" [matMenuTriggerFor]="productMenu">Termékek</a>
+    <a class="item" [matMenuTriggerFor]="usersMenu">Felhasználók</a>
+    <a class="item" [matMenuTriggerFor]="ordersMenu">Rendelések</a>
+  </div>
+  <mat-menu #productMenu="matMenu">
+    <a mat-menu-item routerLink="/admin/product/0">Új termék felvétele</a>
+    <a mat-menu-item routerLink="/admin/products">Termékek megtekintése</a>
+  </mat-menu>
+  <mat-menu #usersMenu="matMenu">
+    <a mat-menu-item routerLink="/admin/user/0">Új felhasználó felvétele</a>
+    <a mat-menu-item routerLink="/admin/users">Felhasználók megtekintése</a>
+  </mat-menu>
+  <mat-menu #ordersMenu="matMenu">
+    <a mat-menu-item routerLink="/admin/order/0">Új rendelés felvétele</a>
+    <a mat-menu-item routerLink="/admin/orders">Rendelések megtekintése</a>
+  </mat-menu>
+  <div class="item-group centered">
+    <div class="item" (click)="logout()">Kijelentkezés</div>
   </div>
 </div>
