@@ -115,7 +115,7 @@
   <div class="item-group centered">
     <a class="item" [matMenuTriggerFor]="productMenu">Termékek</a>
     <a class="item" [matMenuTriggerFor]="usersMenu">Felhasználók</a>
-    <a class="item" [matMenuTriggerFor]="ordersMenu">Rendelések</a>
+    <a class="item" routerLink="/admin/orders">Rendelések</a>
   </div>
   <mat-menu #productMenu="matMenu">
     <a mat-menu-item routerLink="/admin/product/0">Új termék felvétele</a>
@@ -124,10 +124,6 @@
   <mat-menu #usersMenu="matMenu">
     <a mat-menu-item routerLink="/admin/user/0">Új felhasználó felvétele</a>
     <a mat-menu-item routerLink="/admin/users">Felhasználók megtekintése</a>
-  </mat-menu>
-  <mat-menu #ordersMenu="matMenu">
-    <a mat-menu-item routerLink="/admin/order/0">Új rendelés felvétele</a>
-    <a mat-menu-item routerLink="/admin/orders">Rendelések megtekintése</a>
   </mat-menu>
   <div class="item-group centered">
     <div class="item" (click)="logout()">Kijelentkezés</div>
