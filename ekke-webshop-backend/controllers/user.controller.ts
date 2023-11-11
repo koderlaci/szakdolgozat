@@ -24,6 +24,7 @@ export default class UserController {
   createUser = asyncHandler(async (req, res) => {
     let responseDto = {
       userId: null,
+      isAdmin: false,
       message: null,
     };
 
@@ -222,6 +223,7 @@ export default class UserController {
   login = asyncHandler(async (req, res) => {
     let responseDto = {
       userId: null,
+      isAdmin: false,
       message: null,
     };
 
@@ -238,6 +240,7 @@ export default class UserController {
         .then((result) => {
           if (result) {
             responseDto.userId = result.getDataValue("id");
+            responseDto.isAdmin = result.getDataValue("permission") === 1;
           } else {
             responseDto.message = "Helytelen email vagy jelszó!";
           }
