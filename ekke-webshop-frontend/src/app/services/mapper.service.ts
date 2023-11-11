@@ -55,15 +55,15 @@ export class MapperService {
   mapProductColorName(color: string) {
     switch (color) {
       case 'black':
-        return 'fekete';
+        return 'Fekete';
       case 'blue':
-        return 'kék';
+        return 'Kék';
       case 'white':
-        return 'fehér';
+        return 'Fehér';
       case 'gray':
-        return 'szürke';
+        return 'Szürke';
       case 'pink':
-        return 'rózsaszín';
+        return 'Rózsaszín';
       default:
         return 'fekete';
     }
