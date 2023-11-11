@@ -1,5 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { AddOrderRequest, OrderApiService } from 'api-generated';
+import {
+  AddOrderRequest,
+  EditOrderRequest,
+  OrderApiService,
+} from 'api-generated';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +15,10 @@ export class OrderService {
     return this.orderApiService.getAllOrders();
   }
 
+  getUserFriendlyOrderByOrderId(orderId: number) {
+    return this.orderApiService.getUserReadableOrderByOrderId(orderId);
+  }
+
   getUserFriendlyOrdersByUserId(userId: number) {
     return this.orderApiService.getAllUserReadableOrdersByUserId(userId);
   }
@@ -19,7 +27,15 @@ export class OrderService {
     return this.orderApiService.addOrder(formData);
   }
 
+  editOrder(formData: EditOrderRequest) {
+    return this.orderApiService.editOrder(formData);
+  }
+
   checkIfTransactionHashHasBeenUsed(txhash: string) {
     return this.orderApiService.checkIfTransactionHashHasBeenUsed(txhash);
+  }
+
+  deleteOrderById(id: number) {
+    return this.orderApiService.deleteOrder(id);
   }
 }

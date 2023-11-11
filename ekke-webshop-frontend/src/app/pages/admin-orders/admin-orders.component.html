@@ -1,0 +1,27 @@
+<div class="main-container">
+  <div class="title">Rendelések</div>
+  <div class="orders" *ngIf="this.orders.length">
+    <div class="header">
+      <div>Id</div>
+      <div>Státusz</div>
+      <div>Ár</div>
+      <div>Átvétel módja</div>
+      <div>Rögzítve</div>
+    </div>
+
+    <div
+      class="row"
+      *ngFor="let order of orders"
+      (click)="onOrderClick(order.id)"
+    >
+      <div>{{ "#" + order.id }}</div>
+      <div>{{ mapperService.mapStatusName(order.status) }}</div>
+      <div>{{ order.price + " UniToken" }}</div>
+      <div>{{ mapperService.mapDeliveryModeName(order.deliveryMode) }}</div>
+      <div>{{ order.date | date : " YYYY MMM. dd" }}</div>
+    </div>
+  </div>
+  <div class="message" *ngIf="!this.orders.length">
+    Nem találhatóak rendelések.
+  </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="main-container">
+  <div class="title">Rendelés módosítása</div>
+  <div class="container">
+    <div class="order" *ngIf="this.order">
+      <div class="row">
+        <span>Rendelés azonosító:</span>
+        <span>#{{ order.id }}</span>
+      </div>
+      <div class="row">
+        <span>Kosár azonosító:</span>
+        <span>#{{ order.cartId }}</span>
+      </div>
+      <div class="row">
+        <span>Rendelés státusza:</span>
+        <span>{{ mapperService.mapStatusName(order.status) }}</span>
+      </div>
+      <div class="row">
+        <span>Felhasználó email címe:</span>
+        <span>{{ order.userEmail }}</span>
+      </div>
+      <div class="row">
+        <span>Átvétel módja:</span>
+        <span>{{ mapperService.mapDeliveryModeName(order.deliveryMode) }}</span>
+      </div>
+      <div class="row">
+        <span>Teljes összeg:</span>
+        <span>{{ order.totalPrice }} UniToken</span>
+      </div>
+      <div class="row">
+        <span>Tranzakciós lenyomat:</span>
+        <span class="dotted">{{ order.txhash ? order.txhash : "-" }}</span>
+      </div>
+      <div class="row">
+        <span>Létrehozva:</span>
+        <span>{{ order.date | date : " YYYY MMM. dd" }}</span>
+      </div>
+      <div class="line"></div>
+      <div class="row">
+        <span>Termékek:</span>
+        <span></span>
+      </div>
+      <div class="row" *ngFor="let product of order.products">
+        <span
+          >{{ product.name }} ({{
+            mapperService.mapProductTypeName(product.type)
+          }}, {{ product.size }},
+          {{ mapperService.mapProductColorName(product.color) }})</span
+        >
+        <span>{{ product.price }} UniToken</span>
+      </div>
+      <div class="line"></div>
+      <div class="row">
+        <span>Lakcím:</span>
+        <span></span>
+      </div>
+      <div class="row">
+        <span>Ország:</span>
+        <span>{{ order.address.country }}</span>
+      </div>
+      <div class="row">
+        <span>Irányítószám:</span>
+        <span>{{ order.address.zipCode }}</span>
+      </div>
+      <div class="row">
+        <span>Város:</span>
+        <span>{{ order.address.city }}</span>
+      </div>
+      <div class="row">
+        <span>Közterület neve:</span>
+        <span>{{ order.address.streetName }}</span>
+      </div>
+      <div class="row">
+        <span>Közterület jellege:</span>
+        <span>{{ order.address.streetType }}</span>
+      </div>
+      <div class="row">
+        <span>Házszám:</span>
+        <span>{{ order.address.houseNumber }}</span>
+      </div>
+      <div class="row">
+        <span>Lakás:</span>
+        <span>{{ order.address.apartment || "-" }}</span>
+      </div>
+      <div class="row">
+        <span>Emelet:</span>
+        <span>{{ order.address.floor || "-" }}</span>
+      </div>
+      <div class="row">
+        <span>Ajtó:</span>
+        <span>{{ order.address.door || "-" }}</span>
+      </div>
+    </div>
+    <div class="fields">
+      <mat-form-field class="input" [formGroup]="statusForm">
+        <mat-label>Rendelés státusza</mat-label>
+        <mat-select panelClass="custom-panel" formControlName="status">
+          <mat-option *ngFor="let status of statuses" [value]="status">{{
+            mapperService.mapStatusName(status)
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="button-container">
+        <button
+          mat-raised-button
+          class="button"
+          [disabled]="
+            statusForm.invalid ||
+            order?.status === statusForm.controls.status.value
+          "
+          (click)="onEdit()"
+        >
+          Státusz módosítása
+        </button>
+        <button mat-raised-button class="button" (click)="onDelete()">
+          Rendelés törlése
+        </button>
+      </div>
+      <div
+        class="response-message"
+        *ngIf="response"
+        [ngClass]="{
+          error: response.error,
+          visible: response.message
+        }"
+      >
+        {{ response.message }}
+      </div>
+    </div>
+  </div>
+  <div class="message" *ngIf="!this.order">Ez a rendelés nem létezik.</div>
+</div>
