@@ -28,11 +28,9 @@ export const User = sequelize.define(
     },
     neptun: {
       type: DataTypes.STRING,
-      unique: true,
     },
     email: {
       type: DataTypes.STRING,
-      unique: true,
     },
     password: {
       type: DataTypes.STRING,

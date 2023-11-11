@@ -8,12 +8,15 @@ const cartController = new CartController();
 
 export default class UserController {
   getAllUsers = asyncHandler(async (req, res) => {
-    const data = await User.findAll();
+    const data = await User.findAll({
+      attributes: ["id", "name", "neptun", "email"],
+    });
     res.send(data);
   });
 
   getUserById = asyncHandler(async (req, res) => {
     const data = await User.findOne({
+      attributes: ["id", "name", "neptun", "email"],
       where: {
         id: req.query.id,
       },
@@ -71,6 +74,7 @@ export default class UserController {
       .then(async (result) => {
         if (result) {
           responseDto.userId = result.getDataValue("id");
+          responseDto.message = "Felhasználó sikeresen létrehozva!";
           await cartController.createCartForUser(responseDto.userId);
         }
       })
@@ -207,8 +211,8 @@ export default class UserController {
         },
       }
     )
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        responseDto.message = "Sikeres törlés!";
       })
       .catch((error) => {
         console.log(error);
