@@ -1,0 +1,21 @@
+<div class="main-container">
+  <div class="title">Felhasználók</div>
+  <div class="users" *ngIf="this.users.length">
+    <div class="header">
+      <div>Id</div>
+      <div>Név</div>
+      <div>Neptun kód</div>
+      <div>Email</div>
+    </div>
+
+    <div class="row" *ngFor="let user of users" (click)="onUserClick(user.id)">
+      <div>{{ "#" + user.id }}</div>
+      <div>{{ user.name }}</div>
+      <div>{{ user.neptun }}</div>
+      <div>{{ user.email }}</div>
+    </div>
+  </div>
+  <div class="message" *ngIf="!this.users.length">
+    Nem találhatóak felhasználók.
+  </div>
+</div>

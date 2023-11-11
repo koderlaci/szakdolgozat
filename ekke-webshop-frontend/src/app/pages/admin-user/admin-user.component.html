@@ -1,0 +1,103 @@
+<div class="main-container">
+  <div class="title" *ngIf="userId() !== 0">Felhasználó módosítása</div>
+  <div class="title" *ngIf="userId() === 0">Felhasználó létrehozása</div>
+  <ng-container [formGroup]="userForm">
+    <mat-form-field class="input">
+      <mat-label>Id</mat-label>
+      <input matInput type="text" formControlName="id" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(this.userForm.controls.id.errors)
+        }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Név</mat-label>
+      <input matInput type="text" formControlName="name" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.userForm.controls.name.errors
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Neptun kód</mat-label>
+      <input matInput type="text" formControlName="neptun" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.userForm.controls.neptun.errors
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input">
+      <mat-label>Email</mat-label>
+      <input matInput type="text" formControlName="email" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.userForm.controls.email.errors
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="input larger-bottom-margin" *ngIf="userId() === 0">
+      <mat-label>Jelszó</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <mat-error>
+        {{
+          errorMessageService.getErrorMessage(
+            this.userForm.controls.password.errors,
+            "password"
+          )
+        }}
+      </mat-error>
+    </mat-form-field>
+  </ng-container>
+  <div class="button-container">
+    <button
+      mat-raised-button
+      class="button"
+      [disabled]="userForm.invalid"
+      (click)="onCreate()"
+      *ngIf="userId() === 0"
+    >
+      Létrehozás
+    </button>
+    <button
+      mat-raised-button
+      class="button"
+      [disabled]="userForm.invalid"
+      (click)="onEdit()"
+      *ngIf="userId() > 0"
+    >
+      Módosítás
+    </button>
+    <button
+      mat-raised-button
+      class="button"
+      [disabled]="userForm.invalid"
+      (click)="onDelete()"
+      *ngIf="userId() > 0"
+    >
+      Törlés
+    </button>
+  </div>
+  <div
+    class="response-message"
+    *ngIf="response"
+    [ngClass]="{
+      error: response.error,
+      visible: response.message
+    }"
+  >
+    {{ response.message }}
+  </div>
+</div>

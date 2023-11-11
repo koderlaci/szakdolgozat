@@ -49,6 +49,10 @@ export class UserHandlerService {
     return this.userService.editPassword(formData);
   }
 
+  deleteUserById(id: number) {
+    return this.userService.deleteUser(id);
+  }
+
   setUserLoggedIn(value: number | null) {
     this.userLoggedIn.set(value);
     if (value) {
