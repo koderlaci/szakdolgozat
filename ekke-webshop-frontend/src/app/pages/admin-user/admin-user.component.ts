@@ -42,6 +42,8 @@ export class AdminUserComponent {
   });
 
   protected response = {
+    userId: null,
+    isAdmin: false,
     error: false,
     message: '',
   };
@@ -82,9 +84,11 @@ export class AdminUserComponent {
       )
         .then((result) => {
           this.response = result;
-          setTimeout(() => {
-            this.router.navigateByUrl('admin/users');
-          }, 2000);
+          if (this.response.userId) {
+            setTimeout(() => {
+              this.router.navigateByUrl('admin/users');
+            }, 2000);
+          }
         })
         .catch((error) => {
           this.response.error = true;
