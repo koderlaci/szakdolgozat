@@ -30,6 +30,7 @@ export class AdminOrdersComponent implements OnInit {
 
   async ngOnInit() {
     this.orders = await firstValueFrom(this.orderService.getAllOrders());
+    this.orders = this.orders.reverse();
   }
 
   onOrderClick(orderId: number) {
