@@ -83,5 +83,7 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-  <div class="message" *ngIf="!this.orders">Még nincsenek megrendeléseid.</div>
+  <div class="message" *ngIf="!this.orders.length">
+    Még nincsenek megrendeléseid.
+  </div>
 </div>
