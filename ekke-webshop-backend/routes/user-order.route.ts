@@ -19,7 +19,7 @@ router.get(
 
 router.post("/add-order", userOrderController.createOrder);
 
-router.put("/edit-order/:id", userOrderController.editOrder);
+router.put("/edit-order", userOrderController.editOrder);
 
 router.delete("/delete-order/:id", userOrderController.deleteOrder);
 

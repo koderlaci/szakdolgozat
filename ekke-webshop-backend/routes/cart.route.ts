@@ -11,7 +11,7 @@ router.get("/get-active-cart-by-user-id", cartController.getActiveCartByUserId);
 
 router.post("/add-cart", cartController.createCart);
 
-router.put("/edit-cart/:id", cartController.editCart);
+router.put("/edit-cart", cartController.editCart);
 
 router.post(
   "/disable-current-create-new-cart",
