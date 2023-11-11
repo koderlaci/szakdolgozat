@@ -11,12 +11,19 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
+import { ProductComponent } from './pages/product/product/product.component';
+import { SandboxComponent } from './pages/sandbox/sandbox.component';
+import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.component';
+import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
+import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
+import { AdminProductComponent } from './pages/admin-product/admin-product.component';
+import { AdminUserComponent } from './pages/admin-user/admin-user.component';
+import { AdminOrderComponent } from './pages/admin-order/admin-order.component';
 
 // guards
 import { IsUserLoggedInGuard } from './guards/isUserLoggedIn/is-user-logged-in.guard';
 import { IsUserLoggedOutGuard } from './guards/isUserLoggedOut/is-user-logged-out.guard';
-import { ProductComponent } from './pages/product/product/product.component';
-import { SandboxComponent } from './pages/sandbox/sandbox.component';
+import { IsUserAdminGuard } from './guards/isUserAdmin/is-user-admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
@@ -39,7 +46,40 @@ const routes: Routes = [
     canActivate: [IsUserLoggedInGuard],
   },
   { path: 'cart', component: CartComponent },
-  { path: 'admin', component: AdminComponent }, // todo: implement guard
+  {
+    path: 'admin',
+    canActivate: [IsUserAdminGuard],
+    children: [
+      {
+        path: 'landing',
+        component: AdminComponent,
+      },
+      {
+        path: 'products',
+        component: AdminProductsComponent,
+      },
+      {
+        path: 'users',
+        component: AdminUsersComponent,
+      },
+      {
+        path: 'orders',
+        component: AdminOrdersComponent,
+      },
+      {
+        path: 'product/:id',
+        component: AdminProductComponent,
+      },
+      {
+        path: 'user/:id',
+        component: AdminUserComponent,
+      },
+      {
+        path: 'order/:id',
+        component: AdminOrderComponent,
+      },
+    ],
+  },
   {
     path: 'profile',
     canActivate: [IsUserLoggedInGuard],
