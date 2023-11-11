@@ -66,7 +66,7 @@ export class RegistrationComponent {
           password: formData.password,
         })
         .subscribe((res) => {
-          if (res.message) {
+          if (!res.userId) {
             this.registrationResponse.message = res.message;
           } else {
             this.registrationResponse.userId = res.userId;
