@@ -124,11 +124,10 @@ export default class UserOrderController {
         cartId: req.body.cartId,
         price: req.body.price,
         deliveryMode: req.body.deliveryMode,
-        date: req.body.date,
       },
       {
         where: {
-          id: req.params.id,
+          id: req.body.id,
         },
       }
     )

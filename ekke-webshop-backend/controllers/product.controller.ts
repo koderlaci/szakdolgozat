@@ -68,19 +68,17 @@ export default class ProductController {
       },
       {
         where: {
-          id: req.params.id,
+          id: req.body.id,
         },
       }
     )
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        res.send(responseDto);
       })
       .catch((error) => {
         console.log(error);
         responseDto.error = true;
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
-      })
-      .finally(() => {
         res.send(responseDto);
       });
   });

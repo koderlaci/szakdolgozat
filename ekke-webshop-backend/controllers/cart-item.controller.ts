@@ -35,12 +35,11 @@ export default class CartItemController {
     })
       .then(() => {
         responseDto.created = true;
+        res.send(responseDto);
       })
       .catch((error) => {
         console.log(error);
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
-      })
-      .finally(() => {
         res.send(responseDto);
       });
   });
@@ -60,15 +59,16 @@ export default class CartItemController {
       },
       {
         where: {
-          id: req.params.id,
+          id: req.body.id,
         },
       }
     )
+      .then(() => {
+        res.send(responseDto);
+      })
       .catch(() => {
         responseDto.error = true;
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
-      })
-      .finally(() => {
         res.send(responseDto);
       });
   });

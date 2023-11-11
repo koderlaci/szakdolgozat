@@ -62,15 +62,13 @@ export default class CartController {
       userId: req.body.userId,
       active: req.body.active,
     })
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        res.send(responseDto);
       })
       .catch((error) => {
         console.log(error);
         responseDto.error = true;
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
-      })
-      .finally(() => {
         res.send(responseDto);
       });
   });
@@ -88,19 +86,17 @@ export default class CartController {
       },
       {
         where: {
-          id: req.params.id,
+          id: req.body.id,
         },
       }
     )
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        res.send(responseDto);
       })
       .catch((error) => {
         console.log(error);
         responseDto.error = true;
         responseDto.message = "Hiba történt, kérjük próbáld újra.";
-      })
-      .finally(() => {
         res.send(responseDto);
       });
   });
