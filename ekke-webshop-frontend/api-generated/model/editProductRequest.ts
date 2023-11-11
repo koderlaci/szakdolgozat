@@ -12,6 +12,7 @@
 
 
 export interface EditProductRequest { 
+    id: number;
     variantId?: string;
     name?: string;
     type?: string;

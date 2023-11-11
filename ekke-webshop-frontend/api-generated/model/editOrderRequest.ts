@@ -12,12 +12,12 @@
 
 
 export interface EditOrderRequest { 
+    id: number;
     status?: string;
     userId?: number;
     addressId?: number;
     cartId?: number;
     price?: number;
     deliveryMode?: string;
-    date?: string;
 }
 

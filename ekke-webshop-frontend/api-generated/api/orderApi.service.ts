@@ -283,18 +283,14 @@ export class OrderApiService {
 
     /**
      * Edits an order by id.
-     * @param id 
      * @param editOrderRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public editOrder(id: number, editOrderRequest: EditOrderRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public editOrder(id: number, editOrderRequest: EditOrderRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public editOrder(id: number, editOrderRequest: EditOrderRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public editOrder(id: number, editOrderRequest: EditOrderRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling editOrder.');
-        }
+    public editOrder(editOrderRequest: EditOrderRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public editOrder(editOrderRequest: EditOrderRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public editOrder(editOrderRequest: EditOrderRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public editOrder(editOrderRequest: EditOrderRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (editOrderRequest === null || editOrderRequest === undefined) {
             throw new Error('Required parameter editOrderRequest was null or undefined when calling editOrder.');
         }
@@ -338,7 +334,7 @@ export class OrderApiService {
             }
         }
 
-        let localVarPath = `/order/edit-order/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}`;
+        let localVarPath = `/order/edit-order`;
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

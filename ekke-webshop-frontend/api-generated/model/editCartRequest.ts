@@ -12,6 +12,7 @@
 
 
 export interface EditCartRequest { 
+    id: number;
     userId?: number;
     active?: number;
 }

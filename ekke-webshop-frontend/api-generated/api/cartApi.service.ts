@@ -420,18 +420,14 @@ export class CartApiService {
 
     /**
      * Edits a cart by id.
-     * @param id 
      * @param editCartRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public editCart(id: number, editCartRequest: EditCartRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public editCart(id: number, editCartRequest: EditCartRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public editCart(id: number, editCartRequest: EditCartRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public editCart(id: number, editCartRequest: EditCartRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling editCart.');
-        }
+    public editCart(editCartRequest: EditCartRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public editCart(editCartRequest: EditCartRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public editCart(editCartRequest: EditCartRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public editCart(editCartRequest: EditCartRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (editCartRequest === null || editCartRequest === undefined) {
             throw new Error('Required parameter editCartRequest was null or undefined when calling editCart.');
         }
@@ -475,7 +471,7 @@ export class CartApiService {
             }
         }
 
-        let localVarPath = `/cart/edit-cart/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}`;
+        let localVarPath = `/cart/edit-cart`;
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -491,18 +487,14 @@ export class CartApiService {
 
     /**
      * Edits a cart item by id.
-     * @param id 
      * @param editCartItemRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public editCartItem(id: number, editCartItemRequest: EditCartItemRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public editCartItem(id: number, editCartItemRequest: EditCartItemRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public editCartItem(id: number, editCartItemRequest: EditCartItemRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public editCartItem(id: number, editCartItemRequest: EditCartItemRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling editCartItem.');
-        }
+    public editCartItem(editCartItemRequest: EditCartItemRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public editCartItem(editCartItemRequest: EditCartItemRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public editCartItem(editCartItemRequest: EditCartItemRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public editCartItem(editCartItemRequest: EditCartItemRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         if (editCartItemRequest === null || editCartItemRequest === undefined) {
             throw new Error('Required parameter editCartItemRequest was null or undefined when calling editCartItem.');
         }
@@ -546,7 +538,7 @@ export class CartApiService {
             }
         }
 
-        let localVarPath = `/cart/edit-cart-item/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}`;
+        let localVarPath = `/cart/edit-cart-item`;
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
