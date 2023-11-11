@@ -367,19 +367,12 @@ paths:
                 - date
                 - txhash
 
-  /order/edit-order/{id}:
+  /order/edit-order:
     put:
       summary: Edits an order by id.
       tags:
         - orderApi
       operationId: editOrder
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
       requestBody:
         required: true
         content:
@@ -387,6 +380,8 @@ paths:
             schema:
               type: object
               properties:
+                id:
+                  type: number
                 status:
                   type: string
                 userId:
@@ -399,8 +394,8 @@ paths:
                   type: number
                 deliveryMode:
                   type: string
-                date:
-                  type: string
+              required:
+                - id
 
   /order/delete-order/{id}:
     delete:
@@ -459,19 +454,12 @@ paths:
                 - price
                 - quantity
 
-  /product/edit-product/{id}:
+  /product/edit-product:
     put:
       summary: Edits a product by id.
       tags:
         - productApi
       operationId: editProduct
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
       requestBody:
         required: true
         content:
@@ -479,6 +467,8 @@ paths:
             schema:
               type: object
               properties:
+                id:
+                  type: number
                 variantId:
                   type: string
                 name:
@@ -493,6 +483,22 @@ paths:
                   type: number
                 quantity:
                   type: number
+              required:
+                - id
+
+  /product/delete-product/{id}:
+    delete:
+      summary: Deletes a product by id.
+      tags:
+        - productApi
+      operationId: deleteProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
 
   /product/check-product-availability-by-quantity:
     get:
@@ -532,20 +538,6 @@ paths:
               required:
                 - id
                 - quantity
-
-  /product/delete-product/{id}:
-    delete:
-      summary: Deletes a product by id.
-      tags:
-        - productApi
-      operationId: deleteProduct
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
 
   /product/get-men-products:
     get:
@@ -688,19 +680,12 @@ paths:
                 - userId
                 - active
 
-  /cart/edit-cart/{id}:
+  /cart/edit-cart:
     put:
       summary: Edits a cart by id.
       tags:
         - cartApi
       operationId: editCart
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
       requestBody:
         required: true
         content:
@@ -708,10 +693,14 @@ paths:
             schema:
               type: object
               properties:
+                id:
+                  type: number
                 userId:
                   type: number
                 active:
                   type: number
+              required:
+                - id
 
   /cart/disable-current-create-new-cart:
     post:
@@ -764,19 +753,12 @@ paths:
                 - productId
                 - date
 
-  /cart/edit-cart-item/{id}:
+  /cart/edit-cart-item:
     put:
       summary: Edits a cart item by id.
       tags:
         - cartApi
       operationId: editCartItem
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
       requestBody:
         required: true
         content:
@@ -784,6 +766,8 @@ paths:
             schema:
               type: object
               properties:
+                id:
+                  type: number
                 userId:
                   type: number
                 cartId:
@@ -792,6 +776,8 @@ paths:
                   type: number
                 date:
                   type: date
+              required:
+                - id
 
   /cart/delete-cart-item/{id}:
     delete:
