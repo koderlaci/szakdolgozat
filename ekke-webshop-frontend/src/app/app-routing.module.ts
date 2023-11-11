@@ -12,7 +12,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
 import { ProductComponent } from './pages/product/product/product.component';
-import { SandboxComponent } from './pages/sandbox/sandbox.component';
 import { AdminOrdersComponent } from './pages/admin-orders/admin-orders.component';
 import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
 import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
@@ -27,7 +26,6 @@ import { IsUserAdminGuard } from './guards/isUserAdmin/is-user-admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
-  { path: 'sandbox', component: SandboxComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'products/:type', component: ProductsComponent },
   {

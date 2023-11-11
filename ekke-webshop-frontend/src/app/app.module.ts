@@ -28,7 +28,6 @@ import { DeliveryComponent } from './pages/delivery/delivery.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductSliderComponent } from './components/product-slider/product-slider/product-slider.component';
 import { ProductComponent } from './pages/product/product/product.component';
-import { SandboxComponent } from './pages/sandbox/sandbox.component';
 import { UserOrdersComponent } from './pages/user-orders/user-orders.component';
 import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
 import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
@@ -65,7 +64,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CartComponent,
     ProductSliderComponent,
     ProductComponent,
-    SandboxComponent,
     AccountChooserDialog,
     PaymentWarningDialog,
     MobilePayDialog,
