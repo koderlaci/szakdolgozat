@@ -1,5 +1,6 @@
 <div class="main-container">
-  <div class="title">Termék módosítása</div>
+  <div class="title" *ngIf="productId() !== 0">Termék módosítása</div>
+  <div class="title" *ngIf="productId() === 0">Termék létrehozása</div>
   <ng-container [formGroup]="productForm">
     <mat-form-field class="input">
       <mat-label>Id</mat-label>
