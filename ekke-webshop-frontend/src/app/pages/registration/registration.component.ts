@@ -20,6 +20,7 @@ export class RegistrationComponent {
 
   protected registrationResponse = {
     userId: null,
+    isAdmin: false,
     message: '',
   };
 
@@ -69,8 +70,13 @@ export class RegistrationComponent {
             this.registrationResponse.message = res.message;
           } else {
             this.registrationResponse.userId = res.userId;
+            this.registrationResponse.isAdmin = res.isAdmin;
+
             this.userHandlerService.setUserLoggedIn(
               this.registrationResponse.userId
+            );
+            this.userHandlerService.setIsUserAdmin(
+              this.registrationResponse.isAdmin
             );
             this.router.navigateByUrl('/landing');
           }

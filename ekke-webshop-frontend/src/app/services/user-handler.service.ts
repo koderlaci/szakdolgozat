@@ -19,6 +19,9 @@ export class UserHandlerService {
       ? Number(sessionStorage.getItem('userLoggedIn'))
       : null
   );
+  isUserAdmin = signal<boolean>(
+    sessionStorage.getItem('isUserAdmin') === 'true' ? true : false
+  );
 
   userLoggedIn_ = new BehaviorSubject<boolean | null>(null);
 
@@ -55,5 +58,10 @@ export class UserHandlerService {
       this.userLoggedIn_.next(false);
       sessionStorage.removeItem('userLoggedIn');
     }
+  }
+
+  setIsUserAdmin(value: boolean) {
+    this.isUserAdmin.set(value);
+    sessionStorage.setItem('isUserAdmin', value.toString());
   }
 }

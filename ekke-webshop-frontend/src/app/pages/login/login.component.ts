@@ -26,6 +26,7 @@ export class LoginComponent {
 
   protected loginResponse = {
     userId: null,
+    isAdmin: false,
     message: '',
   };
 
@@ -39,7 +40,13 @@ export class LoginComponent {
             this.userHandlerService.setUserLoggedIn(
               Number(this.loginResponse.userId)
             );
-            this.router.navigate(['/landing']);
+            this.userHandlerService.setIsUserAdmin(this.loginResponse.isAdmin);
+
+            if (this.loginResponse.isAdmin) {
+              this.router.navigate(['/admin/landing']);
+            } else {
+              this.router.navigate(['/landing']);
+            }
           }
         });
     } else {
