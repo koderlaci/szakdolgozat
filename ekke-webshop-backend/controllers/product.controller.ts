@@ -8,6 +8,15 @@ export default class ProductController {
     res.send(data);
   });
 
+  getProductById = asyncHandler(async (req, res) => {
+    const data = await Product.findOne({
+      where: {
+        id: req.query.id,
+      },
+    });
+    res.send(data);
+  });
+
   createProduct = asyncHandler(async (req, res) => {
     let responseDto = {
       error: false,

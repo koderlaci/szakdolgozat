@@ -418,6 +418,19 @@ paths:
         - productApi
       operationId: getAllProducts
 
+  /product/get-product-by-id:
+    get:
+      summary: Returns a product by id.
+      tags:
+        - productApi
+      operationId: getProductById
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: number
+
   /product/add-product:
     post:
       summary: Creates a product.
