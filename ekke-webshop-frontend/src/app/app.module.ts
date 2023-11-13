@@ -24,7 +24,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { DeliveryComponent } from './pages/delivery/delivery.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductSliderComponent } from './components/product-slider/product-slider/product-slider.component';
 import { ProductComponent } from './pages/product/product/product.component';
@@ -60,7 +59,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     RegistrationComponent,
     AdminComponent,
     ProfileComponent,
-    DeliveryComponent,
     CartComponent,
     ProductSliderComponent,
     ProductComponent,

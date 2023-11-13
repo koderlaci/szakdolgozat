@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 // components
 import { AdminComponent } from './pages/admin/admin.component';
 import { CartComponent } from './pages/cart/cart.component';
-import { DeliveryComponent } from './pages/delivery/delivery.component';
 import { LandingComponent } from './pages/landing/landing.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProductsComponent } from './pages/products/products.component';
@@ -37,11 +36,6 @@ const routes: Routes = [
     path: 'registration',
     component: RegistrationComponent,
     canActivate: [IsUserLoggedOutGuard],
-  },
-  {
-    path: 'delivery',
-    component: DeliveryComponent,
-    canActivate: [IsUserLoggedInGuard],
   },
   { path: 'cart', component: CartComponent },
   {
