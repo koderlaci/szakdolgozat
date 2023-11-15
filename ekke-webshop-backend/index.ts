@@ -58,7 +58,6 @@ const sequelize = new Sequelize(
 const initApp = async () => {
   try {
     await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
 
     // user associations
     User.hasMany(CartItem, {
@@ -185,10 +184,10 @@ const initApp = async () => {
     });
 
     app.listen(port, () => {
-      console.log(`Server is running at: http://localhost:${port}`);
+      console.log(`Server at: http://localhost:${port}`);
     });
   } catch (error) {
-    console.error("Unable to connect to the database:", error.original);
+    console.error("Error:", error.original);
   }
 };
 
