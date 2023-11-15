@@ -34,7 +34,7 @@ import { Configuration }                                     from '../configurat
 })
 export class OrderApiService {
 
-    protected basePath = 'http://localhost:4201';
+    protected basePath = 'https://ekke-webshop-backend.onrender.com';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
