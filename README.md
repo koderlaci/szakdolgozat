@@ -1,6 +1,6 @@
 #Angular #ExpressJS #Web3JS #MySQL #MetaMASK
 
-Link: https://koderlaci.github.io/szakdolgozat/landing
+Link: https://koderlaci.github.io/szakdolgozat
 
 A webshop where you can pay with my own crypto token in order to get university themed products.
 You can use MetaMask in order to pay, or any other mobile crypto wallet applications.
